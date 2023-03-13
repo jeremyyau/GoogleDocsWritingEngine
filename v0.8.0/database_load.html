@@ -6,10 +6,12 @@
   <body>
     <?!= getHeader();?>
     <center><h1 class="mb-4">💾資料管理</h1>
-    <div class="alert alert-primary" role="alert">基於安全性和防止誤按的情況，即使刪除數據庫，也不會刪除相關的檔案，用戶需要手動去刪除檔案</div>
-    <a class="btn btn-primary w-75 mb-4" href="<?=getUrl();?>?page=database_manage&actionType=createDB"><h1 class="display-4">➕創建數據庫</h1></a>
-    <a class="btn btn-primary w-75 mb-4" href="<?=getUrl();?>?page=database_load"><h1 class="display-4">🔃載入數據庫</h1></a>
-    <a class="btn btn-danger w-75" href="<?=getUrl();?>?page=database_manage&actionType=deleteDB"><h1 class="display-4">🗑️刪除數據庫</h1></a></center>
+    <form action="<?=getUrl();?>" method="post" class="mb-4">
+      <input type="hidden" id="actionType" name="actionType" value="loadDB">
+      <input type="hidden" id="page" name="page" value="database_manage">
+      <input type="url" id="dbUrl" name="dbUrl" class="form-control mb-4" value="" placeholder="數據庫(即Google Sheet)的連結">
+      <input type="submit" class="btn btn-primary w-100 mb-4" value="🔃載入數據庫">
+    </form>
     <?!= include('script'); ?>
   </body>
 </html>
