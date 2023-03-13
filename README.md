@@ -1,4 +1,4 @@
-# GoogleDocsWritingEngine
+# Google Docs Writing Engine
 
 ![](https://i.imgur.com/rHgvyHs.png)
 
