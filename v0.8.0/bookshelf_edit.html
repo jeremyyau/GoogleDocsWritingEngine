@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <?!= include('style');?>
+  </head>
+  <body>
+    <?!= getHeader();?>
+    <center><h1 class="mb-4">📚我的書櫃</h1>
+    <a href="<?=getUrl()?>?page=bookshelf" class="btn btn-primary w-100 mb-4">返回</a></center>
+    <?var books = getProperty("books");var bookId = getEditBookId();?>
+    <form action="<?=getUrl();?>" method="post">
+      <input type="hidden" id="actionType" name="actionType" value="editBook">
+      <input type="hidden" id="page" name="page" value="bookshelf">
+      <input type="hidden" id="bookId" name="bookId" value="<?=bookId?>">
+      <input type="url" id="image" name="image" class="form-control mb-4" value="<?=books[bookId]['image']?>" placeholder="🖼️封面連結 (選填)">
+      <input type="text" id="bookName" name="bookName" class="form-control mb-4" value="<?=books[bookId]['name']?>" placeholder="📛自定書名 (選填)">
+      <input type="text" id="desc" name="desc" class="form-control mb-4" value="<?=books[bookId]['desc']?>" placeholder="📄簡介 (選填)">
+      <input type="url" id="bookUrl" name="bookUrl" class="form-control mb-4" value="<?=books[bookId]['link']?>" placeholder="🔗連結" required>
+      <input type="number" id="goal" name="goal" class="form-control mb-4" value="<?=books[bookId]['goal']?>" placeholder="🚩章節目標字數 (選填)">
+      <input type="number" id="goalAll" name="goalAll" class="form-control mb-4" value="<?=books[bookId]['goalAll']?>" placeholder="🏁文章目標字數 (選填)">
+      <input type="submit" class="btn btn-primary w-100 mb-4" value="💾保存修改">
+    </form>
+    <form action="<?=getUrl();?>" method="post" class="mb-4">
+      <div class="d-flex flex-row-reverse">
+        <input type="hidden" id="actionType" name="actionType" value="deleteBook">
+        <input type="hidden" id="page" name="page" value="bookshelf">
+        <input type="hidden" id="bookId" name="bookId" value="<?=bookId?>">
+        <input type="submit" class="btn btn-danger w-100" value="🗑️刪除書本">
+      </div>
+    </form>
+    <?!= include('script'); ?>
+  </body>
+</html>
