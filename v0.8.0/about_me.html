@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <?!= include('style');?>
+    <script src='https://apis.google.com/js/platform.js'></script>
+    <style>
+      #agent-f {
+        position: relative;
+        animation-name: anime-f;
+        animation-duration: 10s;
+      }
+      #agent-p{
+        position: relative;
+        animation-name: anime-p;
+        animation-duration: 10s;
+      }
+      #dialog1{
+        position: relative;
+        animation-name: anime-dia1;
+        animation-duration: 10s;
+      }
+      #dialog2{
+        position: relative;
+        animation-name: anime-dia2;
+        animation-duration: 10s;
+      }
+      #step_button{
+        position:relative;
+        animation-name: anime-button;
+        animation-duration: 10s;
+      }
+      @keyframes anime-f {
+        0%  {-webkit-transform: scaleX(-1);transform: scaleX(-1);left:-120px; top:625px;}
+        31% {-webkit-transform: scaleX(-1);transform: scaleX(-1);left:-120px; top:625px;}
+        40% {-webkit-transform: scaleX(-1);transform: scaleX(-1);left:0px; top:625px;}
+        45% {-webkit-transform: scaleX(1);transform: scaleX(1);left:0px; top:625px;}
+        50% {-webkit-transform: scaleX(-1);transform: scaleX(-1);left:-100px; top:325px;}
+        60% {-webkit-transform: scaleX(1);transform: scaleX(1);left:100px; top:225px;}
+        70% {-webkit-transform: scaleX(1);transform: scaleX(1);left:0px; top:100px;}
+        80% {-webkit-transform: scaleX(1);transform: scale(1.25, 0.75);left:0px; top:140px;}
+        85% {-webkit-transform: scaleX(1);transform: scale(1, 1);left:0px; top:0px;}
+      }
+      @keyframes anime-p {
+        0% {opacity: 1.0;}
+        31% {left: 0px; top: 0px;opacity: 1.0;}
+        90% {left:-950px; top: 0px; opacity: 1.0;}
+        100% {left:-950px; top: 0px; opacity: 0;}
+      }
+      @keyframes anime-dia1 {
+        0% {opacity: 1.0;}
+        30% {opacity: 1.0;}
+        31% {opacity: 0;}
+      }
+      @keyframes anime-dia2 {
+        15% {opacity: 1.0;}
+        30% {opacity: 1.0;}
+        31% {opacity: 0;}
+      }
+      @keyframes anime-button {
+        70% {transform: scaleY(1);}
+        80% {transform: scaleY(0.5);}
+        85% {transform: scaleY(1);}
+      }
+    </style>
+  </head>
+  <body>
+    <?!= getHeader();?>
+    <center><h1 class="mb-4">👤關於作者</h1>
+    <div class="card text-center" style="width: 25rem;">
+      <div class="d-flex justify-content-center"><img src="https://i.imgur.com/oKLUHRw.png" id="agent-f" width="200"></div>
+      <div class="card-body">
+        <h5 class="card-title">郭凝輝</h5>
+        <p class="card-text">「於殘雪處留下青春，凝結光輝之人。」</p>
+        <a href='https://sites.google.com/view/kwokyingfai/' target='_blank' class="btn btn-primary w-100 mb-4" id="step_button"><img src='https://i.imgur.com/7pAxvYw.png' width='20' height='20'>個人網站</a><br>
+        <a href='https://www.instagram.com/doctor_fai/' target='_blank' class="btn btn-danger w-100 mb-4"><img src='https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png' width='20' height='20'>Instagram</a><br>
+        <a href='https://www.penana.com/user/98865/' target='_blank' class="btn btn-warning w-100 mb-4"><img src='https://www.penana.com/img/logo_new.svg' width='20' height='20'>Penana</a><br>
+        <div class='g-ytsubscribe' data-channelid='UCezw_R_PZxYUVxNYWtDHpPg' data-layout='full' data-count='hidden'></div>
+      </div>
+    </div>
+    <p id="dialog1" class="text-danger" style="opacity: 0;">柏依琳：「輝哥，好像有人在偷看我們說話。」</p>
+    <p id="dialog2" class="text-primary" style="opacity: 0;">郭凝輝：「糟了！你快點撤退，我回到原位。」</p>
+    <img src="https://i.imgur.com/69Qa3xA.png" id="agent-p" width="200" style="opacity: 0;"></center>
+    <button type="button" class="btn btn-primary position-absolute bottom-0" id="liveToastBtn">🥚What is this?</button>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      <div id="liveToast1" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <img src="https://i.imgur.com/oKLUHRw.png" width="30" class="rounded me-2">
+          <strong class="me-auto">突發消息</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">郭凝輝失去了一切</div>
+      </div>
+      <div id="liveToast2" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <img src="https://i.imgur.com/oKLUHRw.png" width="30" class="rounded me-2">
+          <strong class="me-auto">突發消息</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">郭凝輝的家人證實了這一消息</div>
+      </div>
+    </div>
+    <script>
+    const toastTrigger = document.getElementById('liveToastBtn');
+    const toastLiveExample1 = document.getElementById('liveToast1');
+    const toastLiveExample2 = document.getElementById('liveToast2');
+    if (toastTrigger) {
+      toastTrigger.addEventListener('click', () => {
+        const toast1 = new bootstrap.Toast(toastLiveExample1);
+        toast1.show();
+        setTimeout(function (){
+          const toast2 = new bootstrap.Toast(toastLiveExample2);
+          toast2.show();
+        }, 1000);
+      })
+    }
+    </script>
+    <?!= include('script'); ?>
+  </body>
+</html>
