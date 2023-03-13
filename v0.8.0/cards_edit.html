@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <?!= include('style');?>
+  </head>
+  <body>
+    <?!= getHeader();?>
+    <center><h1 class="mb-4">👨‍👩‍👦角色卡</h1>
+    <a href="<?=getUrl()?>?page=cards_list" class="btn btn-primary w-100 mb-4">返回</a></center>
+    <?var cards = getProperty("cards");var cardId = getEditCardId();?>
+    <form action="<?=getUrl();?>" method="post">
+      <input type="hidden" id="actionType" name="actionType" value="editCard">
+      <input type="hidden" id="page" name="page" value="cards_list">
+      <input type="hidden" id="cardId" name="cardId" value="<?=cardId?>">
+      <? if(cards[cardId]['image']=="https://www.w3schools.com/howto/img_avatar.png"||cards[cardId]['image']=="https://www.w3schools.com/howto/img_avatar2.png") { ?>
+      <input type="url" id="image" name="image" class="form-control mb-4" value="" placeholder="🖼️圖片連結 (選填)">
+      <? } else { ?>
+      <input type="url" id="image" name="image" class="form-control mb-4" value="<?=cards[cardId]['image']?>" placeholder="🖼️圖片連結 (選填)">
+      <? } ?>
+      <input type="text" id="type" name="type" class="form-control mb-4" value="<?=cards[cardId]['type']?>" placeholder="👽類型 (選填)">
+      <input type="text" id="name" name="name" class="form-control mb-4" value="<?=cards[cardId]['name']?>" placeholder="📛名稱 (選填)">
+      <input class="form-control mb-4" list="genderOptions" id="gender" name="gender" placeholder="🚻性別 (選填)" value="<?=cards[cardId]['gender']?>">
+      <datalist id="genderOptions">
+        <option value="男性">男性</option>
+        <option value="女性">女性</option>
+        <option value="不適用">不適用</option>
+      </datalist>
+      <textarea rows="5" id="desc" name="desc" class="form-control mb-4" placeholder="📋描述 (選填)"><?=cards[cardId]['desc']?></textarea>
+      <input type="submit" class="btn btn-primary w-100 mb-4" value="💾保存修改">
+    </form>
+    <form action="<?=getUrl();?>" method="post" class="mb-4">
+      <div class="d-flex flex-row-reverse">
+        <input type="hidden" id="actionType" name="actionType" value="deleteCard">
+        <input type="hidden" id="page" name="page" value="cards_list">
+        <input type="hidden" id="cardId" name="cardId" value="<?=cardId?>">
+        <input type="submit" class="btn btn-danger w-100" value="🗑️刪除角色卡">
+      </div>
+    </form>
+    <?!= include('script'); ?>
+  </body>
+</html>
