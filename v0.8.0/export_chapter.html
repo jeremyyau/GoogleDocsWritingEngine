@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <?!= include('style');?>
+  </head>
+  <body>
+    <?!= getHeader();?>
+    <?var bookId = getCurBook();?>
+    <center><h1 class="mb-4">🖨️輸出章節</h1></center>
+    <?if (getDB()==null) { ?>
+    <center><h5>數據庫不存在</h5></center>
+    <?} else if (getDbBooks()[0]["link"] == null){?>
+    <center><h5>請先到「我的書櫃」加入書本</h5></center>
+    <? } else { ?>
+    <?var para = getParagraph(bookId);?>
+    <form action="<?=getUrl();?>" method="get">
+      <input type="hidden" id="page" name="page" value="export_result">
+      <select class="form-select mb-4" aria-label="Default select example" id="para" name="para">
+        <option selected>請選擇要輸出的章節</option>
+        <? for (i=0;i<para.length;i++) { ?>
+          <option value="<?=para[i]['index']?>"><?=para[i]['text']?></option>
+        <? } ?>
+      </select>
+      <center><input type="submit" class="btn btn-primary w-50" value="🖨️開始輸出"></center>
+    </form>
+    <? } ?>
+    <?!= include('script'); ?>
+  </body>
+</html>
