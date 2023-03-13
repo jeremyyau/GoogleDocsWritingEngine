@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <?!= include('style');?>
+  </head>
+  <body>
+    <?!= getHeader();?>
+    <?var books = getProperty("books");?>
+    <center><h1 class="mb-4">📚我的書櫃</h1></center>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col" style="width:7%;">🔢編號</th>
+          <th scope="col">🖼️封面</th>
+          <th scope="col" style="width: 12%;">📛書名</th>
+          <th scope="col" style="width: 40%;">📄簡介</th>
+          <th scope="col" style="width: 12%;">🚩章節目標字數</th>
+          <th scope="col" style="width: 12%;">🏁文章目標字數</th>
+          <th scope="col" style="width: 8%;">🖊️編輯</th>
+        </tr>
+      </thead>
+      <tbody>
+        <? for (i=0;i<books.length;i++) { ?>
+        <tr>
+          <th scope="row"><?=i+1?></th>
+          <td><a href="<?=books[i]['image']?>" target="_blank"><img src="<?=books[i]['image']?>" width="120"></a></td>
+          <td><a href="<?=books[i]['link']?>" target="_blank"><?=books[i]["name"]?></a></td>
+          <td><?=books[i]["desc"]?></td>
+          <td><?=books[i]["goal"]?></td>
+          <td><?=books[i]["goalAll"]?></td>
+          <td><a class="btn btn-primary" href="<?=getUrl();?>?page=bookshelf_edit&bookId=<?=i?>">編輯</a></td>
+        </tr>
+        <? } ?>
+      </tbody>
+    </table>
+    <div class="alert alert-primary" role="alert">書名填空的話，將會自動顯示文件名</div>
+    <form action="<?=getUrl();?>" method="post" class="mb-4">
+      <input type="hidden" id="actionType" name="actionType" value="addBook">
+      <input type="hidden" id="page" name="page" value="bookshelf">
+      <div class="row mb-4">
+        <div class="col">
+          <input type="url" id="image" name="image" class="form-control" placeholder="🖼️封面連結 (選填)">
+        </div>
+        <div class="col">
+          <input type="text" id="bookName" name="bookName" class="form-control" placeholder="📛自定書名 (選填)">
+        </div>
+        <div class="col-4">
+          <input type="text" id="desc" name="desc" class="form-control" placeholder="📄簡介 (選填)">
+        </div>
+        <div class="col-4">
+          <input type="url" id="bookUrl" name="bookUrl" class="form-control" placeholder="🔗連結" required>
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col">
+          <input type="number" id="goal" name="goal" class="form-control" placeholder="🚩章節目標字數 (選填)">
+        </div>
+        <div class="col">
+          <input type="number" id="goalAll" name="goalAll" class="form-control" placeholder="🏁文章目標字數 (選填)">
+        </div>
+      </div>
+      <div class="d-flex flex-row-reverse">
+        <input type="submit" class="btn btn-primary w-25" value="➕新增書本">
+      </div>
+    </form>
+    <form action="<?=getUrl();?>" method="post" onsubmit="return confirm('你是否確認要刪除所有書本？');">
+      <div class="d-flex flex-row-reverse">
+        <input type="hidden" id="actionType" name="actionType" value="deleteAllBooks">
+        <input type="hidden" id="page" name="page" value="bookshelf">
+        <input type="submit" class="btn btn-danger w-25" value="🗑️刪除所有書本">
+      </div>
+    </form>
+    <?!= include('script'); ?>
+  </body>
+</html>
