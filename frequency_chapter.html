@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <?!= include('style');?>
+    <?!= include('script'); ?>
+    <?var bookId = getProperty("currentBook");?>
+    <script>
+      function selectAll(source) {
+        checkboxes = document.getElementsByName('para');
+        for(var i=0, n=checkboxes.length;i<n;i++) {
+          checkboxes[i].checked = source.checked;
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <?!= includeWithCode("header");?>
+    <div class="container-xxl">
+      <header class="lh-1 py-3 d-flex justify-content-center gap-1">
+        <h1 class="mb-4">📉詞彙頻率</h1>
+      </header>
+      <?if (getDB()==null) { ?>
+      <header class="lh-1 py-3 d-flex justify-content-center gap-1">
+        <h1 class="mb-4">⚠️數據庫不存在</h1>
+      </header>
+      <?} else if (getDbBooks()[0]["link"] == null) {?>
+      <header class="lh-1 py-3 d-flex justify-content-center gap-1">
+        <h5>⚠️請先到「我的書櫃」加入書本</h5>
+      </header>
+      <? } else { ?>
+      <?var para = getParagraph(bookId);?>
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title text-center">分析書本：<strong><?=getCurBookName(bookId)?></strong></h4>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="selectAll" id="para_selectAll" name="paraSelectAll" onclick="selectAll(this)">
+            <label class="form-check-label" for="para_selectAll">
+              分析全部
+            </label>
+          </div>
+          <form action="<?=getUrl();?>/frequency_report" method="get">
+            <? for (i=0;i<para.length;i++) { ?>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="<?=para[i]['index']?>" id="para<?=i?>" name="para">
+                <label class="form-check-label" for="para<?=i?>">
+                  <?=para[i]['text']?>
+                </label>
+              </div>
+            <? } ?>
+            <center><button type="submit" class="btn btn-primary w-50" onclick="addSpinner(this)">👓開始分析</button></center>
+          </form>
+          <? } ?>
+        </div>
+      </div>
+    </div>
+    <?!= includeWithCode("footer");?>
+  </body>
+</html>

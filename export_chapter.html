@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <?!= include('style');?>
+    <?!= include('script'); ?>
+    <?var bookId = getProperty("currentBook");?>
+    <?
+      let image = "";
+      let name = "";
+      let currentBook = getProperty("currentBook");
+      if (books[currentBook]!=null) {
+        image = books[currentBook]["image"];
+        name = books[currentBook]["name"];
+      }
+    ?>
+    <script>
+      function selectAll(source) {
+        checkboxes = document.getElementsByName('para');
+        for(var i=0, n=checkboxes.length;i<n;i++) {
+          checkboxes[i].checked = source.checked;
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <?!= includeWithCode("header");?>
+    <div class="container-xxl">
+      <header class="lh-1 py-3 d-flex justify-content-center gap-1">
+        <h1 class="mb-4">🖨️輸出章節</h1>
+      </header>
+      <?if (getDB()==null) { ?>
+      <header class="lh-1 py-3 d-flex justify-content-center gap-1">
+        <h1 class="mb-4">⚠️數據庫不存在</h1>
+      </header>
+      <?} else if (getDbBooks()[0]["link"] == null) {?>
+      <header class="lh-1 py-3 d-flex justify-content-center gap-1">
+        <h5>⚠️請先到「我的書櫃」加入書本</h5>
+      </header>
+      <? } else { ?>
+      <?var para = getParagraph(bookId);?>
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title text-center">輸出書本：<strong><?=getCurBookName(bookId)?></strong></h4>
+          <div class="row">
+            <div class="col">
+              <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="selectAll" id="para_selectAll" name="paraSelectAll" onclick="selectAll(this)">
+              <label class="form-check-label" for="para_selectAll">
+                輸出全部
+              </label>
+            </div>
+            <form action="<?=getUrl();?>/export_result" method="get">
+              <? for (i=0;i<para.length;i++) { ?>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="<?=para[i]['index']?>" id="para<?=i?>" name="para">
+                  <label class="form-check-label" for="para<?=i?>">
+                    <?=para[i]['text']?>
+                  </label>
+                </div>
+              <? } ?>
+              <button type="submit" class="btn btn-primary w-100 mt-4" onclick="addSpinner(this)">🖨️開始輸出</button>
+            </form>
+            </div>
+            <div class="col text-center bg-dark">
+              <hr class="border border-white border-4 rounded" id="scanLine">
+              <img src="<?=image?>" class="mt-2 mb-2 rounded w-100">
+            </div>
+          </div>
+        </div>
+      </div>
+      <? } ?>
+    </div>
+    <?!= includeWithCode('footer'); ?>
+  </body>
+</html>

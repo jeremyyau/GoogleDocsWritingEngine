@@ -1,0 +1,116 @@
+<base target="_top">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="KwokYingFai">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<style>
+html, body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+.nav-link:hover, .btn.d-inline-flex.align-items-center.rounded.border-0.collapsed.text-white:hover {
+  background-color: #c6f5ec;
+  color: #000!important;
+}
+
+.btn-toggle-nav a:hover, .btn-toggle-nav a:focus {
+  color: #000!important;
+}
+
+@media only screen and (max-width: 655px) {
+  .menuTitle {
+    display: none;
+  }
+}
+
+#menuButton {
+  display: inline-block!important;
+}
+
+#scanLine {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  right: 0;
+  width: 50%;
+  border: 4px solid #000000;
+  box-shadow: 0 0 20px 15px #00ccff;
+  animation: scan 10s linear infinite;
+}
+
+@keyframes scan {
+  0% {
+    top: 40px;
+  }
+  50% {
+    top: calc(100% - 40px);
+  }
+  100% {
+    top: 40px;
+  }
+}
+
+.storyCard{
+  background-color: transparent;
+  perspective: 1000px;
+  height: 450px;
+}
+
+.storyCard-body {
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.storyCard:hover .storyCard-body {
+  transform: rotateY(-180deg);
+}
+
+.storyCard-front, .storyCard-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.storyCard-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.storyCard-back {
+  transform: rotateY(-180deg);
+}
+
+.innerProgress {
+  position: absolute;
+  width: 100%;
+  color: black;
+  text-align: left;
+  overflow: visible;
+}
+</style>

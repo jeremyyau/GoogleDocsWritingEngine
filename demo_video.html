@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <?!= include('style');?>
+    <?!= include('script'); ?>
+  </head>
+  <body>
+    <?!= includeWithCode("header");?>
+    <div class="container-xxl">
+      <header class="lh-1 py-3 d-flex justify-content-center gap-1">
+        <h1 class="mb-4">🎥示範影片</h1>
+      </header>
+      <div class="text-center">
+        <iframe width='80%' height='600' src='https://www.youtube.com/embed/7J3-6dtmNrg' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>
+      </div>
+    </div>
+    <?!= includeWithCode('footer'); ?>
+  </body>
+</html>

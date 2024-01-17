@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <?!= include('style');?>
+    <?!= include('script'); ?>
+    <?
+    exportResult = exportResult(getProperty("currentBook"), e.parameters.para);
+    const indents = parseInt(getProperty("indents"));
+    const lines = parseInt(getProperty("lines"))+1;
+    const speakLang = getProperty("speakLang");
+    ?>
+    <script>
+      function populateVoiceList() {
+        let voices = speechSynthesis.getVoices();
+        for (let i = 0; i < voices.length; i++) {
+          if (voices[i].lang == "<?=speakLang?>") {
+            const option = document.createElement("option");
+            option.textContent = `${voices[i].name} (${voices[i].lang})`;
+            option.setAttribute("value", i);
+            document.getElementById("voiceSelect").appendChild(option);
+          }
+        }
+      }
+      setTimeout(populateVoiceList, 1)
+      function download(filename, textareaId) {
+        let text = document.getElementById(textareaId).value;
+        let element = document.createElement('a');
+        element.setAttribute('href', 'data:text/docx;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+      }
+      function speakPara(textareaId) {
+        speechSynthesis.cancel();
+        let voices = speechSynthesis.getVoices();
+        let rate = document.querySelector("#rate").value;
+        let text = document.getElementById(textareaId).value;
+        let utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "<?=speakLang?>";
+        utterance.voice = voices[document.querySelector("#voiceSelect").value];
+        utterance.rate = rate;
+        speechSynthesis.speak(utterance);
+      }
+      function onSuccess(response) {
+        document.getElementById("notiSound").play();
+        // new bootstrap.Toast(document.getElementById('toast0')).show();
+        alert("成功上傳至Penana");
+      }
+    </script>
+  </head>
+  <body>
+    <?!= includeWithCode('audio'); ?>
+    <?!= includeWithCode("header"); ?>
+    <div class="container-xxl">
+      <header class="lh-1 py-3 d-flex justify-content-center gap-1">
+        <h1 class="mb-4">🖨️輸出結果</h1>
+      </header>
+      <label for="rate">朗讀速度：<output id="rateOutput">1</output>倍</label> <span class="badge rounded-pill text-bg-danger">New!</span><br>
+      <input type="range" class="form-range w-25" min="0.1" max="4" value="1" step="0.1" id="rate" oninput="document.querySelector('#rateOutput').value = this.value"/><br>
+      <label for="rate">朗讀員：</label> <span class="badge rounded-pill text-bg-danger">New!</span><br>
+      <select class="form-select" id="voiceSelect"></select><br>
+      <? for (let i in exportResult) { ?>
+        <h5><strong><?=exportResult[i]["heading1"]?></strong></h5>
+        <? if (exportResult[i]["content"]!=null) { ?>
+          <input type='button' class='btn btn-primary mb-2 gap-4' value='💾複製文章' onclick='document.getElementById("textarea<?=i?>").focus();document.getElementById("textarea<?=i?>").select();document.execCommand("copy");alert("已複製到剪貼板！");'/>
+          <input type='button' class='btn btn-primary mb-2 gap-4' id='txt<?=i?>' value='💽下載TXT檔' onclick="download('<?=exportResult[i]["heading1"]?>.txt', 'textarea<?=i?>')"/>
+          <input type='button' class='btn btn-primary mb-2 gap-4' id='speak<?=i?>' value='🔊朗讀' onclick="speakPara('textarea<?=i?>')"/>
+          <input type='button' class='btn btn-danger mb-2 gap-4' value='🔈停止朗讀' onclick='speechSynthesis.cancel();'/>
+          <input type='button' class="btn btn-warning mb-2 gap-4" value='🍌上傳至Penana' onclick="google.script.run.withSuccessHandler(onSuccess).fetchHTML('<?=exportResult[i]["heading1"]?>', document.getElementById('textarea<?=i?>').value);" />
+          <textarea class="form-control w-100 mb-4" id="textarea<?=i?>" rows="8"><? for (let x in exportResult[i]["content"]) { for (let p = 0;p < indents;p++) { ?>　<? } ?><?=exportResult[i]["content"][x]?><? if (x!=exportResult[i]["content"].length-1) { for (let k = 0;k < lines;k++) { ?>&#10;<?} }?><? } ?></textarea>
+        <? } else { ?>
+          <? for (let y in exportResult[i]["heading2"]) { ?>
+            <h6><?=exportResult[i]["heading2"][y]["title"]?></h6>
+            <input type='button' class='btn btn-primary mb-2 gap-4' value='💾複製文章' onclick='document.getElementById("textarea<?=i?>_<?=y?>").focus();document.getElementById("textarea<?=i?>_<?=y?>").select();document.execCommand("copy");alert("已複製到剪貼板！");'/>
+            <input type='button' class='btn btn-primary mb-2 gap-4' id='txt<?=i?>' value='💽下載TXT檔' onclick="download('<?=exportResult[i]["heading1"]?> - <?=exportResult[i]["heading2"][y]["title"]?>.txt', 'textarea<?=i?>_<?=y?>')"/>
+            <input type='button' class='btn btn-primary mb-2 gap-4' id='speak<?=i?>' value='🔊朗讀' onclick="speakPara('textarea<?=i?>_<?=y?>')"/>
+            <input type='button' class='btn btn-danger mb-2 gap-4' value='🔈停止朗讀' onclick='speechSynthesis.cancel();'/>
+            <input type='button' class="btn btn-warning mb-2 gap-4" value='🍌上傳至Penana' onclick="google.script.run.withSuccessHandler(onSuccess).fetchHTML('<?=exportResult[i]["heading1"]?>（<?=exportResult[i]["heading2"][y]["title"]?>）', document.getElementById('textarea<?=i?>_<?=y?>').value);" />
+            <textarea class="form-control w-100 mb-4" id="textarea<?=i?>_<?=y?>" rows="8"><? for (let z in exportResult[i]["heading2"][y]["content"]) {?><?=exportResult[i]["heading2"][y]["content"][z]?><?if (z!=exportResult[i]["heading2"][y]["content"].length-1) { for (let k = 0;k < lines;k++) {?>&#10;<? } }?><? } ?></textarea>
+          <? } ?>
+        <? } ?>
+      <? } ?>
+      <script>
+      populateVoiceList();
+      </script>
+    </div>
+    <?!= includeWithCode('footer'); ?>
+  </body>
+</html>

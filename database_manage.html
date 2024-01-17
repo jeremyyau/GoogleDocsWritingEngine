@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <?!= include('style');?>
+    <?!= include('script'); ?>
+  </head>
+  <body>
+    <?!= includeWithCode("header");?>
+    <div class="container-xxl">
+      <header class="lh-1 py-3 d-flex justify-content-center gap-1">
+        <h1 class="mb-4">💾資料管理</h1>
+      </header>
+      <div class="alert alert-primary text-center" role="alert">基於安全性和防止誤按的情況，即使刪除數據庫，也不會刪除相關的檔案，用戶需要手動去刪除檔案</div>
+      <div class="row row-cols-1 row-cols-lg-3">
+        <div class="col mb-4"> 
+          <a class="btn btn-primary w-100 h-100" href="<?=getUrl();?>/database_manage?actionType=createDB" onclick="addSpinner(this)"><h3>➕創建數據庫</h3></a>
+        </div>
+        <div class="col mb-4"> 
+          <a class="btn btn-primary w-100 h-100" href="<?=getUrl();?>/database_load" onclick="addSpinner(this)"><h3>🔃載入數據庫</h3></a>
+        </div>
+        <div class="col mb-4">
+          <a class="btn btn-danger w-100 h-100" href="<?=getUrl();?>/database_manage?actionType=deleteDB" onclick="addSpinner(this)"><h3>🗑️刪除數據庫</h3></a>
+        </div>
+      </div>
+    </div>
+    <?!= includeWithCode("footer");?>
+  </body>
+</html>
