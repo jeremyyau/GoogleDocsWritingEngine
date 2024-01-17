@@ -20,7 +20,7 @@ var cards = getDbCards();
 var days = JSON.parse(userProperties.getProperty('days'));
 
 function getUserEmail() {
-   return Session.getActiveUser().getEmail();
+  return Session.getActiveUser().getEmail();
 }
 
 function getDocument(bookId) {
@@ -73,8 +73,6 @@ function doGet(e) {
   path = e.pathInfo;
   if (path==null||e.parameter.page=="") {
     path = "index";
-  } else {
-    var html = HtmlService.createTemplateFromFile(path);
   }
   var response = UrlFetchApp.fetch("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/index.html");
   var html = HtmlService.createTemplate(response);
@@ -114,8 +112,6 @@ function doPost(e) {
   path = e.pathInfo;
   if (path==null||e.parameter.page=="") {
     path = "index";
-  } else {
-    var html = HtmlService.createTemplateFromFile(path);
   }
   var response = UrlFetchApp.fetch("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/index.html");
   var html = HtmlService.createTemplate(response);
