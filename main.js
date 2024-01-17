@@ -74,7 +74,7 @@ function doGet(e) {
   if (path==null||e.parameter.page=="") {
     path = "index";
   }
-  var response = UrlFetchApp.fetch("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/index.html");
+  var response = UrlFetchApp.fetch("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/"+path+".html");
   var html = HtmlService.createTemplate(response);
   switch(path) {
     case "index":
@@ -113,7 +113,7 @@ function doPost(e) {
   if (path==null||e.parameter.page=="") {
     path = "index";
   }
-  var response = UrlFetchApp.fetch("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/index.html");
+  var response = UrlFetchApp.fetch("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/"+path+".html");
   var html = HtmlService.createTemplate(response);
   switch(e.parameter.actionType) {
     case "setBookshelfDisplay" :
