@@ -177,7 +177,7 @@ function include(filename) {
 
 function includeWithCode(filename) {
   var response = UrlFetchApp.fetch("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/"+filename+".html");
-  return HtmlService.createHtmlOutput(response).evaluate().getContent();
+  return HtmlService.createTemplate(response).evaluate().getContent();
 }
 
 function getToast() {
