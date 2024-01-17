@@ -171,11 +171,13 @@ function getUrl() {
 }
 
 function include(filename) {
-  return HtmlService.createHtmlOutputFromFile(filename).getContent();
+  var response = UrlFetchApp.fetch("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/"+filename+".html");
+  return HtmlService.createHtmlOutput(response).getContent();
 }
 
 function includeWithCode(filename) {
-  return HtmlService.createTemplateFromFile(filename).evaluate().getContent();
+  var response = UrlFetchApp.fetch("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/"+filename+".html");
+  return HtmlService.createHtmlOutput(response).evaluate().getContent();
 }
 
 function getToast() {
