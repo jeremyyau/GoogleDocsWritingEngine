@@ -145,10 +145,8 @@
                 </select>
               </div>
             </div>
-            <div class="row mb-4">
-              <label for="bookUrl">🍌Penana連結</label>
-              <input type="url" id="bookUrl" name="bookUrl" class="form-control mb-4" placeholder="例如：https://www.penana.com/story/xxxxx/">
-            </div>
+            <label for="bookUrl">🍌Penana連結</label>
+            <input type="url" id="bookUrl" name="bookUrl" class="form-control mb-4" placeholder="例如：https://www.penana.com/story/xxxxx/">
             <button type="submit" class="btn btn-primary w-100" onclick="addSpinner(this)">➕新增書本</button>
           </form>
           <form action="<?=getUrl();?>/bookshelf" method="post" onsubmit="return confirm('你是否確認要刪除所有書本？');">
