@@ -1,0 +1,22 @@
+<? APIkey = getGeminiAPIkey(); ?>
+<script type="importmap">
+  {
+    "imports": {
+      "@google/generative-ai": "https://esm.run/@google/generative-ai"
+    }
+  }
+</script>
+<script type="module">
+    import { GoogleGenerativeAI } from "@google/generative-ai";
+    const API_KEY = "<?=APIkey?>";
+    const genAI = new GoogleGenerativeAI(API_KEY);
+    const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+    var prompt = ``;
+    var result = await model.generateContentStream([prompt]);
+    var response = document.getElementById("response");
+    for await (var chunk of result.stream) {
+        var chunkText = chunk.text();
+        console.log(chunkText);
+        response.innerHTML += chunkText;
+    }
+</script>

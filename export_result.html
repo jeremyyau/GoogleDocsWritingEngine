@@ -9,6 +9,7 @@
     const lines = parseInt(getProperty("lines"))+1;
     const speakLang = getProperty("speakLang");
     ?>
+    <?!= includeWithCode("ai");?>
     <script>
       function populateVoiceList() {
         let voices = speechSynthesis.getVoices();
@@ -45,7 +46,6 @@
       }
       function onSuccess(response) {
         document.getElementById("notiSound").play();
-        // new bootstrap.Toast(document.getElementById('toast0')).show();
         alert("成功上傳至Penana");
       }
     </script>
