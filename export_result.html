@@ -81,8 +81,8 @@
             <input type='button' class='btn btn-info mb-2 gap-4' value='✨AI續寫' onclick='geminiContWrite("textarea<?=i?>_<?=y?>", "newTextarea<?=i?>_<?=y?>");'/>
             <input type='button' class="btn btn-warning mb-2 gap-4" value='🍌上傳至Penana' onclick="google.script.run.withSuccessHandler(onSuccess).fetchHTML('<?=exportResult[i]["heading1"]?>（<?=exportResult[i]["heading2"][y]["title"]?>）', document.getElementById('textarea<?=i?>_<?=y?>').value);" />
             <div class="row">
-              <textarea class="form-control col-6 w-100" id="textarea<?=i?>_<?=y?>" rows="50"><? for (let z in exportResult[i]["heading2"][y]["content"]) {?><?=exportResult[i]["heading2"][y]["content"][z]?><?if (z!=exportResult[i]["heading2"][y]["content"].length-1) { for (let k = 0;k < lines;k++) {?>&#10;<? } }?><? } ?></textarea>
-              <textarea class="form-control col-6 w-100" id="newTextarea<?=i?>_<?=y?>" rows="50"></textarea>
+              <textarea class="form-control col-6" id="textarea<?=i?>_<?=y?>" rows="50"><? for (let z in exportResult[i]["heading2"][y]["content"]) {?><?=exportResult[i]["heading2"][y]["content"][z]?><?if (z!=exportResult[i]["heading2"][y]["content"].length-1) { for (let k = 0;k < lines;k++) {?>&#10;<? } }?><? } ?></textarea>
+              <textarea class="form-control col-6" id="newTextarea<?=i?>_<?=y?>" rows="50"></textarea>
             </div>
           <? } ?>
         <? } ?>
