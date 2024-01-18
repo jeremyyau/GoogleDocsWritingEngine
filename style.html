@@ -12,8 +12,14 @@ html, body{
 }
 
 textarea {
-  background-color: grey;
-  overflow: auto;
+  background-color: grey!important;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+textarea::-webkit-scrollbar {
+  display: none;
 }
 
 /* width */
