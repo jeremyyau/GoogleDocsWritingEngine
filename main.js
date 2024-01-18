@@ -261,7 +261,7 @@ function addBook(e) {
   } else {
     newGoalAll = getProperty("goalAll");
   }
-  sheet.appendRow([e.parameter.image,newBookName,e.parameter.desc,e.parameter.bookUrl,newGoal,newGoalAll,e.parameter.tags,e.parameter.status]);
+  sheet.appendRow([e.parameter.image,newBookName,e.parameter.desc,e.parameter.bookUrl,newGoal,newGoalAll,e.parameter.tags,e.parameter.status,e.parameter.penanaUrl]);
   sheet.insertRowAfter(sheet.getLastRow());
   console.log("成功新增書本！");
 }
@@ -289,6 +289,7 @@ function editBook(e) {
   }
   sheet.getRange(parseInt(e.parameter.bookId)+1,7).setValue(e.parameter.tags);
   sheet.getRange(parseInt(e.parameter.bookId)+1,8).setValue(e.parameter.status);
+  sheet.getRange(parseInt(e.parameter.bookId)+1,9).setValue(e.parameter.penanaUrl);
   console.log("成功編輯書本！");
 }
 
@@ -544,7 +545,7 @@ function getDbBooks() {
       var range = sheet.getDataRange();
       var values = range.getValues();
       for (var i = 0; i < values.length; i++) {
-        newBooks.push({"image":values[i][0],"name":values[i][1], "desc":values[i][2],"link":values[i][3],"goal":values[i][4],"goalAll":values[i][5],"tags":values[i][6],"status":values[i][7]});
+        newBooks.push({"image":values[i][0],"name":values[i][1], "desc":values[i][2],"link":values[i][3],"goal":values[i][4],"goalAll":values[i][5],"tags":values[i][6],"status":values[i][7],"penanaUrl":values[i][8]});
       }
       books = newBooks;
       return books;
