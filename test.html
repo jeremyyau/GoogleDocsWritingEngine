@@ -1,0 +1,28 @@
+<html>
+  <body>
+    <!-- ... Your HTML and CSS -->
+
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+      }
+    </script>
+    <script type="module">
+        import { GoogleGenerativeAI } from "@google/generative-ai";
+        const API_KEY = "";
+        const genAI = new GoogleGenerativeAI(API_KEY);
+        const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+        const prompt = ``;
+        const result = await model.generateContentStream([prompt]);
+        const response = document.getElementById("response");
+        for await (const chunk of result.stream) {
+            const chunkText = chunk.text();
+            console.log(chunkText);
+            response.innerHTML += chunkText;
+        }
+    </script>
+    <p id="response"></p>
+  </body>
+</html>
