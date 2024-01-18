@@ -11,16 +11,14 @@
     const API_KEY = "<?=APIkey?>";
     const genAI = new GoogleGenerativeAI(API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-pro"});
-</script>
-<script>
-  async function geminiContWrite(textareaId) {
-    let prompt = document.getElementById(textareaId).value;
-    prompt += "\n幫我續寫上面";
-    let result = await model.generateContentStream([prompt]);
-    let response = document.getElementById("response");
-    for await (let chunk of result.stream) {
-      let chunkText = chunk.text();
-      console.log(chunkText);
+    async function geminiContWrite(textareaId) {
+      let prompt = document.getElementById(textareaId).value;
+      prompt += "\n幫我續寫上面";
+      let result = await model.generateContentStream([prompt]);
+      let response = document.getElementById("response");
+      for await (let chunk of result.stream) {
+        let chunkText = chunk.text();
+        console.log(chunkText);
+      }
     }
-  }
 </script>
