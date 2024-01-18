@@ -38,7 +38,7 @@
           <option value="已放棄" <?if (books[bookId]['status']=="已放棄") {?>selected<? } ?>>已放棄</option>
         </select>
         <label for="bookUrl">🍌Penana連結</label>
-        <input type="url" id="bookUrl" name="bookUrl" class="form-control mb-4" value="<?=books[bookId]['link']?>" placeholder="例如：https://www.penana.com/story/xxxxx/">
+        <input type="url" id="bookUrl" name="bookUrl" class="form-control mb-4" value="<?=books[bookId]['penanaUrl']?>" placeholder="例如：https://www.penana.com/story/xxxxx/">
         <button type="submit" class="btn btn-primary w-100 mb-4" onclick="addSpinner(this)">💾保存修改</button>
       </form>
       <form action="<?=getUrl();?>/bookshelf" method="post" class="mb-4">
