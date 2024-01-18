@@ -68,7 +68,7 @@
           <input type='button' class='btn btn-primary mb-2 gap-4' id='txt<?=i?>' value='💽下載TXT檔' onclick="download('<?=exportResult[i]["heading1"]?>.txt', 'textarea<?=i?>')"/>
           <input type='button' class='btn btn-primary mb-2 gap-4' id='speak<?=i?>' value='🔊朗讀' onclick='speakPara("textarea<?=i?>");'/>
           <input type='button' class='btn btn-danger mb-2 gap-4' value='🔈停止朗讀' onclick='speechSynthesis.cancel();'/>
-          <input type='button' class='btn btn-danger mb-2 gap-4' value='✨AI續寫' onclick='geminiContWrite("textarea<?=i?>");'/>
+          <input type='button' class='btn btn-primary mb-2 gap-4' value='✨AI續寫' onclick='geminiContWrite("textarea<?=i?>");'/>
           <input type='button' class="btn btn-warning mb-2 gap-4" value='🍌上傳至Penana' onclick="google.script.run.withSuccessHandler(onSuccess).fetchHTML('<?=exportResult[i]["heading1"]?>', document.getElementById('textarea<?=i?>').value);" />
           <textarea class="form-control w-100 mb-4" id="textarea<?=i?>" rows="8"><? for (let x in exportResult[i]["content"]) { for (let p = 0;p < indents;p++) { ?>　<? } ?><?=exportResult[i]["content"][x]?><? if (x!=exportResult[i]["content"].length-1) { for (let k = 0;k < lines;k++) { ?>&#10;<?} }?><? } ?></textarea>
         <? } else { ?>
@@ -77,8 +77,8 @@
             <input type='button' class='btn btn-primary mb-2 gap-4' value='💾複製文章' onclick='document.getElementById("textarea<?=i?>_<?=y?>").focus();document.getElementById("textarea<?=i?>_<?=y?>").select();document.execCommand("copy");alert("已複製到剪貼板！");'/>
             <input type='button' class='btn btn-primary mb-2 gap-4' id='txt<?=i?>' value='💽下載TXT檔' onclick="download('<?=exportResult[i]["heading1"]?> - <?=exportResult[i]["heading2"][y]["title"]?>.txt', 'textarea<?=i?>_<?=y?>')"/>
             <input type='button' class='btn btn-primary mb-2 gap-4' id='speak<?=i?>' value='🔊朗讀' onclick='speakPara("textarea<?=i?>_<?=y?>")'/>
-            <input type='button' class='btn btn-danger mb-2 gap-4' value='✨AI續寫' onclick='geminiContWrite("textarea<?=i?>");'/>
             <input type='button' class='btn btn-danger mb-2 gap-4' value='🔈停止朗讀' onclick='speechSynthesis.cancel();'/>
+            <input type='button' class='btn btn-primary mb-2 gap-4' value='✨AI續寫' onclick='geminiContWrite("textarea<?=i?>_<?=y?>");'/>
             <input type='button' class="btn btn-warning mb-2 gap-4" value='🍌上傳至Penana' onclick="google.script.run.withSuccessHandler(onSuccess).fetchHTML('<?=exportResult[i]["heading1"]?>（<?=exportResult[i]["heading2"][y]["title"]?>）', document.getElementById('textarea<?=i?>_<?=y?>').value);" />
             <textarea class="form-control w-100 mb-4" id="textarea<?=i?>_<?=y?>" rows="8"><? for (let z in exportResult[i]["heading2"][y]["content"]) {?><?=exportResult[i]["heading2"][y]["content"][z]?><?if (z!=exportResult[i]["heading2"][y]["content"].length-1) { for (let k = 0;k < lines;k++) {?>&#10;<? } }?><? } ?></textarea>
           <? } ?>
