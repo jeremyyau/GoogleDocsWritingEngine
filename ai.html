@@ -1,4 +1,5 @@
-<? APIkey = getGeminiAPIkey(); ?>
+<? geminiAPIkey = getGeminiAPIkey(); ?>
+<? openJourneyAPIkey = getOpenJourneyAPIkey(); ?>
 <script type="importmap">
   {
     "imports": {
@@ -8,7 +9,7 @@
 </script>
 <script type="module">
     import { GoogleGenerativeAI } from "@google/generative-ai";
-    const API_KEY = "<?=APIkey?>";
+    const API_KEY = "<?=geminiAPIkey?>";
     const genAI = new GoogleGenerativeAI(API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-pro"});
     
@@ -37,4 +38,21 @@
         document.getElementById(newTextareaId).value += chunkText;
       }
     }
+</script>
+<script>
+  async function query(data) {
+    let response = await fetch(
+      "https://api-inference.huggingface.co/models/prompthero/openjourney",
+      {
+        headers: { Authorization: "Bearer <?=openJourneyAPIKey?>" },
+        method: "POST",
+        body: JSON.stringify(data),
+      }
+    );
+    let result = await response.blob();
+    return result;
+  }
+  query({"inputs": "Astronaut riding a horse"}).then((response) => {
+
+  });
 </script>
