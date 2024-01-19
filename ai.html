@@ -18,7 +18,6 @@
       prompt += "\n幫我續寫上面";
       document.getElementById(newTextareaId).value = "";
       let result = await model.generateContentStream([prompt]);
-      let response = document.getElementById("response");
       for await (let chunk of result.stream) {
         let chunkText = chunk.text();
         console.log(chunkText);
@@ -31,7 +30,6 @@
       prompt += "\n幫我檢查上面有甚麼錯別字";
       document.getElementById(newTextareaId).value = "";
       let result = await model.generateContentStream([prompt]);
-      let response = document.getElementById("response");
       for await (let chunk of result.stream) {
         let chunkText = chunk.text();
         console.log(chunkText);
@@ -40,7 +38,7 @@
     }
 </script>
 <script>
-  async function query(data) {
+  async function genImage(data) {
     let response = await fetch(
       "https://api-inference.huggingface.co/models/prompthero/openjourney",
       {
