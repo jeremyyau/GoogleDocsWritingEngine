@@ -44,7 +44,7 @@
     let response = await fetch(
       "https://api-inference.huggingface.co/models/prompthero/openjourney",
       {
-        headers: { Authorization: "Bearer <?=openJourneyAPIKey?>" },
+        headers: { Authorization: "Bearer <?=openJourneyAPIkey?>" },
         method: "POST",
         body: JSON.stringify(data),
       }
