@@ -50,7 +50,7 @@
     let result = await response.blob();
     return result;
   }
-  genImage({"inputs": "Japanese twintails anime girl"}).then((response) => {
+  genImage({"inputs": "Japanese anime girl"}).then((response) => {
     console.log(response);
     let objectURL = URL.createObjectURL(response);
     document.getElementById("image").src = objectURL;
