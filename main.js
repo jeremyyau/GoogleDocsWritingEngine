@@ -1,14 +1,9 @@
 function installFunctions() {
-  oldDBLink = ""; // 請把舊的數據庫連結放在""中
   console.time("安裝花費時間");
   setAllProperties();
   createTimeDrivenTriggers();
-  if (oldDBLink=="") {
-    if (createDB()) {
-      initialDbData();
-    }
-  } else {
-    userProperties.setProperty('dbUrl', oldDBLink);
+  if (createDB()) {
+    initialDbData();
   }
   console.timeEnd("安裝花費時間");
 }
