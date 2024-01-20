@@ -10,11 +10,11 @@
 <script type="module">
     import { GoogleGenerativeAI } from "@google/generative-ai";
     const geminiAPIkey = "<?=geminiAPIkey?>";
-    if (geminiAPIkey!="") {
+    if (geminiAPIkey=="") {
+      alert("請先設定Gemini API Key！");
+    } else {
       const genAI = new GoogleGenerativeAI(geminiAPIkey);
       const model = genAI.getGenerativeModel({ model: "gemini-pro"});
-    } else {
-      alert("請先設定Gemini API Key！");
     }
     
     window.geminiRequest = async function geminiRequest(textareaId, newTextareaId, type) {
