@@ -75,7 +75,7 @@
         <? } else { ?>
           <? for (let y in exportResult[i]["heading2"]) { ?>
             <h6><?=exportResult[i]["heading2"][y]["title"]?></h6>
-            <div class="row mb-2 gap-4">
+            <div class="mb-2 gap-4">
               <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#collapse<?=i?>_<?=y?>" aria-expanded="false" aria-controls="collapse<?=i?>_<?=y?>">🔛展開</button>
               <button type='button' class='btn btn-primary' onclick='document.getElementById("textarea<?=i?>_<?=y?>").focus();document.getElementById("textarea<?=i?>_<?=y?>").select();document.execCommand("copy");alert("已複製到剪貼板！");'>💾複製文章</button>
               <button type='button' class='btn btn-primary' id='txt<?=i?>' onclick="download('<?=exportResult[i]["heading1"]?> - <?=exportResult[i]["heading2"][y]["title"]?>.txt', 'textarea<?=i?>_<?=y?>')">💽下載TXT檔</button>
