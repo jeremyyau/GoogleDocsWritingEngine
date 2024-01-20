@@ -14,10 +14,7 @@
     const model = genAI.getGenerativeModel({ model: "gemini-pro"});
     if (geminiAPIkey=="") {
       alert("請先設定Gemini API Key！");
-    } else {
-      
     }
-    
     window.geminiRequest = async function geminiRequest(textareaId, newTextareaId, type) {
       let prompt = document.getElementById(textareaId).value;
       if (type == "contWrite") {
@@ -35,23 +32,21 @@
     }
 </script>
 <script>
+  const openJourneyAPIkey = "<?=openJourneyAPIkey?>";
   async function genImage(data) {
-    openJourneyAPIkey = "<?=openJourneyAPIkey?>";
     if (openJourneyAPIkey=="") {
       alert("請先設定OpenJourney API Key！");
-    } else {
-      let response = await fetch(
-        "https://api-inference.huggingface.co/models/prompthero/openjourney-v4",
-        {
-          headers: { Authorization: "Bearer " + openJourneyAPIkey },
-          method: "POST",
-          body: JSON.stringify(data),
-        }
-      );
-      let result = await response.blob();
-      return result;
     }
-    return;
+    let response = await fetch(
+      "https://api-inference.huggingface.co/models/prompthero/openjourney-v4",
+      {
+        headers: { Authorization: "Bearer " + openJourneyAPIkey },
+        method: "POST",
+        body: JSON.stringify(data),
+      }
+    );
+    let result = await response.blob();
+    return result;
   }
   genImage({"inputs": "Japanese anime girl"}).then((response) => {
     console.log(response);
