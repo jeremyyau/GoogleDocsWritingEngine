@@ -108,47 +108,6 @@
       <? } ?>
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title text-center"><strong>新增書本</strong></h4>
-          <div class="alert alert-primary" role="alert">書名填空的話，將會自動顯示文件名</div>
-          <form action="<?=getUrl();?>/bookshelf" method="post" class="mb-4">
-            <input type="hidden" id="actionType" name="actionType" value="addBook">
-            <label for="image">🖼️封面連結 (選填)</label>
-            <input type="url" id="image" name="image" class="form-control mb-4" placeholder="例如：https://i.imgur.com/xxxxxxx.png">
-            <label for="bookName">📛自定書名 (選填)</label>
-            <input type="text" id="bookName" name="bookName" class="form-control mb-4" placeholder="例如：怪異科幻故事集">
-            <label for="desc">📄簡介 (選填)</label>
-            <input type="text" id="desc" name="desc" class="form-control mb-4" placeholder="例如：這是一本關於怪異科幻事件的小說。">
-            <label for="bookUrl">🔗連結</label>
-            <input type="url" id="bookUrl" name="bookUrl" class="form-control mb-4" placeholder="例如：https://docs.google.com/document/d/xxxxxxxxxxxxxxxxxxxxxx/" required>
-            <div class="row mb-4">
-              <div class="col">
-                <label for="goal">🚩章節目標字數 (選填)</label>
-                <input type="number" id="goal" name="goal" class="form-control" placeholder="例如：1200">
-              </div>
-              <div class="col">
-                <label for="goalAll">🏁文章目標字數 (選填)</label>
-                <input type="number" id="goalAll" name="goalAll" class="form-control" placeholder="例如：100000">
-              </div>
-            </div>
-            <div class="row mb-4">
-              <div class="col">
-                <label for="tags">🏷️標籤 (選填)</label>
-                <input type="text" id="tags" name="tags" class="form-control mb-4" placeholder="請用,分開標籤，例如：科幻,愛情,武俠">
-              </div>
-              <div class="col">
-                <label for="tags">📝狀態</label>
-                <select id="status" name="status" class="form-select mb-4">
-                  <option value="未連載">未連載</option>
-                  <option value="連載中">連載中</option>
-                  <option value="已完結">已完結</option>
-                  <option value="已放棄">已放棄</option>
-                </select>
-              </div>
-            </div>
-            <label for="penanaUrl">🍌Penana連結</label>
-            <input type="url" id="penanaUrl" name="penanaUrl" class="form-control mb-4" placeholder="例如：https://www.penana.com/story/xxxxx/">
-            <button type="submit" class="btn btn-primary w-100" onclick="addSpinner(this)">➕新增書本</button>
-          </form>
           <form action="<?=getUrl();?>/bookshelf" method="post" onsubmit="return confirm('你是否確認要刪除所有書本？');">
             <input type="hidden" id="actionType" name="actionType" value="deleteAllBooks">
             <button type="submit" class="btn btn-danger w-100" onclick="addSpinner(this)">🗑️刪除所有書本</button>
