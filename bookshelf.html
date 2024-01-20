@@ -60,50 +60,62 @@
       </table>
       <? } else if (bookshelfDisplay == "card") {?>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4">
-        <? for (let i in books) { ?>
+          <? for (let i in books) { ?>
+            <div class="col mb-4 d-flex flex-wrap align-items-stretch">
+              <div class="storyCard w-100 flex-grow-1 d-flex">
+                <div class="storyCard-body border rounded-4 card-img-overlay">
+                  <? if (books[i]["image"]!="") { ?>
+                  <div class="storyCard-front h-100">
+                    <img src="<?=books[i]["image"]?>" class="rounded-4 <?if (streamerMode) { ?>placeholder<? } ?>">
+                  </div>
+                  <? } else { ?>
+                  <div class="storyCard-front d-flex justify-content-center align-items-center" style="height:100%;">
+                    <h5><strong><?=books[i]["name"]?></strong></h5>
+                  </div>
+                  <? } ?> 
+                  <div class="storyCard-back p-4 d-flex flex-column">
+                    <p><a href="<?=books[i]['link']?>" target="_blank" class="card-title h5 text-primary <?if (streamerMode) { ?>placeholder<? } ?>"><?=books[i]["name"]?></a>
+                    <? if (books[i]["status"]=="未連載") { ?>
+                      <span class="badge bg-danger"><?=books[i]["status"]?></span>
+                    <? } else if (books[i]["status"]=="連載中") { ?>
+                      <span class="badge bg-warning"><?=books[i]["status"]?></span>
+                    <? } else if (books[i]["status"]=="已完結") { ?>
+                      <span class="badge bg-success"><?=books[i]["status"]?></span>
+                    <? } else if (books[i]["status"]=="已放棄") { ?>
+                      <span class="badge bg-secondary"><?=books[i]["status"]?></span>
+                    <? } ?>
+                    </p>
+                    <p class="card-text <?if (streamerMode) { ?>placeholder<? } ?>"><?=books[i]["desc"]?></p>
+                    <p class="card-text mt-auto">
+                      <? 
+                      if (books[i]["tags"].length != 0) {
+                        const tags = books[i]["tags"].split(",");
+                        for (let tag of tags) { 
+                      ?>
+                          <span class="badge bg-secondary"><?=tag?></span>
+                        <? }
+                      }
+                      ?>
+                    </p>
+                    <p class="card-text"><small>🚩章節目標字數: <?=books[i]["goal"]?></small><br><small>🏁文章目標字數: <?=books[i]["goalAll"]?></small></p>
+                    <a href="<?=getUrl();?>/bookshelf_edit?bookId=<?=i?>" class="col-6 w-100 btn btn-primary rounded-4 btn-sm" onclick="addSpinner(this)">編輯</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <? } ?>
           <div class="col mb-4 d-flex flex-wrap align-items-stretch">
             <div class="storyCard w-100 flex-grow-1 d-flex">
               <div class="storyCard-body border rounded-4 card-img-overlay">
-                <? if (books[i]["image"]!="") { ?>
-                <div class="storyCard-front h-100">
-                  <img src="<?=books[i]["image"]?>" class="rounded-4 <?if (streamerMode) { ?>placeholder<? } ?>">
-                </div>
-                <? } else { ?>
                 <div class="storyCard-front d-flex justify-content-center align-items-center" style="height:100%;">
-                  <h5><strong><?=books[i]["name"]?></strong></h5>
+                  <h5><strong>➕新增書本</strong></h5>
                 </div>
-                <? } ?> 
                 <div class="storyCard-back p-4 d-flex flex-column">
-                  <p><a href="<?=books[i]['link']?>" target="_blank" class="card-title h5 text-primary <?if (streamerMode) { ?>placeholder<? } ?>"><?=books[i]["name"]?></a>
-                  <? if (books[i]["status"]=="未連載") { ?>
-                    <span class="badge bg-danger"><?=books[i]["status"]?></span>
-                  <? } else if (books[i]["status"]=="連載中") { ?>
-                    <span class="badge bg-warning"><?=books[i]["status"]?></span>
-                  <? } else if (books[i]["status"]=="已完結") { ?>
-                    <span class="badge bg-success"><?=books[i]["status"]?></span>
-                  <? } else if (books[i]["status"]=="已放棄") { ?>
-                    <span class="badge bg-secondary"><?=books[i]["status"]?></span>
-                  <? } ?>
-                  </p>
-                  <p class="card-text <?if (streamerMode) { ?>placeholder<? } ?>"><?=books[i]["desc"]?></p>
-                  <p class="card-text mt-auto">
-                    <? 
-                    if (books[i]["tags"].length != 0) {
-                      const tags = books[i]["tags"].split(",");
-                      for (let tag of tags) { 
-                    ?>
-                        <span class="badge bg-secondary"><?=tag?></span>
-                      <? }
-                    }
-                    ?>
-                  </p>
-                  <p class="card-text"><small>🚩章節目標字數: <?=books[i]["goal"]?></small><br><small>🏁文章目標字數: <?=books[i]["goalAll"]?></small></p>
-                  <a href="<?=getUrl();?>/bookshelf_edit?bookId=<?=i?>" class="col-6 w-100 btn btn-primary rounded-4 btn-sm" onclick="addSpinner(this)">編輯</a>
+                  <a href="<?=getUrl();?>/bookshelf_add"><strong>➕新增書本</strong></a>
                 </div>
               </div>
             </div>
           </div>
-        <? } ?>
         </div>
       <? } ?>
       <div class="card">
