@@ -1,3 +1,4 @@
+<?var books = getProperty("books");var bookId = getEditBookId();?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -11,7 +12,6 @@
         <h1 class="mb-4">📚我的書櫃</h1>
       </header>
       <a href="<?=getUrl()?>/bookshelf" class="btn btn-primary w-100 mb-4" onclick="addSpinner(this)">返回</a></center>
-      <?var books = getProperty("books");var bookId = getEditBookId();?>
       <form action="<?=getUrl();?>/bookshelf" method="post">
         <input type="hidden" id="actionType" name="actionType" value="editBook">
         <input type="hidden" id="page" name="page" value="bookshelf">
