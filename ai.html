@@ -17,7 +17,7 @@
       alert("請先設定Gemini API Key！");
     }
     
-    window.geminiRequest = async function geminiContWrite(textareaId, newTextareaId, type) {
+    window.geminiRequest = async function geminiRequest(textareaId, newTextareaId, type) {
       let prompt = document.getElementById(textareaId).value;
       if (type == "contWrite") {
         prompt += "\n幫我續寫上面";
