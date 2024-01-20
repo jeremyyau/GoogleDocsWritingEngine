@@ -13,21 +13,13 @@
     const genAI = new GoogleGenerativeAI(API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-pro"});
     
-    window.geminiContWrite = async function geminiContWrite(textareaId, newTextareaId) {
+    window.geminiRequest = async function geminiContWrite(textareaId, newTextareaId, type) {
       let prompt = document.getElementById(textareaId).value;
-      prompt += "\n幫我續寫上面";
-      document.getElementById(newTextareaId).value = "";
-      let result = await model.generateContentStream([prompt]);
-      for await (let chunk of result.stream) {
-        let chunkText = chunk.text();
-        console.log(chunkText);
-        document.getElementById(newTextareaId).value += chunkText;
+      if (type == "contWrite") {
+        prompt += "\n幫我續寫上面";
+      } else if (type == "checkMistake") {
+        prompt += "\n幫我檢查上面有甚麼錯別字";
       }
-    }
-
-    window.geminiCheckMistake = async function geminiContWrite(textareaId, newTextareaId) {
-      let prompt = document.getElementById(textareaId).value;
-      prompt += "\n幫我檢查上面有甚麼錯別字";
       document.getElementById(newTextareaId).value = "";
       let result = await model.generateContentStream([prompt]);
       for await (let chunk of result.stream) {
