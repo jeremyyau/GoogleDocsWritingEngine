@@ -4,6 +4,15 @@
     <?!= include('style');?>
     <?!= include('script'); ?>
     <?var bookId = getProperty("currentBook");?>
+    <?
+      let image = "";
+      let name = "";
+      let currentBook = getProperty("currentBook");
+      if (books[currentBook]!=null) {
+        image = books[currentBook]["image"];
+        name = books[currentBook]["name"];
+      }
+    ?>
     <script>
       function selectAll(source) {
         checkboxes = document.getElementsByName('para');
@@ -32,26 +41,34 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title text-center">分析書本：<strong><?=getCurBookName(bookId)?></strong></h4>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="selectAll" id="para_selectAll" name="paraSelectAll" onclick="selectAll(this)">
-            <label class="form-check-label" for="para_selectAll">
-              分析全部
-            </label>
-          </div>
-          <form action="<?=getUrl();?>/frequency_report" method="get">
-            <? for (i=0;i<para.length;i++) { ?>
+          <div class="row">
+            <div class="col">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="<?=para[i]['index']?>" id="para<?=i?>" name="para">
-                <label class="form-check-label" for="para<?=i?>">
-                  <?=para[i]['text']?>
+                <input class="form-check-input" type="checkbox" value="selectAll" id="para_selectAll" name="paraSelectAll" onclick="selectAll(this)">
+                <label class="form-check-label" for="para_selectAll">
+                  分析全部
                 </label>
               </div>
-            <? } ?>
-            <center><button type="submit" class="btn btn-primary w-50" onclick="addSpinner(this)">👓開始分析</button></center>
-          </form>
-          <? } ?>
+              <form action="<?=getUrl();?>/frequency_report" method="get">
+                <? for (i=0;i<para.length;i++) { ?>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="<?=para[i]['index']?>" id="para<?=i?>" name="para">
+                    <label class="form-check-label" for="para<?=i?>">
+                      <?=para[i]['text']?>
+                    </label>
+                  </div>
+                <? } ?>
+                <button type="submit" class="btn btn-primary w-100 mt-4" onclick="addSpinner(this)">👓開始分析</button>
+              </form>
+            </div>
+            <div class="col text-center bg-dark">
+              <hr class="border border-white border-4 rounded" id="scanLine">
+              <img src="<?=image?>" class="mt-2 mb-2 rounded w-100">
+            </div>
+          </div>
         </div>
       </div>
+      <? } ?>
     </div>
     <?!= includeWithCode("footer");?>
   </body>

@@ -44,22 +44,22 @@
           <div class="row">
             <div class="col">
               <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="selectAll" id="para_selectAll" name="paraSelectAll" onclick="selectAll(this)">
-              <label class="form-check-label" for="para_selectAll">
-                輸出全部
-              </label>
-            </div>
-            <form action="<?=getUrl();?>/export_result" method="get">
-              <? for (i=0;i<para.length;i++) { ?>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="<?=para[i]['index']?>" id="para<?=i?>" name="para">
-                  <label class="form-check-label" for="para<?=i?>">
-                    <?=para[i]['text']?>
-                  </label>
-                </div>
-              <? } ?>
-              <button type="submit" class="btn btn-primary w-100 mt-4" onclick="addSpinner(this)">🖨️開始輸出</button>
-            </form>
+                <input class="form-check-input" type="checkbox" value="selectAll" id="para_selectAll" name="paraSelectAll" onclick="selectAll(this)">
+                <label class="form-check-label" for="para_selectAll">
+                  輸出全部
+                </label>
+              </div>
+              <form action="<?=getUrl();?>/export_result" method="get">
+                <? for (i=0;i<para.length;i++) { ?>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="<?=para[i]['index']?>" id="para<?=i?>" name="para">
+                    <label class="form-check-label" for="para<?=i?>">
+                      <?=para[i]['text']?>
+                    </label>
+                  </div>
+                <? } ?>
+                <button type="submit" class="btn btn-primary w-100 mt-4" onclick="addSpinner(this)">🖨️開始輸出</button>
+              </form>
             </div>
             <div class="col text-center bg-dark">
               <hr class="border border-white border-4 rounded" id="scanLine">
