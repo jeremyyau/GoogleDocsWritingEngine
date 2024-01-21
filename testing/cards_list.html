@@ -6,59 +6,63 @@
   <body>
     <?!= includeWithCode("header");?>
     <?var cards = getProperty("cards");?>
-    <center><h1 class="mb-4">👨‍👩‍👦角色卡</h1></center>
-    <table class="table">
-      <thead>
-        <tr class="table-secondary">
-          <th scope="col" style="width: 7%;">🔢編號</th>
-          <th scope="col">🖼️圖片</th>
-          <th scope="col" style="width: 12%;">👽類型</th>
-          <th scope="col" style="width: 12%;">📛名稱</th>
-          <th scope="col" style="width: 8%;">🚻性別</th>
-          <th scope="col" style="width: 40%;">📋描述</th>
-          <th scope="col" style="width: 8%;">🖊️編輯</th>
-        </tr>
-      </thead>
-      <tbody>
-        <? for (i=0;i<cards.length;i++) { ?>
-        <tr class="table-<?if(cards[i]['gender']=="男性"){?>primary<?}?><?if(cards[i]['gender']=="女性"){?>danger<?}?><?if(cards[i]['gender']=="不適用"){?>warning<?}?>">
-          <th scope="row" ><?=i+1?></th>
-          <td><img src="<?=cards[i]['image']?>" width="120"></td>
-          <td><?=cards[i]["type"]?></td>
-          <td><?=cards[i]["name"]?></td>
-          <td><?=cards[i]["gender"]?></td>
-          <td><textarea class="form-control bg-white" rows="4" style="resize: none;" disabled readonly><?=cards[i]["desc"]?></textarea></td>
-          <td><a class="btn btn-primary" href="<?=getUrl();?>/cards_edit?cardId=<?=i?>" onclick="addSpinner(this)">編輯</a></td>
-        </tr>
-        <? } ?>
-      </tbody>
-    </table>
-    <form action="<?=getUrl();?>" method="post" class="mb-4">
-      <input type="hidden" id="actionType" name="actionType" value="addCard">
-      <input type="url" id="image" name="image" class="form-control mb-4" placeholder="🖼️圖片連結 (選填)">
-      <div class="row mb-4">
-        <div class="col">
-          <input type="text" id="type" name="type" class="form-control" placeholder="👽類型 (選填)">
+    <header class="lh-1 py-3 d-flex justify-content-center gap-1">
+      <h1 class="mb-4">👨‍👩‍👦角色卡</h1>
+    </header>
+    <div class="container-xxl">
+      <table class="table">
+        <thead>
+          <tr class="table-secondary">
+            <th scope="col" style="width: 7%;">🔢編號</th>
+            <th scope="col">🖼️圖片</th>
+            <th scope="col" style="width: 12%;">👽類型</th>
+            <th scope="col" style="width: 12%;">📛名稱</th>
+            <th scope="col" style="width: 8%;">🚻性別</th>
+            <th scope="col" style="width: 40%;">📋描述</th>
+            <th scope="col" style="width: 8%;">🖊️編輯</th>
+          </tr>
+        </thead>
+        <tbody>
+          <? for (i=0;i<cards.length;i++) { ?>
+          <tr class="table-<?if(cards[i]['gender']=="男性"){?>primary<?}?><?if(cards[i]['gender']=="女性"){?>danger<?}?><?if(cards[i]['gender']=="不適用"){?>warning<?}?>">
+            <th scope="row" ><?=i+1?></th>
+            <td><img src="<?=cards[i]['image']?>" width="120"></td>
+            <td><?=cards[i]["type"]?></td>
+            <td><?=cards[i]["name"]?></td>
+            <td><?=cards[i]["gender"]?></td>
+            <td><textarea class="form-control bg-white" rows="4" style="resize: none;" disabled readonly><?=cards[i]["desc"]?></textarea></td>
+            <td><a class="btn btn-primary" href="<?=getUrl();?>/cards_edit?cardId=<?=i?>" onclick="addSpinner(this)">編輯</a></td>
+          </tr>
+          <? } ?>
+        </tbody>
+      </table>
+      <form action="<?=getUrl();?>" method="post" class="mb-4">
+        <input type="hidden" id="actionType" name="actionType" value="addCard">
+        <input type="url" id="image" name="image" class="form-control mb-4" placeholder="🖼️圖片連結 (選填)">
+        <div class="row mb-4">
+          <div class="col">
+            <input type="text" id="type" name="type" class="form-control" placeholder="👽類型 (選填)">
+          </div>
+          <div class="col-4">
+            <input type="text" id="name" name="name" class="form-control" placeholder="📛名稱 (選填)">
+          </div>
+          <div class="col-4">
+            <input class="form-control" list="genderOptions" id="gender" name="gender" placeholder="🚻性別 (選填)">
+            <datalist id="genderOptions">
+              <option value="男性">男性</option>
+              <option value="女性">女性</option>
+              <option value="不適用">不適用</option>
+            </datalist>
+          </div>
         </div>
-        <div class="col-4">
-          <input type="text" id="name" name="name" class="form-control" placeholder="📛名稱 (選填)">
-        </div>
-        <div class="col-4">
-          <input class="form-control" list="genderOptions" id="gender" name="gender" placeholder="🚻性別 (選填)">
-          <datalist id="genderOptions">
-            <option value="男性">男性</option>
-            <option value="女性">女性</option>
-            <option value="不適用">不適用</option>
-          </datalist>
-        </div>
-      </div>
-      <textarea rows="5" id="desc" name="desc" class="form-control mb-4" placeholder="📋描述 (選填)"></textarea>
-      <button type="submit" class="btn btn-primary w-100" onclick="addSpinner(this)">➕新增角色卡</button>
-    </form>
-    <form action="<?=getUrl();?>" method="post" onsubmit="return confirm('你是否確認要刪除所有角色卡？');">
-      <input type="hidden" id="actionType" name="actionType" value="deleteAllCards">
-      <button type="submit" class="btn btn-danger w-100" onclick="addSpinner(this)">🗑️刪除所有角色卡</button>
-    </form>
+        <textarea rows="5" id="desc" name="desc" class="form-control mb-4" placeholder="📋描述 (選填)"></textarea>
+        <button type="submit" class="btn btn-primary w-100" onclick="addSpinner(this)">➕新增角色卡</button>
+      </form>
+      <form action="<?=getUrl();?>" method="post" onsubmit="return confirm('你是否確認要刪除所有角色卡？');">
+        <input type="hidden" id="actionType" name="actionType" value="deleteAllCards">
+        <button type="submit" class="btn btn-danger w-100" onclick="addSpinner(this)">🗑️刪除所有角色卡</button>
+      </form>
+    </div>
     <?!= include('script'); ?>
   </body>
 </html>

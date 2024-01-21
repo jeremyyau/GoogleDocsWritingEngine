@@ -67,21 +67,25 @@
   </head>
   <body>
     <?!= includeWithCode('header'); ?>
-    <center><h1 class="mb-4">👤關於作者</h1>
-    <div class="card text-center bg-light" style="width: 25rem;">
-      <div class="d-flex justify-content-center"><img src="https://i.imgur.com/oKLUHRw.png" id="agent-f" width="200" title="看甚麼看？"></div>
-      <div class="card-body">
-        <h5 class="card-title">郭凝輝</h5>
-        <p class="card-text">「於殘雪處留下青春，凝結光輝之人。」</p>
-        <a href='https://sites.google.com/view/kwokyingfai/' target='_blank' class="btn btn-primary w-100 mb-4" id="step_button"><img src='https://i.imgur.com/7pAxvYw.png' width='20' height='20'>個人網站</a><br>
-        <a href='https://www.instagram.com/doctor_fai/' target='_blank' class="btn btn-danger w-100 mb-4"><img src='https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png' width='20' height='20'>Instagram</a><br>
-        <a href='https://www.penana.com/user/98865/' target='_blank' class="btn btn-warning w-100 mb-4"><img src='https://penanamedia.s3.ap-southeast-1.amazonaws.com/img/logo_new.svg' width='20' height='20'>Penana</a><br>
-        <div class='g-ytsubscribe' data-channelid='UCezw_R_PZxYUVxNYWtDHpPg' data-layout='full' data-count='hidden'></div>
+    <header class="lh-1 py-3 d-flex justify-content-center gap-1">
+      <h1 class="mb-4">👤關於作者</h1>
+    </header>
+    <div class="container-xxl">
+      <div class="card text-center bg-light" style="width: 25rem;">
+        <div class="d-flex justify-content-center"><img src="https://i.imgur.com/oKLUHRw.png" id="agent-f" width="200" title="看甚麼看？"></div>
+        <div class="card-body">
+          <h5 class="card-title">郭凝輝</h5>
+          <p class="card-text">「於殘雪處留下青春，凝結光輝之人。」</p>
+          <a href='https://sites.google.com/view/kwokyingfai/' target='_blank' class="btn btn-primary w-100 mb-4" id="step_button"><img src='https://i.imgur.com/7pAxvYw.png' width='20' height='20'>個人網站</a><br>
+          <a href='https://www.instagram.com/doctor_fai/' target='_blank' class="btn btn-danger w-100 mb-4"><img src='https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png' width='20' height='20'>Instagram</a><br>
+          <a href='https://www.penana.com/user/98865/' target='_blank' class="btn btn-warning w-100 mb-4"><img src='https://penanamedia.s3.ap-southeast-1.amazonaws.com/img/logo_new.svg' width='20' height='20'>Penana</a><br>
+          <div class='g-ytsubscribe' data-channelid='UCezw_R_PZxYUVxNYWtDHpPg' data-layout='full' data-count='hidden'></div>
+        </div>
       </div>
+      <p id="dialog1" class="text-danger" style="opacity: 0;">柏依琳：「輝哥，好像有人在偷看我們說話。」</p>
+      <p id="dialog2" class="text-primary" style="opacity: 0;">郭凝輝：「糟了！你快點撤退，我回到原位。」</p>
+      <img src="https://i.imgur.com/69Qa3xA.png" id="agent-p" width="200" style="opacity: 0;">
     </div>
-    <p id="dialog1" class="text-danger" style="opacity: 0;">柏依琳：「輝哥，好像有人在偷看我們說話。」</p>
-    <p id="dialog2" class="text-primary" style="opacity: 0;">郭凝輝：「糟了！你快點撤退，我回到原位。」</p>
-    <img src="https://i.imgur.com/69Qa3xA.png" id="agent-p" width="200" style="opacity: 0;"></center>
     <script>
     const toastEle0 = document.getElementById('toast0');
     const toastEle1 = document.getElementById('toast1');
