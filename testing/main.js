@@ -952,9 +952,13 @@ function fetchHTML(title, content) {
   const finalContent = paragraphs.map(paragraph => `<p>${paragraph}</p>`).join("");
 
   var formData = {
-    email: getProperty("penanaEmail"),
-    password: getProperty("penanaPassword")
+    email: "",
+    password: ""
   };
+
+  if (email == "" || password == "") {
+    throw new error("Hello World!")
+  }
 
   var loginResponse = UrlFetchApp.fetch('https://www.penana.com/login.php', {
     method: 'post',
