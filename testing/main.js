@@ -982,9 +982,7 @@ function fetchHTML(title, content) {
   storyId = storyUrl.split('story/')[1].split('/')[0];
   Logger.log(storyId);
   var otherResponse = UrlFetchApp.fetch('https://www.penana.com/write.php?id=' + storyId, params);
-  
   response = otherResponse.getContentText();
-
   Logger.log(response);
   return response;
 }
