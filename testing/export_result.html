@@ -50,7 +50,7 @@
       }
       function onFailure(error) {
         document.getElementById("notiSound").play();
-        alert("上傳失敗，可能是由於你沒有輸入Penana帳戶或者故事連結，請再試一次");
+        alert("上傳失敗：" + error.message);
       }
     </script>
   </head>
