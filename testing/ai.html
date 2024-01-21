@@ -32,25 +32,25 @@
     }
 </script>
 <script>
-  const openJourneyAPIkey = "<?=openJourneyAPIkey?>";
-  async function genImage(data) {
-    if (openJourneyAPIkey=="") {
-      alert("請先設定OpenJourney API Key！");
-    }
-    let response = await fetch(
-      "https://api-inference.huggingface.co/models/prompthero/openjourney-v4",
-      {
-        headers: { Authorization: "Bearer " + openJourneyAPIkey },
-        method: "POST",
-        body: JSON.stringify(data),
-      }
-    );
-    let result = await response.blob();
-    return result;
-  }
-  genImage({"inputs": "Japanese anime girl"}).then((response) => {
-    console.log(response);
-    let objectURL = URL.createObjectURL(response);
-    document.getElementById("image").src = objectURL;
-  });
+  // const openJourneyAPIkey = "<?=openJourneyAPIkey?>";
+  // async function genImage(data) {
+  //   if (openJourneyAPIkey=="") {
+  //     alert("請先設定OpenJourney API Key！");
+  //   }
+  //   let response = await fetch(
+  //     "https://api-inference.huggingface.co/models/prompthero/openjourney-v4",
+  //     {
+  //       headers: { Authorization: "Bearer " + openJourneyAPIkey },
+  //       method: "POST",
+  //       body: JSON.stringify(data),
+  //     }
+  //   );
+  //   let result = await response.blob();
+  //   return result;
+  // }
+  // genImage({"inputs": "Japanese anime girl"}).then((response) => {
+  //   console.log(response);
+  //   let objectURL = URL.createObjectURL(response);
+  //   document.getElementById("image").src = objectURL;
+  // });
 </script>
