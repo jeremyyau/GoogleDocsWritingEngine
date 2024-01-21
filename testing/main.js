@@ -233,7 +233,6 @@ function getEditBookId() {
 }
 
 function setCurBook(e) {
-  currentBook = e.parameter.bookId;
   userProperties.setProperty('currentBook', e.parameter.bookId);
 }
 
@@ -980,7 +979,7 @@ function fetchHTML(title, content) {
   }
   storyUrl = books[getProperty("currentBook")]["penanaUrl"];
   Logger.log(storyUrl);
-  pathname = storyUrl.url.split('story/')[1].split('/')[0];
+  pathname = storyUrl.split('story/')[1].split('/')[0];
   Logger.log(pathname);
   var otherResponse = UrlFetchApp.fetch('https://www.penana.com/write.php?id=' + storyId, params);
   
