@@ -981,7 +981,8 @@ function fetchHTML(title, content) {
     method: 'post',
     payload: formData
   }
-  storyUrl = books[getProperty("currentBook")]["penanaUrl"];
+  // storyUrl = books[getProperty("currentBook")]["penanaUrl"];
+  storyUrl = null;
   if (storyUrl == "" || storyUrl == null) {
     throw new error("Penana連結不存在！");
   }
