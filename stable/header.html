@@ -1,0 +1,102 @@
+<?
+  let image = "";
+  let name = "";
+  let currentBook = getProperty("currentBook");
+  if (books[currentBook]!=null) {
+    image = books[currentBook]["image"];
+    name = books[currentBook]["name"];
+  }
+?>
+<header class="p-3 text-bg-dark">
+  <div class="d-flex align-items-center justify-content-center justify-content-lg-start">
+    <button class="btn btn-dark d-none" id="menuButton" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+      </svg>
+    </button>
+    <a class="text-light text-decoration-none" href="<?=getUrl()?>/index">
+      <img src="https://i.imgur.com/rHgvyHs.png" alt="Logo" width="30" height="30" class="d-inline-block me-2 rounded">
+      <span class="menuTitle">Google Docs Writing Engine</span>
+    </a>
+    <div class="nav col me-lg-auto mb-2 justify-content-center mb-md-0 overflow-hidden"></div>
+    <div class="text-end d-flex gap-3">
+      <? if (getDB()!=null) { ?>
+        <h6 class="text-white mt-3">數據庫狀態: ✅已連接</h6>
+      <? } else { ?>
+        <h6 class="text-white mt-3">數據庫狀態: ❌未連接</h6>
+      <? } ?>
+      <div class="dropdown">
+        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="<?=image?>" alt="" width="40" height="50" class="me-2">
+          <strong><?=name?></strong>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+        <? for (i=0;i<books.length;i++) {
+          if (books[i]!=null){ ?>
+            <li><a class="dropdown-item" href="<?=getUrl()?>?actionType=setCurBook&bookId=<?=i?>"><?=books[i]["name"]?></a></li>
+          <? }
+        } ?>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="offcanvas offcanvas-start text-bg-dark" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+  <div class="offcanvas-header">
+    <a class="text-light text-decoration-none" href="<?=getUrl()?>/index">
+      <img src="https://i.imgur.com/rHgvyHs.png" alt="Logo" width="30" height="30" class="d-inline-block rounded">
+      <span class="offcanvas-title h5" id="offcanvasWithBothOptionsLabel">Google Docs Writing Engine</span>
+    </a>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <hr>
+  <div class="offcanvas-body">
+    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+      <li class="nav-item"><a class="nav-link rounded" href="<?=getUrl()?>/index" onclick="addSpinner(this)">🏠主頁</a></li>
+      <li class="nav-item"><a class="nav-link rounded text-white" href="<?=getUrl()?>/bookshelf" onclick="addSpinner(this)">📚我的書櫃 <span class="badge bg-secondary"><?=books.length?></span></a></li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle rounded" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">✍🏻字數統計</a>
+        <ul class="dropdown-menu dropdown-menu-dark w-100">
+          <li><a class="dropdown-item" href="<?=getUrl()?>/word_count_report" onclick="addSpinner(this)">📊統計報告</a></li>
+          <li><a class="dropdown-item" href="<?=getUrl()?>/word_count_record" onclick="addSpinner(this)">📆統計紀錄(全部作品)</a></li>
+          <li><a class="dropdown-item" href="<?=getUrl()?>/notavailable" onclick="addSpinner(this)">📆統計紀錄(當前作品)</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a class="nav-link rounded text-white" href="<?=getUrl()?>/export_chapter" onclick="addSpinner(this)">🖨️輸出文件</a></li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle rounded text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">📉詞彙頻率</a>
+        <ul class="dropdown-menu dropdown-menu-dark w-100" style="min-width: 220px;">
+          <li><a class="dropdown-item" href="<?=getUrl()?>/frequency_chapter" onclick="addSpinner(this)">📉詞彙頻率</a></li>
+          <li><a class="dropdown-item" href="<?=getUrl()?>/notavailable" onclick="addSpinner(this)">📃詞彙黑名單</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a class="nav-link rounded text-white" href="<?=getUrl()?>/cards_list" onclick="addSpinner(this)">👨‍👩‍👦角色卡 <span class="badge bg-secondary"><?=cards.length?></span></a></li>
+      <li class="nav-item"><a class="nav-link rounded text-white" href="<?=getUrl()?>/share" onclick="addSpinner(this)">🔗分享頁面</a></a></li>
+      <li class="nav-item"><a class="nav-link rounded text-white" href="<?=getUrl()?>/database_manage" onclick="addSpinner(this)">💾資料管理</a></li>
+      <li class="nav-item"><a class="nav-link rounded text-white" href="<?=getUrl()?>/demo_video" onclick="addSpinner(this)">🎥示範影片</a></li>
+      <li class="nav-item"><a class="nav-link rounded text-white" href="<?=getUrl()?>/about_me" onclick="addSpinner(this)">👤關於作者</a></li>
+      <li class="nav-item"><a class="nav-link rounded text-white" href="<?=getUrl()?>/settings" onclick="addSpinner(this)">⚙️設定</a></li>
+    </ul>
+    <hr>
+    <? if (getDB()!=null) { ?>
+      <p class="text-white text-center mb-2">數據庫狀態: ✅已連接</p>
+    <? } else { ?>
+      <p class="text-white text-center mb-2">數據庫狀態: ❌未連接</p>
+    <? } ?>
+    <hr>
+    <p class="text-center text-white mb-2">現時書本</p>
+    <div class="dropdown d-flex justify-content-center">
+      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle gap-3" data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="<?=image?>" alt="" width="150" height="200" class="me-2">
+        <h5><strong><?=name?></strong></h5>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-dark text-small shadow w-100">
+      <? for (i=0;i<books.length;i++) {
+        if (books[i]!=null){ ?>
+          <li><a class="dropdown-item" href="<?=getUrl()?>?actionType=setCurBook&bookId=<?=i?>"><?=books[i]["name"]?></a></li>
+        <? }
+      } ?>
+      </ul>
+    </div>
+  </div>
+</div>

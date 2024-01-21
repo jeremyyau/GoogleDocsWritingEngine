@@ -1,0 +1,68 @@
+<?var books = getProperty("books");var bookId = getEditBookId();?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <?!= include('style');?>
+    <?!= include('script'); ?>
+  </head>
+  <body>
+    <?!= includeWithCode("header");?>
+    <div class="container-xxl">
+      <header class="lh-1 py-3 d-flex justify-content-center gap-1">
+        <h1 class="mb-4">📚我的書櫃</h1>
+      </header>
+      <a href="<?=getUrl()?>/bookshelf" class="btn btn-primary w-100 mb-4" onclick="addSpinner(this)">返回</a></center>
+      <form action="<?=getUrl();?>/bookshelf" method="post">
+        <input type="hidden" id="actionType" name="actionType" value="editBook">
+        <input type="hidden" id="page" name="page" value="bookshelf">
+        <input type="hidden" id="bookId" name="bookId" value="<?=bookId?>">
+        <label for="image">🖼️封面連結 (選填)</label>
+        <input type="url" id="image" name="image" class="form-control mb-4" value="<?=books[bookId]['image']?>" placeholder="例如：https://i.imgur.com/xxxxxxx.png">
+        <label for="bookName">📛自定書名 (選填)</label>
+        <input type="text" id="bookName" name="bookName" class="form-control mb-4" value="<?=books[bookId]['name']?>" placeholder="例如：怪異科幻故事集">
+        <label for="desc">📄簡介 (選填)</label>
+        <input type="text" id="desc" name="desc" class="form-control mb-4" value="<?=books[bookId]['desc']?>" placeholder="例如：這是一本關於怪異科幻事件的小說。">
+        <label for="bookUrl">🔗連結</label>
+        <input type="url" id="bookUrl" name="bookUrl" class="form-control mb-4" value="<?=books[bookId]['link']?>" placeholder="例如：https://docs.google.com/document/d/xxxxxxxxxxxxxxxxxxxxxx/" required>
+        
+        <div class="row mb-4">
+          <div class="col">
+            <label for="goal">🚩章節目標字數 (選填)</label>
+            <input type="number" id="goal" name="goal" class="form-control" value="<?=books[bookId]['goal']?>" placeholder="例如：1200">
+          </div>
+          <div class="col">
+            <label for="goalAll">🏁文章目標字數 (選填)</label>
+        <input type="number" id="goalAll" name="goalAll" class="form-control" value="<?=books[bookId]['goalAll']?>" placeholder="例如：100000">
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col">
+            <label for="tags">🏷️標籤 (選填)</label>
+            <input type="text" id="tags" name="tags" class="form-control" value="<?=books[bookId]['tags']?>" placeholder="請用,分開標籤，例如：科幻,愛情,武俠">
+          </div>
+          <div class="col">
+            <label for="tags">📝狀態</label>
+            <select id="status" name="status" class="form-select">
+              <option value="未連載" <?if (books[bookId]['status']=="未連載") {?>selected<? } ?>>未連載</option>
+              <option value="連載中" <?if (books[bookId]['status']=="連載中") {?>selected<? } ?>>連載中</option>
+              <option value="已完結" <?if (books[bookId]['status']=="已完結") {?>selected<? } ?>>已完結</option>
+              <option value="已放棄" <?if (books[bookId]['status']=="已放棄") {?>selected<? } ?>>已放棄</option>
+            </select>
+          </div>
+        </div>
+        <label for="penanaUrl">🍌Penana連結</label>
+        <input type="url" id="penanaUrl" name="penanaUrl" class="form-control mb-4" value="<?=books[bookId]['penanaUrl']?>" placeholder="例如：https://www.penana.com/story/xxxxx/">
+        <button type="submit" class="btn btn-primary w-100 mb-4" onclick="addSpinner(this)">💾保存修改</button>
+      </form>
+      <form action="<?=getUrl();?>/bookshelf" method="post" class="mb-4">
+        <div class="d-flex flex-row-reverse">
+          <input type="hidden" id="actionType" name="actionType" value="deleteBook">
+          <input type="hidden" id="page" name="page" value="bookshelf">
+          <input type="hidden" id="bookId" name="bookId" value="<?=bookId?>">
+          <input type="submit" class="btn btn-danger w-100" value="🗑️刪除書本">
+        </div>
+      </form>
+    </div>
+    <?!= includeWithCode('footer'); ?>
+  </body>
+</html>

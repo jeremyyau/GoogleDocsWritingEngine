@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <?!= include('style');?>
+    <?!= include('script'); ?>
+  </head>
+  <body>
+    <?!= includeWithCode("header");?>
+    <div class="container-xxl">
+      <header class="lh-1 py-3 d-flex justify-content-center gap-1">
+        <h1 class="mb-4">💾資料管理</h1>
+      </header>
+      <form action="<?=getUrl();?>" method="post" class="mb-4">
+        <input type="hidden" id="actionType" name="actionType" value="loadDB">
+        <input type="hidden" id="page" name="page" value="database_manage">
+        <input type="url" id="dbUrl" name="dbUrl" class="form-control mb-4" value="" placeholder="數據庫(即Google Sheet)的連結">
+        <button type="submit" class="btn btn-primary w-100 mb-4" onclick="addSpinner(this)">🔃載入數據庫</button>
+      </form>
+    </div>
+    <?!= includeWithCode("footer");?>
+  </body>
+</html>

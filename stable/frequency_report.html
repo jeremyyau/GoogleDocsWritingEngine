@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <?!= include('style');?>
+    <?!= include('script'); ?>
+    <script>
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var rdata = [['Word','Count']];
+        countRank = JSON.parse(<?=JSON.stringify(frequency_chi(getProperty("currentBook"), e.parameters.para))?>);
+        console.log(countRank);
+        for (var i=0;i<<?=getProperty("freqNum")?>; i++){ 
+          var temp=[];
+          if (countRank[i]!=null) {
+            temp.push(countRank[i]["word"]);
+            temp.push(parseInt(countRank[i]["count"]));
+            rdata.push(temp);
+          }
+        }
+        var data = google.visualization.arrayToDataTable(rdata);
+        var options = {
+          title:'<?=getCurBookName(getProperty("currentBook"))?>'
+        };
+        var chart = new google.visualization.BarChart(document.getElementById('freqChart'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <?!= includeWithCode("header");?>
+    <div class="container-xxl">
+      <header class="lh-1 py-3 d-flex justify-content-center gap-1">
+        <h1 class="mb-4">📉詞彙頻率</h1>
+      </header>
+      <?if (getDB()==null) { ?>
+      <center><h5>數據庫不存在</h5></center>
+      <?} else if (getDbBooks()[0]["link"] == null){?>
+      <center><h5>請先到「我的書櫃」加入書本</h5></center>
+      <? } else { ?>
+      <div id="freqChart" style="width:100%;height:500px;"></div>
+      <? } ?>
+    </div>
+    <?!= includeWithCode("footer");?>
+  </body>
+</html>

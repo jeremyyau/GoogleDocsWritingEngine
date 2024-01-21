@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <?!= include('style');?>
+    <script>
+      function selectAll(source) {
+        checkboxes = document.getElementsByName('para');
+        for(var i=0, n=checkboxes.length;i<n;i++) {
+          checkboxes[i].checked = source.checked;
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <?!= includeWithCode("header");?>
+    <?var bookId = getProperty("currentBook");?>
+    <center><h1 class="mb-4">🖨️輸出章節</h1></center>
+    <?if (getDB()==null) { ?>
+    <center><h5>數據庫不存在</h5></center>
+    <?} else if (getDbBooks()[0]["link"] == null){?>
+    <center><h5>請先到「我的書櫃」加入書本</h5></center>
+    <? } else { ?>
+    <?var para = getParagraph(bookId);?>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="selectAll" id="para_selectAll" name="paraSelectAll" onclick="selectAll(this)">
+      <label class="form-check-label" for="para_selectAll">
+        輸出全部
+      </label>
+    </div>
+    <form action="<?=getUrl();?>/frequency_report" method="get">
+      <? for (i=0;i<para.length;i++) { ?>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="<?=para[i]['index']?>" id="para<?=i?>" name="para">
+          <label class="form-check-label" for="para<?=i?>">
+            <?=para[i]['text']?>
+          </label>
+        </div>
+      <? } ?>
+      <center><button type="submit" class="btn btn-primary w-50" onclick="addSpinner(this)">👓開始分析</button></center>
+    </form>
+    <? } ?>
+    <?!= include('script'); ?>
+  </body>
+</html>
