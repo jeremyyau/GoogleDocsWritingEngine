@@ -939,7 +939,13 @@ function fetchHTML(title, content) {
     throw new error("Hello World!")
   }
 
-  const paragraphs = content.split("\n\n");
+  splitAccording = "\n";
+
+  for (i=0;i<getProperty("indents").length;i++) {
+    splitAccording += "\n";
+  }
+
+  const paragraphs = content.split(splitAccording);
   const finalContent = paragraphs.map(paragraph => `<p>${paragraph}</p>`).join("");
 
   var formData = {
