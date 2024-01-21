@@ -80,10 +80,10 @@
             <button type='button' class='btn btn-primary' onclick='document.getElementById("textarea<?=i?>").focus();document.getElementById("textarea<?=i?>").select();document.execCommand("copy");alert("已複製到剪貼板！");'>💾複製文章</button>
             <button type='button' class='btn btn-primary' id='txt<?=i?>' onclick="download('<?=exportResult[i]["heading1"]?>.txt', 'textarea<?=i?>')">💽下載TXT檔</button>
             <button type='button' class='btn btn-primary' id='speak<?=i?>' onclick='speakPara("textarea<?=i?>");'>🔊朗讀</button>
-            <button type='button' class='btn btn-danger' onclick='speechSynthesis.cancel();'>🔈停止朗讀</div>
+            <button type='button' class='btn btn-danger' onclick='speechSynthesis.cancel();'>🔈停止朗讀</button>
             <button type='button' class='btn btn-info' onclick='geminiRequest("textarea<?=i?>", "contWrite");'>✨AI續寫</button>
             <button type='button' class='btn btn-info' onclick='geminiRequest("textarea<?=i?>", "checkMistake");'>✨AI錯別字檢查</button>
-            <button type='button' class="btn btn-warning" onclick="google.script.run.withSuccessHandler(onSuccess).withFailureHandler(onFailure).fetchHTML('<?=exportResult[i]["heading1"]?>', document.getElementById('textarea<?=i?>').value);">🍌上傳至Penana</button>
+            <button type='button' class="btn btn-warning" onclick="google.script.run.withSuccessHandler(onSuccess).withFailureHandler(onFailure).callFunction('fetchHTML', ['<?=exportResult[i]["heading1"]?>', document.getElementById('textarea<?=i?>').value]);">🍌上傳至Penana</button>
           </div>
           <div class="row collapse mb-4" id="collapse<?=i?>">
             <textarea class="form-control col-6 w-50" id="textarea<?=i?>" rows="8"><? for (let x in exportResult[i]["content"]) { for (let p = 0;p < indents;p++) { ?>　<? } ?><?=exportResult[i]["content"][x]?><? if (x!=exportResult[i]["content"].length-1) { for (let k = 0;k < lines;k++) { ?>&#10;<?} }?><? } ?></textarea>
