@@ -755,9 +755,6 @@ function frequency_chi(bookId, selectedPara) {
   countRank = Object.entries(countRank)
   .sort((a, b) => b[1] - a[1])
   .map(entry => ({ word: entry[0], count: entry[1] }));
-  // console.log(paragraphs);
-  // console.log(freqList);
-  console.log(countRank);
   console.timeEnd("頻率分析時間");
   return countRank;
 }
