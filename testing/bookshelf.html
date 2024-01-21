@@ -98,7 +98,8 @@
                       ?>
                     </p>
                     <p class="card-text"><small>🚩章節目標字數: <?=books[i]["goal"]?></small><br><small>🏁文章目標字數: <?=books[i]["goalAll"]?></small></p>
-                    <a href="<?=getUrl();?>/bookshelf_edit?bookId=<?=i?>" class="col-6 w-100 btn btn-primary rounded-4 btn-sm" onclick="addSpinner(this)">編輯</a>
+                    <a href="<?=getUrl();?>/bookshelf_edit?bookId=<?=i?>" class="w-100 btn btn-primary rounded-4 btn-sm mb-2" onclick="addSpinner(this)">編輯</a>
+                    <a href="<?=books[i]['penanaUrl']?>" class="w-100 btn btn-warning rounded-4 btn-sm">🍌Penana連結</a>
                   </div>
                 </div>
               </div>
