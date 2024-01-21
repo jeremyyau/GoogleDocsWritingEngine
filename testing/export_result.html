@@ -58,12 +58,12 @@
         <h1 class="mb-4">🖨️輸出結果</h1>
       </header>
       <!-- <img id="image"/> -->
-      <div class="row row-cols-1 row-cols-lg-2 mb-4">
-        <div class="col-8">
+      <div class="row">
+        <div class="col-md-auto">
           <label for="voiceSelect" class="form-label">朗讀員：</label>
           <select class="form-select" id="voiceSelect"></select>
         </div>
-        <div class="col-4">
+        <div class="col col-lg-3">
           <label for="rate" class="form-label">朗讀速度：<output id="rateOutput">1</output>倍</label>
           <input type="range" class="form-range" min="0.1" max="4" value="1" step="0.1" id="rate" oninput="document.querySelector('#rateOutput').value = this.value"/>
         </div>
