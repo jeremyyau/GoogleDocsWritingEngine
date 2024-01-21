@@ -949,13 +949,12 @@ function createLongTerm(bookName, id, datetime, endDate) {
 }
 
 function fetchHTML(title, content) {
-  storyId = 88164;
   const paragraphs = content.split("\n\n");
   const finalContent = paragraphs.map(paragraph => `<p>${paragraph}</p>`).join("");
 
   var formData = {
-    email: "",
-    password: ""
+    email: getProperty("penanaEmail"),
+    password: getProperty("penanaPassword")
   };
 
   var loginResponse = UrlFetchApp.fetch('https://www.penana.com/login.php', {
@@ -979,10 +978,16 @@ function fetchHTML(title, content) {
     method: 'post',
     payload: formData
   }
-
+  storyUrl = books[getProperty("currentBook")]["penanaUrl"];
+  Logger.log(storyUrl);
+  pathname = new URL(storyUrl).pathname;
+  Logger.log(pathname);
+  storyId = pathname.split("/")[2];
+  Logger.log(storyId);
   var otherResponse = UrlFetchApp.fetch('https://www.penana.com/write.php?id=' + storyId, params);
   
   response = otherResponse.getContentText();
+
   Logger.log(response);
   return response;
 }
