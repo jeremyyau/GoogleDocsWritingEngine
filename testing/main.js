@@ -949,46 +949,45 @@ function createLongTerm(bookName, id, datetime, endDate) {
 }
 
 function fetchHTML(title, content) {
-  // const paragraphs = content.split("\n\n");
-  // const finalContent = paragraphs.map(paragraph => `<p>${paragraph}</p>`).join("");
+  const paragraphs = content.split("\n\n");
+  const finalContent = paragraphs.map(paragraph => `<p>${paragraph}</p>`).join("");
 
-  // var formData = {
-  //   email: getProperty("penanaEmail"),
-  //   password: getProperty("penanaPassword")
-  // };
+  var formData = {
+    email: getProperty("penanaEmail"),
+    password: getProperty("penanaPassword")
+  };
 
-  // var loginResponse = UrlFetchApp.fetch('https://www.penana.com/login.php', {
-  //   method: 'post',
-  //   payload: formData,
-  //   followRedirects: false
-  // });
+  var loginResponse = UrlFetchApp.fetch('https://www.penana.com/login.php', {
+    method: 'post',
+    payload: formData,
+    followRedirects: false
+  });
 
-  // var cookies = loginResponse.getHeaders()['Set-Cookie'];
+  var cookies = loginResponse.getHeaders()['Set-Cookie'];
 
-  // formData = {
-  //   content: finalContent,
-  //   chaptertitle: title,
-  //   newdraft: "Save as draft"
-  // };
+  formData = {
+    content: finalContent,
+    chaptertitle: title,
+    newdraft: "Save as draft"
+  };
 
-  // params = {
-  //   headers: {
-  //     'Cookie': cookies
-  //   },
-  //   method: 'post',
-  //   payload: formData
-  // }
-  // storyUrl = books[getProperty("currentBook")]["penanaUrl"];
-  // Logger.log(storyUrl);
-  // pathname = new URL(storyUrl).pathname;
-  // Logger.log(pathname);
-  // storyId = pathname.split("/")[2];
-  // Logger.log(storyId);
-  // var otherResponse = UrlFetchApp.fetch('https://www.penana.com/write.php?id=' + storyId, params);
+  params = {
+    headers: {
+      'Cookie': cookies
+    },
+    method: 'post',
+    payload: formData
+  }
+  storyUrl = books[getProperty("currentBook")]["penanaUrl"];
+  Logger.log(storyUrl);
+  pathname = new URL(storyUrl).pathname;
+  Logger.log(pathname);
+  storyId = pathname.split("/")[2];
+  Logger.log(storyId);
+  var otherResponse = UrlFetchApp.fetch('https://www.penana.com/write.php?id=' + storyId, params);
   
-  // response = otherResponse.getContentText();
+  response = otherResponse.getContentText();
 
-  // Logger.log(response);
-  // return response;
-  console.log("Hello World!");
+  Logger.log(response);
+  return response;
 }
