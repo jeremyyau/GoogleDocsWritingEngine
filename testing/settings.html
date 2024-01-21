@@ -72,12 +72,24 @@
         <div class="col mb-3">
           <label for="geminiAPIkey" class="form-label">✨Gemini API Key</label>
           <input type="password" class="form-control" id="geminiAPIkey" name="geminiAPIkey" value="<?=getProperty("geminiAPIkey")?>" aria-describedby="geminiAPIkeyHelp" placeholder="">
-          <div id="geminiAPIkeyHelp" class="form-text"></div>
+          <div id="geminiAPIkeyHelp" class="form-text">如果要使用AI功能，必須要填寫此欄</div>
         </div>
         <div class="col mb-3">
           <label for="openJourneyAPIkey" class="form-label">🖼️OpenJourney API Key</label>
           <input type="password" class="form-control" id="openJourneyAPIkey" name="openJourneyAPIkey" value="<?=getProperty("openJourneyAPIkey")?>" aria-describedby="openJourneyAPIkeyHelp" placeholder="">
-          <div id="openJourneyAPIkeyHelp" class="form-text"></div>
+          <div id="openJourneyAPIkeyHelp" class="form-text">暫未開放</div>
+        </div>
+      </div>
+      <div class="row row-cols-1 row-cols-lg-2">
+        <div class="col mb-3">
+          <label for="geminiAPIkey" class="form-label">🍌Penana Account Email</label>
+          <input type="text" class="form-control" id="penanaEmail" name="penanaEmail" value="<?=getProperty("penanaEmail")?>" aria-describedby="penanaEmailHelp" placeholder="">
+          <div id="penanaEmailHelp" class="form-text">如果要使用上傳到Penana的功能，必須要填寫此欄</div>
+        </div>
+        <div class="col mb-3">
+          <label for="openJourneyAPIkey" class="form-label">🍌Penana Account Password</label>
+          <input type="password" class="form-control" id="penanaPassword" name="penanaPassword" value="<?=getProperty("penanaPassword")?>" aria-describedby="penanaPasswordHelp" placeholder="">
+          <div id="penanaPasswordHelp" class="form-text">如果要使用上傳到Penana的功能，必須要填寫此欄</div>
         </div>
       </div>
       <button type="submit" class="btn btn-primary w-100" onclick="addSpinner(this)">💾保存設定</button>

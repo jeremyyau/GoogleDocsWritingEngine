@@ -200,6 +200,8 @@ function setAllProperties() {
   if (userProperties.getProperty('speakLang')==null){userProperties.setProperty('speakLang', 'zh-HK');}
   if (userProperties.getProperty('geminiAPIkey')==null){userProperties.setProperty('geminiAPIkey', '');}
   if (userProperties.getProperty('openJourneyAPIkey')==null){userProperties.setProperty('openJourneyAPIkey', '');}
+  if (userProperties.getProperty('penanaEmail')==null){userProperties.setProperty('penanaEmail', '');}
+  if (userProperties.getProperty('penanaPassword')==null){userProperties.setProperty('penanaPassword', '');}
   if (userProperties.getProperty('bookshelfDisplay')==null){userProperties.setProperty('bookshelfDisplay', 'card');}
   if (userProperties.getProperty('characterDisplay')==null){userProperties.setProperty('characterDisplay', 'card');}
   if (userProperties.getProperty('streamerMode')==null){userProperties.setProperty('streamerMode', 'false');}
@@ -501,7 +503,7 @@ function initialDbData() {
       db.deleteSheet(sheet1);
     }
     sheet = db.getSheetByName("設定");
-    sheet.appendRow([userProperties.getProperty('goal'),userProperties.getProperty('goalAll'),userProperties.getProperty('freqNum'),userProperties.getProperty('indents'),userProperties.getProperty('lines'),userProperties.getProperty('whitespaceCount'),userProperties.getProperty('symbolCount'),userProperties.getProperty('speakLang'),userProperties.getProperty('geminiAPIkey'),userProperties.getProperty('openJourneyAPIkey')]);
+    sheet.appendRow([userProperties.getProperty('goal'),userProperties.getProperty('goalAll'),userProperties.getProperty('freqNum'),userProperties.getProperty('indents'),userProperties.getProperty('lines'),userProperties.getProperty('whitespaceCount'),userProperties.getProperty('symbolCount'),userProperties.getProperty('speakLang'),userProperties.getProperty('geminiAPIkey'),userProperties.getProperty('openJourneyAPIkey'),userProperties.getProperty('penanaEmail'),userProperties.getProperty('penanaPassword')]);
     console.log("數據初始化完成！");
   } else {
     console.error("數據庫不存在！");
@@ -529,7 +531,7 @@ function addDbCards() {
 function addDbSettings(e) {
   db = getDB();
   sheet = db.getSheetByName("設定");
-  sheet.appendRow([e.parameter.goal,e.parameter.goalAll,e.parameter.freqNum,e.parameter.indents,e.parameter.lines,e.parameter.whitespaceCount,e.parameter.symbolCount,e.parameter.speakLang,e.parameter.geminiAPIkey,e.parameter.openJourneyAPIkey]);
+  sheet.appendRow([e.parameter.goal,e.parameter.goalAll,e.parameter.freqNum,e.parameter.indents,e.parameter.lines,e.parameter.whitespaceCount,e.parameter.symbolCount,e.parameter.speakLang,e.parameter.geminiAPIkey,e.parameter.openJourneyAPIkey,e.parameter.penanaEmail,e.parameter.penanaPassword]);
   sheet.deleteRow(1);
   sheet.insertRowAfter(sheet.getLastRow()); 
 }
@@ -588,7 +590,9 @@ function getDbSettings() {
       userProperties.setProperty('speakLang', values[0][7]);
       userProperties.setProperty('geminiAPIkey', values[0][8]);
       userProperties.setProperty('openJourneyAPIkey', values[0][9]);
-      newSettings.push({"goal":values[0][0]+"","goalAll":values[0][1]+"", "freqNum":values[0][2]+"","indents":values[0][3]+"","lines":values[0][4]+"","whitespaceCount":values[0][5],"symbolCount":values[0][6],"speakLang":values[0][7],"geminiAPIkey":values[0][8],"openJourneyAPIkey":values[0][9]});
+      userProperties.setProperty('penanaEmail', values[0][10]);
+      userProperties.setProperty('penanaPassword', values[0][11]);
+      newSettings.push({"goal":values[0][0]+"","goalAll":values[0][1]+"", "freqNum":values[0][2]+"","indents":values[0][3]+"","lines":values[0][4]+"","whitespaceCount":values[0][5],"symbolCount":values[0][6],"speakLang":values[0][7],"geminiAPIkey":values[0][8],"openJourneyAPIkey":values[0][9],"penanaEmail":values[0][10],"penanaPassword":values[0][11]});
       return newSettings;
     }
   }
@@ -871,6 +875,8 @@ function setSettings(e) {
   userProperties.setProperty('speakLang', e.parameter.speakLang);
   userProperties.setProperty('geminiAPIkey', e.parameter.geminiAPIkey);
   userProperties.setProperty('openJourneyAPIkey', e.parameter.openJourneyAPIkey);
+  userProperties.setProperty('penanaEmail', e.parameter.penanaEmail);
+  userProperties.setProperty('penanaPassword', e.parameter.penanaPassword);
   addDbSettings(e);
 }
 
