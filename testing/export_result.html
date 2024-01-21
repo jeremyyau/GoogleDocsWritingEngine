@@ -48,6 +48,10 @@
         document.getElementById("notiSound").play();
         alert("成功上傳至Penana");
       }
+      function onFailure(error) {
+        document.getElementById("notiSound").play();
+        alert("上傳失敗，可能是由於你沒有輸入Penana帳戶或者故事連結，請再試一次");
+      }
     </script>
   </head>
   <body>
@@ -79,7 +83,7 @@
             <button type='button' class='btn btn-danger' onclick='speechSynthesis.cancel();'>🔈停止朗讀</div>
             <button type='button' class='btn btn-info' onclick='geminiRequest("textarea<?=i?>", "contWrite");'>✨AI續寫</button>
             <button type='button' class='btn btn-info' onclick='geminiRequest("textarea<?=i?>", "checkMistake");'>✨AI錯別字檢查</button>
-            <button type='button' class="btn btn-warning" onclick="google.script.run.withSuccessHandler(onSuccess).fetchHTML('<?=exportResult[i]["heading1"]?>', document.getElementById('textarea<?=i?>').value);">🍌上傳至Penana</button>
+            <button type='button' class="btn btn-warning" onclick="google.script.run.withSuccessHandler(onSuccess).withFailureHandler(onFailure).fetchHTML('<?=exportResult[i]["heading1"]?>', document.getElementById('textarea<?=i?>').value);">🍌上傳至Penana</button>
           </div>
           <div class="row collapse mb-4" id="collapse<?=i?>">
             <textarea class="form-control col-6 w-50" id="textarea<?=i?>" rows="8"><? for (let x in exportResult[i]["content"]) { for (let p = 0;p < indents;p++) { ?>　<? } ?><?=exportResult[i]["content"][x]?><? if (x!=exportResult[i]["content"].length-1) { for (let k = 0;k < lines;k++) { ?>&#10;<?} }?><? } ?></textarea>
@@ -96,7 +100,7 @@
               <button type='button' class='btn btn-danger' onclick='speechSynthesis.cancel();'>🔈停止朗讀</button>
               <button type='button' class='btn btn-info' onclick='geminiRequest("textarea<?=i?>_<?=y?>", "newTextarea<?=i?>_<?=y?>", "contWrite");'>✨AI續寫</button>
               <button type='button' class='btn btn-info' onclick='geminiRequest("textarea<?=i?>_<?=y?>", "newTextarea<?=i?>_<?=y?>", "checkMistake");'>✨AI錯別字檢查</button>
-              <button type='button' class="btn btn-warning" onclick="google.script.run.withSuccessHandler(onSuccess).fetchHTML('<?=exportResult[i]["heading1"]?>（<?=exportResult[i]["heading2"][y]["title"]?>）', document.getElementById('textarea<?=i?>_<?=y?>').value);">🍌上傳至Penana</button>
+              <button type='button' class="btn btn-warning" onclick="google.script.run.withSuccessHandler(onSuccess).withFailureHandler(onFailure).fetchHTML('<?=exportResult[i]["heading1"]?>（<?=exportResult[i]["heading2"][y]["title"]?>）', document.getElementById('textarea<?=i?>_<?=y?>').value);">🍌上傳至Penana</button>
             </div>
             <div class="row collapse mb-4" id="collapse<?=i?>_<?=y?>">
               <textarea class="form-control col-6 w-50" id="textarea<?=i?>_<?=y?>" rows="50"><? for (let z in exportResult[i]["heading2"][y]["content"]) {?><?=exportResult[i]["heading2"][y]["content"][z]?><?if (z!=exportResult[i]["heading2"][y]["content"].length-1) { for (let k = 0;k < lines;k++) {?>&#10;<? } }?><? } ?></textarea>
