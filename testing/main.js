@@ -935,10 +935,6 @@ function createLongTerm(bookName, id, datetime, endDate) {
 }
 
 function fetchHTML(title, content) {
-  if (getProperty("penanaEmail") == "" || getProperty("penanaPassword") == "") {
-    throw new error("Hello World!")
-  }
-
   splitAccording = "\n";
 
   for (i=0;i<getProperty("indents").length;i++) {
