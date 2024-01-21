@@ -979,8 +979,8 @@ function fetchHTML(title, content) {
   }
   storyUrl = books[getProperty("currentBook")]["penanaUrl"];
   Logger.log(storyUrl);
-  pathname = storyUrl.split('story/')[1].split('/')[0];
-  Logger.log(pathname);
+  storyId = storyUrl.split('story/')[1].split('/')[0];
+  Logger.log(storyId);
   var otherResponse = UrlFetchApp.fetch('https://www.penana.com/write.php?id=' + storyId, params);
   
   response = otherResponse.getContentText();
