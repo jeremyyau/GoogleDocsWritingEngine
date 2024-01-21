@@ -8,6 +8,7 @@ function installFunctions() {
   console.timeEnd("安裝花費時間");
 }
 
+const operateMode = "testing";
 var userProperties = PropertiesService.getUserProperties();
 var cache = CacheService.getScriptCache();
 var books = getDbBooks();
@@ -69,7 +70,7 @@ function doGet(e) {
   if (path==null||e.parameter.page=="") {
     path = "index";
   }
-  var response = UrlFetchApp.fetch("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/"+path+".html");
+  var response = UrlFetchApp.fetch("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/"+operateMode+"/"+path+".html");
   var html = HtmlService.createTemplate(response);
   switch(path) {
     case "index":
@@ -108,7 +109,7 @@ function doPost(e) {
   if (path==null||e.parameter.page=="") {
     path = "index";
   }
-  var response = UrlFetchApp.fetch("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/"+path+".html");
+  var response = UrlFetchApp.fetch("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/"+operateMode+"/"+path+".html");
   var html = HtmlService.createTemplate(response);
   switch(e.parameter.actionType) {
     case "setBookshelfDisplay" :
@@ -166,12 +167,12 @@ function getUrl() {
 }
 
 function include(filename) {
-  var response = UrlFetchApp.fetch("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/"+filename+".html");
+  var response = UrlFetchApp.fetch("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/"+operateMode+"/"+filename+".html");
   return HtmlService.createHtmlOutput(response).getContent();
 }
 
 function includeWithCode(filename) {
-  var response = UrlFetchApp.fetch("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/"+filename+".html");
+  var response = UrlFetchApp.fetch("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/"+operateMode+"/"+filename+".html");
   return HtmlService.createTemplate(response).evaluate().getContent();
 }
 
