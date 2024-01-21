@@ -984,7 +984,7 @@ function fetchHTML(title, content) {
   // storyUrl = books[getProperty("currentBook")]["penanaUrl"];
   storyUrl = null;
   if (storyUrl == "" || storyUrl == null) {
-    throw new error("Penana連結不存在！");
+    throw new Error("Penana連結不存在！");
   }
   storyId = storyUrl.split('story/')[1].split('/')[0];
   var otherResponse = UrlFetchApp.fetch('https://www.penana.com/write.php?id=' + storyId, params);
