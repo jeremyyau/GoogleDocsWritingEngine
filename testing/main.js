@@ -789,16 +789,6 @@ function frequency_eng(bookId) {
   return frequency_export(text, bookId);
 }
 
-function frequency_report() {
-  var jsUrl = 'https://cdn.jsdelivr.net/npm/segmentit@2.0.3/dist/umd/segmentit.min.js';
-  var response = UrlFetchApp.fetch(jsUrl);
-  var jsCode = response.getContentText();
-  eval(jsCode);
-  const segmentit = Segmentit.useDefault(new Segmentit.Segment());
-  const result = segmentit.doSegment('現今，網絡世界發展一日千里，每個人都有能力成為媒體的一部份，小時候不敢前往探險的廢棄地方，現在有人以影片，甚至以直播的形式，為大家揭露那些地方的真實一面，陳立聰和李仁佳就是其中一員。');
-  console.log(result[1]["w"]);
-}
-
 function getEditCardId() {
   return cache.get('cardId');
 }
