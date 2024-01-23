@@ -7,7 +7,7 @@
   <body>
     <?!= includeWithCode("header");?>
     <div class="container-xxl">
-      <div class="form-control w-100" id="myTextarea" contenteditable="true"></div>
+      <div class="form-control w-100 h-50" id="myTextarea" contenteditable="true"></div>
     </div>
     <script>
       var textarea = document.getElementById('myTextarea');
@@ -28,7 +28,7 @@
       function callFunction() {
         var grayText = '<span class="aiContWriteText">這是灰色的文字</span>';
         var position = textarea.selectionEnd;
-        var text = textarea.value;
+        var text = textarea.innerHTML;
         var modifiedText = text.slice(0, position) + grayText + text.slice(position);
         textarea.innerHTML = modifiedText;
       }
@@ -36,9 +36,9 @@
       function applyGrayText() {
         var grayText = '這是灰色的文字';
         var position = textarea.selectionStart - grayText.length;
-        var text = textarea.value;
+        var text = textarea.innerHTML;
         var modifiedText = text.slice(0, position) + grayText + text.slice(position + grayText.length);
-        textarea.value = modifiedText;
+        textarea.innerHTML = modifiedText;
         textarea.selectionEnd = position + grayText.length;
       }
     </script>
