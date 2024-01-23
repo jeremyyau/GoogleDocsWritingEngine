@@ -43,7 +43,7 @@
         if ($('.aiContWriteText').length) {
           var newText = $('.aiContWriteText').text();
           $('.aiContWriteText').remove();
-          paragraphEditor.textContent += newText;
+          paragraphEditor.innerText += newText;
           setCursorPos(paragraphEditor, paragraphEditor.textContent.length);
           grayText = '';
         }
