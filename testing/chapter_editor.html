@@ -26,7 +26,7 @@
       });
 
       function callFunction() {
-        var grayText = '<span class="aiContWriteText">這是灰色的文字</span>';
+        var grayText = '<span class="aiContWriteText" contenteditable="false">這是灰色的文字</span>';
         var position = textarea.selectionEnd;
         var text = textarea.innerHTML;
         var modifiedText = text.slice(0, position) + grayText;
