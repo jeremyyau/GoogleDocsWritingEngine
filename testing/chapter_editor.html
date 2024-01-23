@@ -50,8 +50,8 @@
 
       function setCaretToEnd(element) {
         var range = document.createRange();
-        range.setStart(element, element.textContent.length);
-        range.setEnd(element, element.textContent.length);
+        range.setStart(element, element.innerText.length-1);
+        range.setEnd(element, element.innerText.length-1);
         var selection = window.getSelection();
         selection.addRange(range);
       }
