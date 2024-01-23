@@ -52,48 +52,15 @@
       function setCursorPos(element, pos) {
         const range = document.createRange();
         const selection = window.getSelection();
-        const textNodes = getTextNodes(element);
-
-        let count = 0;
-        let foundNode = null;
-
-        for (let i = 0; i < textNodes.length; i++) {
-          const node = textNodes[i];
-          const nodeLength = node.textContent.length;
-
-          if (count + nodeLength >= pos) {
-            foundNode = node;
-            break;
-          }
-
-          count += nodeLength;
-        }
-
-        if (foundNode) {
-          const offset = pos - count;
-          range.setStart(foundNode, offset);
-          range.setEnd(foundNode, offset);
+        const textNode = element.firstChild;
+        
+        if (textNode) {
+          range.setStart(textNode, pos);
+          range.setEnd(textNode, pos);
           range.collapse(true);
           selection.removeAllRanges();
           selection.addRange(range);
         }
-      }
-
-      function getTextNodes(element) {
-        const textNodes = [];
-
-        function traverse(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              traverse(childNode);
-            }
-          }
-        }
-
-        traverse(element);
-        return textNodes;
       }
     </script>
     <?!= includeWithCode("footer");?>
