@@ -13,12 +13,12 @@
       var paragraphEditor = document.getElementById('paragraphEditor');
       var timer;
 
-      textarea.addEventListener('input', function() {
+      paragraphEditor.addEventListener('input', function() {
         clearTimeout(timer);
         timer = setTimeout(callFunction, 3000);
       });
 
-      textarea.addEventListener('keydown', function(event) {
+      paragraphEditor.addEventListener('keydown', function(event) {
         if (event.key === 'Tab') {
           event.preventDefault();
           applyGrayText();
