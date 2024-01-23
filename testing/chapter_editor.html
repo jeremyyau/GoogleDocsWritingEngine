@@ -27,20 +27,49 @@
 
       function callFunction() {
         var grayText = '<span class="aiContWriteText" contenteditable="false">這是灰色的文字</span>';
-        var position = paragraphEditor.selectionEnd;
-        var text = paragraphEditor.innerHTML;
+        var position = paragraphEditor.innerText.length;
+        var text = paragraphEditor.innerText;
         paragraphEditor.innerHTML = text+grayText;
-        setCaretPosition("paragraphEditor", position);
+        setCursorPos("paragraphEditor", position);
       }
 
       function applyGrayText() {
         $('.aiContWriteText').remove();
         var grayText = '這是黑色的文字';
-        var position = paragraphEditor.selectionEnd;
+        var position = paragraphEditor.innerHTML.length;
         var text = paragraphEditor.innerHTML;
         var modifiedText = text.slice(0, position) + grayText;
         paragraphEditor.innerHTML = modifiedText;
-        setCaretPosition("paragraphEditor", modifiedText.length);
+        setCursorPos("paragraphEditor", modifiedText.length);
+      }
+
+      function getCursorPos(element) {
+        let cursorPos = 0;
+        const selection = window.getSelection();
+        
+        if (selection.rangeCount > 0) {
+          const range = selection.getRangeAt(0);
+          const preCaretRange = range.cloneRange();
+          preCaretRange.selectNodeContents(element);
+          preCaretRange.setEnd(range.endContainer, range.endOffset);
+          cursorPos = preCaretRange.toString().length;
+        }
+        
+        return cursorPos;
+      }
+
+      function setCursorPos(element, pos) {
+        const range = document.createRange();
+        const selection = window.getSelection();
+        const textNode = element.firstChild;
+        
+        if (textNode) {
+          range.setStart(textNode, pos);
+          range.setEnd(textNode, pos);
+          range.collapse(true);
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
       }
     </script>
     <?!= includeWithCode("footer");?>
