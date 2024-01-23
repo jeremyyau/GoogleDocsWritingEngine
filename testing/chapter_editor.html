@@ -3,6 +3,7 @@
   <head>
     <?!= include('style');?>
     <?!= include('script'); ?>
+    <?!= includeWithCode("ai");?>
   </head>
   <body>
     <?!= includeWithCode("header");?>
@@ -30,11 +31,14 @@
       });
 
       function callFunction() {
-        grayText = '<span class="aiContWriteText" contenteditable="false">續寫的部份</span>';
-        var position = paragraphEditor.innerText.length;
-        oldText = paragraphEditor.innerText;
-        paragraphEditor.innerHTML = paragraphEditor.innerText + grayText;
-        setCursorPos(paragraphEditor, position);
+        if (paragraphEditor.innerText.length !== 0) {
+          copilotText = geminiCopilot(paragraphEditor.innerText);
+          grayText = '<span class="aiContWriteText" contenteditable="false">'+copilotText+'</span>';
+          var position = paragraphEditor.innerText.length;
+          oldText = paragraphEditor.innerText;
+          paragraphEditor.innerHTML = paragraphEditor.innerText + grayText;
+          setCursorPos(paragraphEditor, position);
+        }
       }
 
       function applyGrayText() {

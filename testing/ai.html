@@ -19,7 +19,8 @@
       let prompt = document.getElementById(textareaId).value;
       if (type == "contWrite") {
         prompt += "\n幫我續寫上面";
-      } else if (type == "checkMistake") {
+      }
+      if (type == "checkMistake") {
         prompt += "\n幫我檢查上面有甚麼錯別字";
       }
       document.getElementById(newTextareaId).value = "";
@@ -29,6 +30,12 @@
         console.log(chunkText);
         document.getElementById(newTextareaId).value += chunkText;
       }
+    }
+    window.geminiCopilot = async function geminiCopilot(content) {
+      let result = await model.generateContent("請續寫下面的最後一行：\n" + content);
+      let response = await result.response;
+      let text = response.text();
+      return text
     }
 </script>
 <script>
