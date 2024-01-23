@@ -59,7 +59,7 @@
 
         for (let i = 0; i < textNodes.length; i++) {
           const node = textNodes[i];
-          const nodeLength = node.textContent.length;
+          const nodeLength = node.innerText.length;
 
           if (count + nodeLength >= pos) {
             foundNode = node;
