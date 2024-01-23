@@ -31,7 +31,6 @@
         var text = textarea.value;
         var modifiedText = text.slice(0, position) + grayText + text.slice(position);
         textarea.value = modifiedText;
-        textarea.selectionEnd = position + grayText.length;
       }
 
       function applyGrayText() {
@@ -40,7 +39,7 @@
         var text = textarea.value;
         var modifiedText = text.slice(0, position) + grayText + text.slice(position + grayText.length);
         textarea.value = modifiedText;
-        textarea.selectionEnd = textarea.selectionStart;
+        textarea.selectionEnd = position + grayText.length;
       }
     </script>
     <?!= includeWithCode("footer");?>
