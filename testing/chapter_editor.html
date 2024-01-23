@@ -34,8 +34,8 @@
           var position = paragraphEditor.innerText.length;
           oldText = paragraphEditor.innerText.replaceAll("\r", "\n");
           console.log(paragraphEditor.innerText.length);
-          setCursorPos(paragraphEditor, position);
           paragraphEditor.innerHTML += grayText;
+          setCursorPos(paragraphEditor, position);
         }
       }
 
