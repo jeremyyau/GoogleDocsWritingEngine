@@ -33,6 +33,7 @@
           grayText = '<span class="aiContWriteText" contenteditable="false">'+copilotText+'</span>';
           var position = paragraphEditor.innerText.length;
           oldText = paragraphEditor.innerText.replaceAll("\r", "\n");
+          console.log(paragraphEditor.innerText.length);
           setCaretToEnd(paragraphEditor);
           paragraphEditor.innerHTML += grayText;
         }
