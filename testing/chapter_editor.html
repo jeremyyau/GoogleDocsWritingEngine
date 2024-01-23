@@ -50,10 +50,18 @@
         }
       }
 
+      // function setCaretToEnd(element) {
+      //   var selection = window.getSelection();
+      //   selection.modify("extend", "backward", "paragraphboundary");
+      //   selection.collapseToEnd();
+      // }
+
       function setCaretToEnd(element) {
+        var range = document.createRange();
+        range.setStart(element, element.textContent.length);
+        range.setEnd(element, element.textContent.length);
         var selection = window.getSelection();
-        selection.modify("extend", "backward", "paragraphboundary");
-        selection.collapseToEnd();
+        selection.addRange(range);
       }
 
 
