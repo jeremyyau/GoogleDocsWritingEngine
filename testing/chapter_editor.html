@@ -3,6 +3,12 @@
   <head>
     <?!= include('style');?>
     <?!= include('script'); ?>
+  </head>
+  <body>
+    <?!= includeWithCode("header");?>
+    <div class="container-xxl">
+      <textarea class="form-control w-100" id="myTextarea" rows="25" placeholder="請輸入文字"></textarea>
+    </div>
     <script>
       var textarea = document.getElementById('myTextarea');
       var timer;
@@ -37,12 +43,6 @@
         textarea.selectionEnd = textarea.selectionStart;
       }
     </script>
-  </head>
-  <body>
-    <?!= includeWithCode("header");?>
-    <div class="container-xxl">
-      <textarea class="form-control w-100" id="myTextarea" rows="25" placeholder="請輸入文字"></textarea>
-    </div>
     <?!= includeWithCode("footer");?>
   </body>
 </html>
