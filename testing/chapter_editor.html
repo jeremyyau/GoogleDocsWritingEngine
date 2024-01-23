@@ -29,8 +29,9 @@
         var grayText = '<span class="aiContWriteText" contenteditable="false">這是灰色的文字</span>';
         var position = paragraphEditor.innerText.length;
         var text = paragraphEditor.innerText;
-        paragraphEditor.innerHTML = text+grayText;
-        setCursorPos("paragraphEditor", position);
+        paragraphEditor.innerHTML = text + grayText;
+        console.log(position);
+        setCursorPos(paragraphEditor, position);
       }
 
       function applyGrayText() {
@@ -40,7 +41,7 @@
         var text = paragraphEditor.innerHTML;
         var modifiedText = text.slice(0, position) + grayText;
         paragraphEditor.innerHTML = modifiedText;
-        setCursorPos("paragraphEditor", modifiedText.length);
+        setCursorPos(paragraphEditor, modifiedText.length);
       }
 
       function getCursorPos(element) {
