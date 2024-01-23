@@ -32,7 +32,7 @@
       }
     }
     window.geminiCopilot = async function geminiCopilot(content) {
-      let result = await model.generateContent("請續寫下面的最後一行：\n" + content);
+      let result = await model.generateContent("請續寫下面的最後一行，並且只續寫一行就可以：\n" + content);
       let response = await result.response;
       let text = response.text();
       console.log(text);
