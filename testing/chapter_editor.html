@@ -31,6 +31,7 @@
         var text = paragraphEditor.innerHTML;
         // var modifiedText = text.slice(0, position) + grayText;
         paragraphEditor.innerHTML = text+grayText;
+        paragraphEditor.setSelectionRange(paragraphEditor.selectionEnd, paragraphEditor.selectionEnd);
       }
 
       function applyGrayText() {
@@ -40,7 +41,7 @@
         var text = paragraphEditor.innerHTML;
         var modifiedText = text.slice(0, position) + grayText;
         paragraphEditor.innerHTML = modifiedText;
-        paragraphEditor.selectionEnd = position + grayText.length;
+        paragraphEditor.setSelectionRange(modifiedText.length, modifiedText.length);
       }
     </script>
     <?!= includeWithCode("footer");?>
