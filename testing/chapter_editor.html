@@ -13,6 +13,7 @@
       var paragraphEditor = document.getElementById('paragraphEditor');
       var timer;
       var grayText = '';
+      var oldText = 
 
       paragraphEditor.addEventListener('input', function() {
         clearTimeout(timer);
@@ -29,6 +30,7 @@
       function callFunction() {
         grayText = '<span class="aiContWriteText" contenteditable="false">續寫的部份</span>';
         var position = paragraphEditor.innerText.length;
+        oldText = paragraphEditor.innerText;
         paragraphEditor.innerHTML = paragraphEditor.innerText + grayText;
         setCursorPos(paragraphEditor, position);
       }
@@ -37,8 +39,8 @@
         if ($('.aiContWriteText')) {
           var newText = $('.aiContWriteText').text();
           $('.aiContWriteText').remove();
-          paragraphEditor.innerText = paragraphEditor.innerText + newText;
-          setCursorPos(paragraphEditor, paragraphEditor.innerText.length-1);
+          paragraphEditor.innerText = oldText + newText;
+          setCursorPos(paragraphEditor, paragraphEditor.innerText.length);
         }
       }
 
