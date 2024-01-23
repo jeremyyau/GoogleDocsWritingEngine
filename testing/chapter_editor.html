@@ -36,9 +36,9 @@
       function applyGrayText() {
         $('.aiContWriteText').remove();
         var grayText = '這是黑色的文字';
-        var position = textarea.selectionStart - grayText.length;
+        var position = textarea.selectionEnd;
         var text = textarea.innerHTML;
-        var modifiedText = text.slice(0, position) + grayText + text.slice(position + grayText.length);
+        var modifiedText = text.slice(0, position) + grayText;
         textarea.innerHTML = modifiedText;
         textarea.selectionEnd = position + grayText.length;
       }
