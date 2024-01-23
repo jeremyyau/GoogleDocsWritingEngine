@@ -30,7 +30,7 @@
         var position = paragraphEditor.selectionEnd;
         var text = paragraphEditor.innerHTML;
         paragraphEditor.innerHTML = text+grayText;
-        paragraphEditor.setCaretPosition("paragraphEditor",position);
+        setCaretPosition("paragraphEditor", position);
       }
 
       function applyGrayText() {
@@ -40,7 +40,7 @@
         var text = paragraphEditor.innerHTML;
         var modifiedText = text.slice(0, position) + grayText;
         paragraphEditor.innerHTML = modifiedText;
-        paragraphEditor.setCaretPosition("paragraphEditor",modifiedText.length);
+        setCaretPosition("paragraphEditor", modifiedText.length);
       }
     </script>
     <?!= includeWithCode("footer");?>
