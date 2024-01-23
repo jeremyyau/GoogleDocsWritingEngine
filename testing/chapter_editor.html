@@ -29,19 +29,14 @@
       function callFunction() {
         grayText = '<span class="aiContWriteText" contenteditable="false">續寫的部份</span>';
         var position = paragraphEditor.innerText.length;
-        var text = paragraphEditor.innerText;
-        paragraphEditor.innerHTML = text + grayText;
-        console.log(position);
+        paragraphEditor.innerHTML = paragraphEditor.innerText + grayText;
         setCursorPos(paragraphEditor, position);
       }
 
       function applyGrayText() {
         $('.aiContWriteText').remove();
-        var position = paragraphEditor.innerHTML.length;
-        var text = paragraphEditor.innerHTML;
-        var modifiedText = text.slice(0, position) + grayText;
-        paragraphEditor.innerHTML = modifiedText;
-        setCursorPos(paragraphEditor, modifiedText.length);
+        paragraphEditor.innerHTML = paragraphEditor.innerHTML + grayText.innerText;
+        setCursorPos(paragraphEditor, paragraphEditor.innerHTML.length);
         grayText = '';
       }
 
