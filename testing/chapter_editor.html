@@ -21,7 +21,7 @@
       });
 
       paragraphEditor.addEventListener('keydown', function(event) {
-        if (event.key === 'Tab' && $('.aiContWriteText').length) {
+        if (event.key === 'Tab') {
           event.preventDefault();
           applyGrayText();
         } else {
@@ -38,7 +38,7 @@
       }
 
       function applyGrayText() {
-        if (grayText != '') {
+        if ($('.aiContWriteText').length) {
           var newText = $('.aiContWriteText').text();
           $('.aiContWriteText').remove();
           paragraphEditor.innerText = oldText + newText;
