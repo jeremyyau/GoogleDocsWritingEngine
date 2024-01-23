@@ -34,7 +34,8 @@
           var position = paragraphEditor.innerText.length;
           oldText = paragraphEditor.innerText.replaceAll("\r", "\n");
           paragraphEditor.innerHTML += grayText;
-          setCursorPos(paragraphEditor, position);
+          // setCursorPos(paragraphEditor, position);
+          setCaretToEnd(paragraphEditor);
         }
       }
 
@@ -43,57 +44,65 @@
           var newText = $('.aiContWriteText').text();
           $('.aiContWriteText').remove();
           paragraphEditor.innerText += newText;
-          setCursorPos(paragraphEditor, paragraphEditor.innerText.length);
+          // setCursorPos(paragraphEditor, paragraphEditor.innerText.length);
+          setCaretToEnd(paragraphEditor);
           grayText = '';
         }
       }
 
-      function setCursorPos(element, pos) {
-        const range = document.createRange();
-        const selection = window.getSelection();
-        const textNodes = getTextNodes(element);
-
-        let count = 0;
-        let foundNode = null;
-
-        for (let i = 0; i < textNodes.length; i++) {
-          const node = textNodes[i];
-          const nodeLength = node.textContent.length;
-
-          if (count + nodeLength >= pos) {
-            foundNode = node;
-            break;
-          }
-
-          count += nodeLength;
-        }
-
-        if (foundNode) {
-          const offset = pos - count;
-          range.setStart(foundNode, offset);
-          range.setEnd(foundNode, offset);
-          range.collapse(true);
-          selection.removeAllRanges();
-          selection.addRange(range);
-        }
+      function setCaretToEnd(element) {
+        var selection = window.getSelection();
+        selection.modify("extend", "backward", "paragraphboundary");
+        selection.collapseToEnd();
       }
 
-      function getTextNodes(element) {
-        const textNodes = [];
 
-        function traverse(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            textNodes.push(node);
-          } else {
-            for (const childNode of node.childNodes) {
-              traverse(childNode);
-            }
-          }
-        }
+      // function setCursorPos(element, pos) {
+      //   const range = document.createRange();
+      //   const selection = window.getSelection();
+      //   const textNodes = getTextNodes(element);
 
-        traverse(element);
-        return textNodes;
-      }
+      //   let count = 0;
+      //   let foundNode = null;
+
+      //   for (let i = 0; i < textNodes.length; i++) {
+      //     const node = textNodes[i];
+      //     const nodeLength = node.textContent.length;
+
+      //     if (count + nodeLength >= pos) {
+      //       foundNode = node;
+      //       break;
+      //     }
+
+      //     count += nodeLength;
+      //   }
+
+      //   if (foundNode) {
+      //     const offset = pos - count;
+      //     range.setStart(foundNode, offset);
+      //     range.setEnd(foundNode, offset);
+      //     range.collapse(true);
+      //     selection.removeAllRanges();
+      //     selection.addRange(range);
+      //   }
+      // }
+
+      // function getTextNodes(element) {
+      //   const textNodes = [];
+
+      //   function traverse(node) {
+      //     if (node.nodeType === Node.TEXT_NODE) {
+      //       textNodes.push(node);
+      //     } else {
+      //       for (const childNode of node.childNodes) {
+      //         traverse(childNode);
+      //       }
+      //     }
+      //   }
+
+      //   traverse(element);
+      //   return textNodes;
+      // }
     </script>
     <?!= includeWithCode("footer");?>
   </body>
