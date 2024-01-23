@@ -31,10 +31,10 @@
         var text = textarea.innerHTML;
         var modifiedText = text.slice(0, position) + grayText;
         textarea.innerHTML = modifiedText;
-        $('.aiContWriteText').remove();
       }
 
       function applyGrayText() {
+        $('.aiContWriteText').remove();
         var grayText = '這是黑色的文字';
         var position = textarea.selectionStart - grayText.length;
         var text = textarea.innerHTML;
