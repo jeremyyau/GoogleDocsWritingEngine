@@ -7,10 +7,10 @@
   <body>
     <?!= includeWithCode("header");?>
     <div class="container-xxl">
-      <div class="form-control w-100" id="myTextarea" contenteditable="true"></div>
+      <div class="form-control w-100" id="paragraphEditor" contenteditable="true"></div>
     </div>
     <script>
-      var textarea = document.getElementById('myTextarea');
+      var paragraphEditor = document.getElementById('paragraphEditor');
       var timer;
 
       textarea.addEventListener('input', function() {
@@ -27,20 +27,20 @@
 
       function callFunction() {
         var grayText = '<span class="aiContWriteText" contenteditable="false">這是灰色的文字</span>';
-        var position = textarea.selectionEnd;
-        var text = textarea.innerHTML;
+        var position = paragraphEditor.selectionEnd;
+        var text = paragraphEditor.innerHTML;
         var modifiedText = text.slice(0, position) + grayText;
-        textarea.innerHTML = modifiedText;
+        paragraphEditor.innerHTML = modifiedText;
       }
 
       function applyGrayText() {
         $('.aiContWriteText').remove();
         var grayText = '這是黑色的文字';
-        var position = textarea.selectionEnd;
-        var text = textarea.innerHTML;
+        var position = paragraphEditor.selectionEnd;
+        var text = paragraphEditor.innerHTML;
         var modifiedText = text.slice(0, position) + grayText;
-        textarea.innerHTML = modifiedText;
-        textarea.selectionEnd = position + grayText.length;
+        paragraphEditor.innerHTML = modifiedText;
+        paragraphEditor.selectionEnd = position + grayText.length;
       }
     </script>
     <?!= includeWithCode("footer");?>
