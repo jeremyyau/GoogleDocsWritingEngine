@@ -35,7 +35,8 @@
       let result = await model.generateContent("請續寫下面的最後一行：\n" + content);
       let response = await result.response;
       let text = response.text();
-      return text
+      console.log(text);
+      return text;
     }
 </script>
 <script>
