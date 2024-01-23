@@ -35,7 +35,8 @@
 
       function applyGrayText() {
         $('.aiContWriteText').remove();
-        var newText = new DOMParser().parseFromString(xmlString, "text/xml").innerText;
+        var newText = new DOMParser().parseFromString(grayText, "text/xml").innerText;
+        console.log(newText);
         if (grayText != "") {
           paragraphEditor.innerHTML = paragraphEditor.innerHTML + newText;
           setCursorPos(paragraphEditor, paragraphEditor.innerHTML.length);
