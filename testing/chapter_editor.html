@@ -16,16 +16,13 @@
       var grayText = '';
       var oldText = '';
 
-      paragraphEditor.addEventListener('input', function() {
-        clearTimeout(timer);
-        timer = setTimeout(callFunction, 1500);
-      });
-
       paragraphEditor.addEventListener('keydown', function(event) {
         if (event.key === 'Tab') {
           event.preventDefault();
           applyGrayText();
         } else {
+          clearTimeout(timer);
+          timer = setTimeout(callFunction, 1500);
           $('.aiContWriteText').remove();
         }
       });
