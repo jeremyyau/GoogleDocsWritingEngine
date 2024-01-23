@@ -21,7 +21,7 @@
       });
 
       paragraphEditor.addEventListener('keydown', function(event) {
-        if (event.key === 'Tab') {
+        if (event.key === 'Tab' && $('#elemId').length) {
           event.preventDefault();
           applyGrayText();
         } else {
