@@ -12,10 +12,11 @@
     <script>
       var paragraphEditor = document.getElementById('paragraphEditor');
       var timer;
+      var grayText = '';
 
       paragraphEditor.addEventListener('input', function() {
         clearTimeout(timer);
-        timer = setTimeout(callFunction, 3000);
+        timer = setTimeout(callFunction, 1500);
       });
 
       paragraphEditor.addEventListener('keydown', function(event) {
@@ -26,7 +27,7 @@
       });
 
       function callFunction() {
-        var grayText = '<span class="aiContWriteText" contenteditable="false">這是灰色的文字</span>';
+        grayText = '<span class="aiContWriteText" contenteditable="false">續寫的部份</span>';
         var position = paragraphEditor.innerText.length;
         var text = paragraphEditor.innerText;
         paragraphEditor.innerHTML = text + grayText;
@@ -36,18 +37,17 @@
 
       function applyGrayText() {
         $('.aiContWriteText').remove();
-        var grayText = '這是黑色的文字';
         var position = paragraphEditor.innerHTML.length;
         var text = paragraphEditor.innerHTML;
         var modifiedText = text.slice(0, position) + grayText;
         paragraphEditor.innerHTML = modifiedText;
         setCursorPos(paragraphEditor, modifiedText.length);
+        grayText = '';
       }
 
       function getCursorPos(element) {
         let cursorPos = 0;
         const selection = window.getSelection();
-        
         if (selection.rangeCount > 0) {
           const range = selection.getRangeAt(0);
           const preCaretRange = range.cloneRange();
@@ -55,7 +55,6 @@
           preCaretRange.setEnd(range.endContainer, range.endOffset);
           cursorPos = preCaretRange.toString().length;
         }
-        
         return cursorPos;
       }
 
@@ -63,7 +62,6 @@
         const range = document.createRange();
         const selection = window.getSelection();
         const textNode = element.firstChild;
-        
         if (textNode) {
           range.setStart(textNode, pos);
           range.setEnd(textNode, pos);
