@@ -35,7 +35,7 @@
 
       function applyGrayText() {
         if ($('.aiContWriteText')) {
-          var newText = $('.aiContWriteText').innerText;
+          var newText = $('.aiContWriteText').text();
           console.log(newText);
           paragraphEditor.innerHTML = paragraphEditor.innerHTML + newText;
           setCursorPos(paragraphEditor, paragraphEditor.innerHTML.length);
