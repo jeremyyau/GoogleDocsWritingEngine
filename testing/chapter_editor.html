@@ -34,7 +34,7 @@
           var position = paragraphEditor.innerText.length;
           oldText = paragraphEditor.innerText.replaceAll("\r", "\n");
           console.log(paragraphEditor.innerText.length);
-          setCaretToEnd(paragraphEditor);
+          setCursorPos(paragraphEditor, position);
           paragraphEditor.innerHTML += grayText;
         }
       }
@@ -44,66 +44,57 @@
           var newText = $('.aiContWriteText').text();
           $('.aiContWriteText').remove();
           paragraphEditor.innerText += newText;
-          setCaretToEnd(paragraphEditor);
+          setCursorPos(paragraphEditor, paragraphEditor.innerText.length);
           grayText = '';
         }
       }
 
-      function setCaretToEnd(element) {
-        var range = document.createRange();
-        range.setStart(element, element.innerText.length-1);
-        range.setEnd(element, element.innerText.length-1);
-        var selection = window.getSelection();
-        selection.addRange(range);
+      function setCursorPos(element, pos) {
+        const range = document.createRange();
+        const selection = window.getSelection();
+        const textNodes = getTextNodes(element);
+
+        let count = 0;
+        let foundNode = null;
+
+        for (let i = 0; i < textNodes.length; i++) {
+          const node = textNodes[i];
+          const nodeLength = node.textContent.length;
+
+          if (count + nodeLength >= pos) {
+            foundNode = node;
+            break;
+          }
+
+          count += nodeLength;
+        }
+
+        if (foundNode) {
+          const offset = pos - count;
+          range.setStart(foundNode, offset);
+          range.setEnd(foundNode, offset);
+          range.collapse(true);
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
       }
 
+      function getTextNodes(element) {
+        const textNodes = [];
 
-      // function setCursorPos(element, pos) {
-      //   const range = document.createRange();
-      //   const selection = window.getSelection();
-      //   const textNodes = getTextNodes(element);
+        function traverse(node) {
+          if (node.nodeType === Node.TEXT_NODE) {
+            textNodes.push(node);
+          } else {
+            for (const childNode of node.childNodes) {
+              traverse(childNode);
+            }
+          }
+        }
 
-      //   let count = 0;
-      //   let foundNode = null;
-
-      //   for (let i = 0; i < textNodes.length; i++) {
-      //     const node = textNodes[i];
-      //     const nodeLength = node.textContent.length;
-
-      //     if (count + nodeLength >= pos) {
-      //       foundNode = node;
-      //       break;
-      //     }
-
-      //     count += nodeLength;
-      //   }
-
-      //   if (foundNode) {
-      //     const offset = pos - count;
-      //     range.setStart(foundNode, offset);
-      //     range.setEnd(foundNode, offset);
-      //     range.collapse(true);
-      //     selection.removeAllRanges();
-      //     selection.addRange(range);
-      //   }
-      // }
-
-      // function getTextNodes(element) {
-      //   const textNodes = [];
-
-      //   function traverse(node) {
-      //     if (node.nodeType === Node.TEXT_NODE) {
-      //       textNodes.push(node);
-      //     } else {
-      //       for (const childNode of node.childNodes) {
-      //         traverse(childNode);
-      //       }
-      //     }
-      //   }
-
-      //   traverse(element);
-      //   return textNodes;
-      // }
+        traverse(element);
+        return textNodes;
+      }
     </script>
     <?!= includeWithCode("footer");?>
   </body>
