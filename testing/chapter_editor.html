@@ -34,6 +34,7 @@
           var position = paragraphEditor.textContent.length;
           oldText = paragraphEditor.textContent;
           console.log(paragraphEditor.textContent.length);
+          console.log(paragraphEditor.innerText.length);
           paragraphEditor.innerHTML += grayText;
           setCursorPos(paragraphEditor, position);
         }
