@@ -34,13 +34,13 @@
       }
 
       function applyGrayText() {
-        $('.aiContWriteText').remove();
-        var newText = new DOMParser().parseFromString(grayText, "text/xml").innerText;
-        console.log(newText);
-        if (grayText != "") {
+        if ($('.aiContWriteText')) {
+          var newText = $('.aiContWriteText').innerText;
+          console.log(newText);
           paragraphEditor.innerHTML = paragraphEditor.innerHTML + newText;
           setCursorPos(paragraphEditor, paragraphEditor.innerHTML.length);
           grayText = '';
+          $('.aiContWriteText').remove();
         }
       }
 
