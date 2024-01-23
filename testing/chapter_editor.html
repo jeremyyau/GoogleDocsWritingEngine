@@ -37,7 +37,7 @@
           var position = paragraphEditor.innerText.length;
           console.log(paragraphEditor.innerText);
           oldText = paragraphEditor.innerText.replaceAll("\r", "\n");
-          paragraphEditor.innerHTML = oldText + grayText;
+          paragraphEditor.innerHTML += grayText;
           setCursorPos(paragraphEditor, position);
         }
       }
@@ -46,7 +46,7 @@
         if ($('.aiContWriteText').length) {
           var newText = $('.aiContWriteText').text();
           $('.aiContWriteText').remove();
-          paragraphEditor.innerText = oldText + newText;
+          paragraphEditor.innerText += newText;
           setCursorPos(paragraphEditor, paragraphEditor.innerText.length);
           grayText = '';
         }
