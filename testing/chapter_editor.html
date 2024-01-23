@@ -36,8 +36,8 @@
           console.log(copilotText);
           grayText = '<span class="aiContWriteText" contenteditable="false">'+copilotText+'</span>';
           var position = paragraphEditor.innerText.length;
-          oldText = paragraphEditor.innerHTML;
-          paragraphEditor.innerHTML = paragraphEditor.innerText.replaceAll("\n", "<br/>") + grayText;
+          oldText = paragraphEditor.innerText;
+          paragraphEditor.innerHTML = paragraphEditor.innerText + grayText;
           setCursorPos(paragraphEditor, position);
         }
       }
