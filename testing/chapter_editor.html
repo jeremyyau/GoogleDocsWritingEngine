@@ -33,6 +33,7 @@
       function callFunction() {
         if (paragraphEditor.innerText.length !== 0) {
           copilotText = geminiCopilot(paragraphEditor.innerText);
+          console.log(copilotText);
           grayText = '<span class="aiContWriteText" contenteditable="false">'+copilotText+'</span>';
           var position = paragraphEditor.innerText.length;
           oldText = paragraphEditor.innerText;
