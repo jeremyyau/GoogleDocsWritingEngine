@@ -35,9 +35,12 @@
 
       function applyGrayText() {
         $('.aiContWriteText').remove();
-        paragraphEditor.innerHTML = paragraphEditor.innerHTML + grayText.innerText;
-        setCursorPos(paragraphEditor, paragraphEditor.innerHTML.length);
-        grayText = '';
+        var newText = new DOMParser().parseFromString(xmlString, "text/xml").innerText;
+        if (grayText != "") {
+          paragraphEditor.innerHTML = paragraphEditor.innerHTML + newText;
+          setCursorPos(paragraphEditor, paragraphEditor.innerHTML.length);
+          grayText = '';
+        }
       }
 
       function getCursorPos(element) {
