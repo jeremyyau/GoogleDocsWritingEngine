@@ -36,8 +36,8 @@
       function applyGrayText() {
         if ($('.aiContWriteText')) {
           var newText = $('.aiContWriteText').text();
-          paragraphEditor.innerText = paragraphEditor.innerHTML + newText;
           $('.aiContWriteText').remove();
+          paragraphEditor.innerText = paragraphEditor.innerText + newText;
           setCursorPos(paragraphEditor, paragraphEditor.innerText.length-1);
         }
       }
