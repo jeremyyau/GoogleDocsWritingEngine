@@ -28,12 +28,12 @@
       });
 
       async function genGrayText() {
-        if (paragraphEditor.innerText.length !== 0) {
-          copilotText = await geminiCopilot(paragraphEditor.innerText);
+        if (paragraphEditor.textContent.length !== 0) {
+          copilotText = await geminiCopilot(paragraphEditor.textContent);
           grayText = '<span class="aiContWriteText" contenteditable="false">'+copilotText+'</span>';
-          var position = paragraphEditor.innerText.length;
-          oldText = paragraphEditor.innerText;
-          console.log(paragraphEditor.innerText.length);
+          var position = paragraphEditor.textContent.length;
+          oldText = paragraphEditor.textContent;
+          console.log(paragraphEditor.textContent.length);
           paragraphEditor.innerHTML += grayText;
           setCursorPos(paragraphEditor, position);
         }
@@ -43,8 +43,8 @@
         if ($('.aiContWriteText').length) {
           var newText = $('.aiContWriteText').text();
           $('.aiContWriteText').remove();
-          paragraphEditor.innerText += newText;
-          setCursorPos(paragraphEditor, paragraphEditor.innerText.length);
+          paragraphEditor.textContent += newText;
+          setCursorPos(paragraphEditor, paragraphEditor.textContent.length);
           grayText = '';
         }
       }
@@ -59,7 +59,7 @@
 
         for (let i = 0; i < textNodes.length; i++) {
           const node = textNodes[i];
-          const nodeLength = node.innerText.length;
+          const nodeLength = node.textContent.length;
 
           if (count + nodeLength >= pos) {
             foundNode = node;
