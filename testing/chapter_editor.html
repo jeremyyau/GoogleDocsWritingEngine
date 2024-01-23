@@ -33,9 +33,8 @@
           grayText = '<span class="aiContWriteText" contenteditable="false">'+copilotText+'</span>';
           var position = paragraphEditor.innerText.length;
           oldText = paragraphEditor.innerText.replaceAll("\r", "\n");
-          paragraphEditor.innerHTML += grayText;
-          // setCursorPos(paragraphEditor, position);
           setCaretToEnd(paragraphEditor);
+          paragraphEditor.innerHTML += grayText;
         }
       }
 
@@ -44,17 +43,10 @@
           var newText = $('.aiContWriteText').text();
           $('.aiContWriteText').remove();
           paragraphEditor.innerText += newText;
-          // setCursorPos(paragraphEditor, paragraphEditor.innerText.length);
           setCaretToEnd(paragraphEditor);
           grayText = '';
         }
       }
-
-      // function setCaretToEnd(element) {
-      //   var selection = window.getSelection();
-      //   selection.modify("extend", "backward", "paragraphboundary");
-      //   selection.collapseToEnd();
-      // }
 
       function setCaretToEnd(element) {
         var range = document.createRange();
