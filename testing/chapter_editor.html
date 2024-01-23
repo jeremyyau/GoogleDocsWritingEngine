@@ -26,11 +26,11 @@
       });
 
       function callFunction() {
-        var grayText = '這是灰色的文字';
+        var grayText = '<span class="aiContWriteText">這是灰色的文字</span>';
         var position = textarea.selectionEnd;
         var text = textarea.value;
         var modifiedText = text.slice(0, position) + grayText + text.slice(position);
-        textarea.value = modifiedText;
+        textarea.innerHTML = modifiedText;
       }
 
       function applyGrayText() {
