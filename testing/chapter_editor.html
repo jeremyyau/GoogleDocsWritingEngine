@@ -29,8 +29,8 @@
         var grayText = '<span class="aiContWriteText" contenteditable="false">這是灰色的文字</span>';
         var position = paragraphEditor.selectionEnd;
         var text = paragraphEditor.innerHTML;
-        var modifiedText = text.slice(0, position) + grayText;
-        paragraphEditor.innerHTML = modifiedText;
+        // var modifiedText = text.slice(0, position) + grayText;
+        paragraphEditor.innerHTML = text+grayText;
       }
 
       function applyGrayText() {
