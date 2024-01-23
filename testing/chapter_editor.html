@@ -31,13 +31,13 @@
       });
 
       async function callFunction() {
-        if (paragraphEditor.innerText.length !== 0) {
-          copilotText = await geminiCopilot(paragraphEditor.innerText);
+        if (paragraphEditor.textContent.length !== 0) {
+          copilotText = await geminiCopilot(paragraphEditor.textContent);
           console.log(copilotText);
           grayText = '<span class="aiContWriteText" contenteditable="false">'+copilotText+'</span>';
-          var position = paragraphEditor.innerText.length;
-          oldText = paragraphEditor.innerText;
-          paragraphEditor.innerHTML = paragraphEditor.innerText + grayText;
+          var position = paragraphEditor.textContent.length;
+          oldText = paragraphEditor.textContent;
+          paragraphEditor.innerHTML = paragraphEditor.textContent + grayText;
           setCursorPos(paragraphEditor, position);
         }
       }
@@ -46,8 +46,8 @@
         if ($('.aiContWriteText').length) {
           var newText = $('.aiContWriteText').text();
           $('.aiContWriteText').remove();
-          paragraphEditor.innerText = oldText + newText;
-          setCursorPos(paragraphEditor, paragraphEditor.innerText.length);
+          paragraphEditor.textContent = oldText + newText;
+          setCursorPos(paragraphEditor, paragraphEditor.textContent.length);
           grayText = '';
         }
       }
