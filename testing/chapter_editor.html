@@ -33,9 +33,9 @@
       async function callFunction() {
         if (paragraphEditor.innerText.length !== 0) {
           copilotText = await geminiCopilot(paragraphEditor.innerText);
-          console.log(copilotText);
           grayText = '<span class="aiContWriteText" contenteditable="false">'+copilotText+'</span>';
           var position = paragraphEditor.innerText.length;
+          console.log(paragraphEditor.innerText);
           oldText = paragraphEditor.innerText.replaceAll("\r", "\n");
           paragraphEditor.innerHTML = oldText + grayText;
           setCursorPos(paragraphEditor, position);
