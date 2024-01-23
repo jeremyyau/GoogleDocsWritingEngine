@@ -36,8 +36,8 @@
           console.log(copilotText);
           grayText = '<span class="aiContWriteText" contenteditable="false">'+copilotText+'</span>';
           var position = paragraphEditor.innerText.length;
-          oldText = paragraphEditor.innerText;
-          paragraphEditor.innerHTML = paragraphEditor.innerText + grayText;
+          oldText = paragraphEditor.innerText.replaceAll("\r", "\n");
+          paragraphEditor.innerHTML = oldText + grayText;
           setCursorPos(paragraphEditor, position);
         }
       }
@@ -46,7 +46,7 @@
         if ($('.aiContWriteText').length) {
           var newText = $('.aiContWriteText').text();
           $('.aiContWriteText').remove();
-          paragraphEditor.innerText = oldText.replaceAll("<br>", "\n") + newText;
+          paragraphEditor.innerText = oldText + newText;
           setCursorPos(paragraphEditor, paragraphEditor.innerText.length);
           grayText = '';
         }
