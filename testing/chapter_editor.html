@@ -3,6 +3,40 @@
   <head>
     <?!= include('style');?>
     <?!= include('script'); ?>
+    <script>
+      var textarea = document.getElementById('myTextarea');
+      var timer;
+
+      textarea.addEventListener('input', function() {
+        clearTimeout(timer);
+        timer = setTimeout(callFunction, 5000);
+      });
+
+      textarea.addEventListener('keydown', function(event) {
+        if (event.key === 'Tab') {
+          event.preventDefault();
+          applyGrayText();
+        }
+      });
+
+      function callFunction() {
+        var grayText = '這是灰色的文字';
+        var position = textarea.selectionEnd;
+        var text = textarea.value;
+        var modifiedText = text.slice(0, position) + grayText + text.slice(position);
+        textarea.value = modifiedText;
+        textarea.selectionEnd = position + grayText.length;
+      }
+
+      function applyGrayText() {
+        var grayText = '這是灰色的文字';
+        var position = textarea.selectionStart - grayText.length;
+        var text = textarea.value;
+        var modifiedText = text.slice(0, position) + grayText + text.slice(position + grayText.length);
+        textarea.value = modifiedText;
+        textarea.selectionEnd = textarea.selectionStart;
+      }
+    </script>
   </head>
   <body>
     <?!= includeWithCode("header");?>
