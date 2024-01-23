@@ -22,12 +22,12 @@
           applyGrayText();
         } else {
           clearTimeout(timer);
-          timer = setTimeout(callFunction, 1500);
+          timer = setTimeout(genGrayText, 1500);
           $('.aiContWriteText').remove();
         }
       });
 
-      async function callFunction() {
+      async function genGrayText() {
         if (paragraphEditor.innerText.length !== 0) {
           copilotText = await geminiCopilot(paragraphEditor.innerText);
           grayText = '<span class="aiContWriteText" contenteditable="false">'+copilotText+'</span>';
