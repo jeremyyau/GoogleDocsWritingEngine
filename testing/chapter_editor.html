@@ -39,11 +39,12 @@
       }
 
       function applyGrayText() {
-        if ($('.aiContWriteText')) {
+        if (grayText != '') {
           var newText = $('.aiContWriteText').text();
           $('.aiContWriteText').remove();
           paragraphEditor.innerText = oldText + newText;
           setCursorPos(paragraphEditor, paragraphEditor.innerText.length);
+          grayText = '';
         }
       }
 
