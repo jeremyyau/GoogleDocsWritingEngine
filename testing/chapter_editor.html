@@ -32,7 +32,6 @@
           copilotText = await geminiCopilot(paragraphEditor.innerText);
           grayText = '<span class="aiContWriteText" contenteditable="false">'+copilotText+'</span>';
           var position = paragraphEditor.innerText.length;
-          console.log(paragraphEditor.innerText);
           oldText = paragraphEditor.innerText.replaceAll("\r", "\n");
           paragraphEditor.innerHTML += grayText;
           setCursorPos(paragraphEditor, position);
