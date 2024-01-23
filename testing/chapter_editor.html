@@ -13,7 +13,7 @@
       var paragraphEditor = document.getElementById('paragraphEditor');
       var timer;
       var grayText = '';
-      var oldText = 
+      var oldText = '';
 
       paragraphEditor.addEventListener('input', function() {
         clearTimeout(timer);
@@ -24,6 +24,9 @@
         if (event.key === 'Tab') {
           event.preventDefault();
           applyGrayText();
+        } else {
+          event.preventDefault();
+          $('.aiContWriteText').remove();
         }
       });
 
