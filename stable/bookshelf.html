@@ -88,13 +88,16 @@
                     <p class="card-text <?if (streamerMode) { ?>placeholder<? } ?>"><?=books[i]["desc"]?></p>
                     <p class="card-text mt-auto">
                       <? 
-                      if (books[i]["tags"].length != 0) {
-                        const tags = books[i]["tags"].split(",");
-                        for (let tag of tags) { 
+                        if (books[i]["tags"] !== 'undefined') {
+                          if (books[i]["tags"].length != 0) {
+                            const tags = books[i]["tags"].split(",");
+                            for (let tag of tags) { 
                       ?>
                           <span class="badge bg-secondary"><?=tag?></span>
-                        <? }
-                      }
+                      <?
+                            }
+                          }
+                        }
                       ?>
                     </p>
                     <p class="card-text"><small>🚩章節目標字數: <?=books[i]["goal"]?></small><br><small>🏁文章目標字數: <?=books[i]["goalAll"]?></small></p>
