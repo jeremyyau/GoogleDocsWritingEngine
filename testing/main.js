@@ -858,12 +858,12 @@ function setSettings(e) {
   userProperties.setProperty('freqNum', e.parameter.freqNum);
   userProperties.setProperty('indents', e.parameter.indents);
   userProperties.setProperty('lines', e.parameter.lines);
-  if (e.parameter.whitespaceCount == "true") {
+  if (e.parameter.whitespaceCount === "true") {
     userProperties.setProperty('whitespaceCount', "true");
   } else {
     userProperties.setProperty('whitespaceCount', "false");
   }
-  if (e.parameter.symbolCount == "true") {
+  if (e.parameter.symbolCount === "true") {
     userProperties.setProperty('symbolCount', "true");
   } else {
     userProperties.setProperty('symbolCount', "false");
