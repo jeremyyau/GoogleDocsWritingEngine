@@ -8,7 +8,7 @@ function installFunctions() {
   console.timeEnd("安裝花費時間");
 }
 
-const operateMode = "stable";
+const operateMode = "testing";
 var userProperties = PropertiesService.getUserProperties();
 var cache = CacheService.getScriptCache();
 var books = getDbBooks();
