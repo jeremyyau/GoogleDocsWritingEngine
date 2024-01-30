@@ -44,17 +44,16 @@
       </div>
       <div class="row row-cols-1 row-cols-lg-2">
         <div class="col mb-3">
-          <label for="whitespaceCount" class="form-label">⬜計算空格</label>
-          <select class="form-select" id="whitespaceCount" name="whitespaceCount">
-            <option value="false" <?if (getProperty("whitespaceCount")=="false"){?>selected<?}?>>關閉</option>
-            <option value="true" <?if (getProperty("whitespaceCount")=="true"){?>selected<?}?>>開啟</option>
-          </select>
+          <div class="form-check form-switch">
+            <label for="whitespaceCount" class="form-check-label">⬜計算空格</label>
+            <input type="checkbox" class="form-check-input" role="switch" id="whitespaceCount" name="whitespaceCount" <?if (getProperty("whitespaceCount")=="true"){?>checked="checked"<?}?>></option>
+          </div>
           <div id="whitespaceCountHelp" class="form-text">字數統計會把空格計算在內</div>
         </div>
         <div class="col mb-3">
             <div class="form-check form-switch">
-              <input type="checkbox" class="form-check-input" role="switch" id="symbolCount" name="symbolCount" <?if (getProperty("symbolCount")=="true"){?>checked="checked"<?}?>></option>
               <label for="symbolCount" class="form-check-label">🔣計算標點符號</label>
+              <input type="checkbox" class="form-check-input" role="switch" id="symbolCount" name="symbolCount" <?if (getProperty("symbolCount")=="true"){?>checked="checked"<?}?>></option>
             </div>
             <div id="symbolCountHelp" class="form-text">字數統計會把標點符號計算在內</div>
         </div>
