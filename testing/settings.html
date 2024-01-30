@@ -53,10 +53,7 @@
         </div>
         <div class="col mb-3">
           <label for="symbolCount" class="form-label">🔣計算標點符號</label>
-          <select class="form-select" id="symbolCount" name="symbolCount">
-            <option value="false" <?if (getProperty("symbolCount")=="false"){?>selected<?}?>>關閉</option>
-            <option value="true" <?if (getProperty("symbolCount")=="true"){?>selected<?}?>>開啟</option>
-          </select>
+            <input type="checkbox" class="form-check-input" role="switch" id="symbolCount" name="symbolCount" <?if (getProperty("symbolCount")=="true"){?>checked<?}?>>開啟</option>
           <div id="symbolCountHelp" class="form-text">字數統計會把標點符號計算在內</div>
         </div>
       </div>
