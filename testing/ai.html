@@ -25,8 +25,10 @@
     window.geminiRequest = async function geminiRequest(textareaId, newTextareaId, type) {
       let text = "今天我在做運動，";
       // let text = document.getElementById(textareaId).value;
+      console.log(text);
       if (type == "contWrite") {
         let prompt = "這段文字是小說內容，請幫我續寫下去：\n" + text;
+        console.log(prompt);
       }
       if (type == "checkMistake") {
         let prompt = "這段文字是小說內容，請幫我檢查有甚麼錯別字：\n" + text;
