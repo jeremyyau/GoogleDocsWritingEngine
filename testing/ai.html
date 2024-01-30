@@ -37,11 +37,13 @@
       //   console.log(chunkText);
       //   document.getElementById(newTextareaId).value += chunkText;
       // }
-      let prompt = document.getElementById(textareaId).value;
+      let prompt = "";
+      let text = document.getElementById(textareaId).value;
       if (type == "contWrite") {
-        prompt += "\n幫我續寫上面";
-      } else if (type == "checkMistake") {
-        prompt += "\n幫我檢查上面有甚麼錯別字";
+        prompt = "這段文字是小說內容，請幫我續寫下去：\n" + text;
+      }
+      if (type == "checkMistake") {
+        prompt = "這段文字是小說內容，請幫我檢查有甚麼錯別字：\n" + text;
       }
       document.getElementById(newTextareaId).value = "";
       let result = await model.generateContentStream([prompt]);
