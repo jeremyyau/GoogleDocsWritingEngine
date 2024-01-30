@@ -52,9 +52,11 @@
           <div id="whitespaceCountHelp" class="form-text">字數統計會把空格計算在內</div>
         </div>
         <div class="col mb-3">
-          <label for="symbolCount" class="form-label">🔣計算標點符號</label>
-            <input type="checkbox" class="form-check-input" role="switch" id="symbolCount" name="symbolCount" <?if (getProperty("symbolCount")=="true"){?>checked<?}?>>開啟</option>
-          <div id="symbolCountHelp" class="form-text">字數統計會把標點符號計算在內</div>
+            <div class="form-check form-switch">
+              <input type="checkbox" class="form-check-input" role="switch" id="symbolCount" name="symbolCount" <?if (getProperty("symbolCount")=="true"){?>checked="checked"<?}?>></option>
+              <label for="symbolCount" class="form-check-label">🔣計算標點符號</label>
+            </div>
+            <div id="symbolCountHelp" class="form-text">字數統計會把標點符號計算在內</div>
         </div>
       </div>
       <div class="mb-3">
