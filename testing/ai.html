@@ -11,24 +11,22 @@
     import { GoogleGenerativeAI } from "@google/generative-ai";
     const geminiAPIkey = "<?=geminiAPIkey?>";
     const genAI = new GoogleGenerativeAI(geminiAPIkey);
-    var generationConfig = {
-      stopSequences: [],
-      maxOutputTokens: 200,
-      temperature: 0.9,
-      topP: 0.1,
-      topK: 16,
-    };
-    const model = genAI.getGenerativeModel({ model: "gemini-pro"}, generationConfig);
+    // var generationConfig = {
+    //   stopSequences: [],
+    //   maxOutputTokens: 200,
+    //   temperature: 0.9,
+    //   topP: 0.1,
+    //   topK: 16,
+    // };
+    // const model = genAI.getGenerativeModel({ model: "gemini-pro"}, generationConfig);
+    const model = genAI.getGenerativeModel({ model: "gemini-pro"});
     if (geminiAPIkey=="") {
       alert("請先設定Gemini API Key！");
     }
     window.geminiRequest = async function geminiRequest(textareaId, newTextareaId, type) {
-      let text = "今天我在做運動，";
-      // let text = document.getElementById(textareaId).value;
-      console.log(text);
+      let text = document.getElementById(textareaId).value;
       if (type == "contWrite") {
         let prompt = "這段文字是小說內容，請幫我續寫下去：\n" + text;
-        console.log(prompt);
       }
       if (type == "checkMistake") {
         let prompt = "這段文字是小說內容，請幫我檢查有甚麼錯別字：\n" + text;
