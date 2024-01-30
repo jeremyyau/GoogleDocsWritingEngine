@@ -530,7 +530,9 @@ function addDbCards() {
 function addDbSettings(e) {
   db = getDB();
   sheet = db.getSheetByName("設定");
-  sheet.appendRow([e.parameter.goal,e.parameter.goalAll,e.parameter.freqNum,e.parameter.indents,e.parameter.lines,e.parameter.whitespaceCount,e.parameter.symbolCount,e.parameter.speakLang,e.parameter.geminiAPIkey,e.parameter.openJourneyAPIkey,e.parameter.penanaEmail,e.parameter.penanaPassword]);
+  whitespaceCount = (e.parameter.whitespaceCount==="true");
+  symbolCount = (e.parameter.symbolCount==="true");
+  sheet.appendRow([e.parameter.goal,e.parameter.goalAll,e.parameter.freqNum,e.parameter.indents,e.parameter.lines,whitespaceCount,symbolCount,e.parameter.speakLang,e.parameter.geminiAPIkey,e.parameter.openJourneyAPIkey,e.parameter.penanaEmail,e.parameter.penanaPassword]);
   sheet.deleteRow(1);
   sheet.insertRowAfter(sheet.getLastRow()); 
 }
