@@ -530,7 +530,7 @@ function addDbCards() {
 function addDbSettings(e) {
   db = getDB();
   sheet = db.getSheetByName("設定");
-  sheet.appendRow([e.parameter.goal,e.parameter.goalAll,e.parameter.freqNum,e.parameter.indents,e.parameter.lines,e.parameter.whitespaceCount.checked,e.parameter.symbolCount.checked,e.parameter.speakLang,e.parameter.geminiAPIkey,e.parameter.openJourneyAPIkey,e.parameter.penanaEmail,e.parameter.penanaPassword]);
+  sheet.appendRow([e.parameter.goal,e.parameter.goalAll,e.parameter.freqNum,e.parameter.indents,e.parameter.lines,e.parameter.whitespaceCount,e.parameter.symbolCount,e.parameter.speakLang,e.parameter.geminiAPIkey,e.parameter.openJourneyAPIkey,e.parameter.penanaEmail,e.parameter.penanaPassword]);
   sheet.deleteRow(1);
   sheet.insertRowAfter(sheet.getLastRow()); 
 }
@@ -856,8 +856,16 @@ function setSettings(e) {
   userProperties.setProperty('freqNum', e.parameter.freqNum);
   userProperties.setProperty('indents', e.parameter.indents);
   userProperties.setProperty('lines', e.parameter.lines);
-  userProperties.setProperty('whitespaceCount', e.parameter.whitespaceCount.checked);
-  userProperties.setProperty('symbolCount', e.parameter.symbolCount.checked);
+  if (e.parameter.whitespaceCount == "true") {
+    userProperties.setProperty('whitespaceCount', "true");
+  } else {
+    userProperties.setProperty('whitespaceCount', "false");
+  }
+  if (e.parameter.symbolCount == "true") {
+    userProperties.setProperty('symbolCount', "true");
+  } else {
+    userProperties.setProperty('symbolCount', "false");
+  }
   userProperties.setProperty('speakLang', e.parameter.speakLang);
   userProperties.setProperty('geminiAPIkey', e.parameter.geminiAPIkey);
   userProperties.setProperty('openJourneyAPIkey', e.parameter.openJourneyAPIkey);
