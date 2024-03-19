@@ -69,16 +69,17 @@
                   </div>
                   <? } ?> 
                   <div class="storyCard-back p-4 d-flex flex-column">
-                    <p><a href="<?=books[i]['link']?>" target="_blank" class="card-title h5 text-primary <?if (streamerMode) { ?>placeholder<? } ?>"><?=books[i]["name"]?></a>
-                    <? if (books[i]["status"]=="未連載") { ?>
-                      <span class="badge bg-danger"><?=books[i]["status"]?></span>
-                    <? } else if (books[i]["status"]=="連載中") { ?>
-                      <span class="badge bg-warning"><?=books[i]["status"]?></span>
-                    <? } else if (books[i]["status"]=="已完結") { ?>
-                      <span class="badge bg-success"><?=books[i]["status"]?></span>
-                    <? } else if (books[i]["status"]=="已放棄") { ?>
-                      <span class="badge bg-secondary"><?=books[i]["status"]?></span>
-                    <? } ?>
+                    <p class="text-center"><a href="<?=books[i]['link']?>" target="_blank" class="card-title h5 text-primary <?if (streamerMode) { ?>placeholder<? } ?>"><?=books[i]["name"]?></a></p>
+                    <p>
+                      <? if (books[i]["status"]=="未連載") { ?>
+                        <span class="badge bg-danger"><?=books[i]["status"]?></span>
+                      <? } else if (books[i]["status"]=="連載中") { ?>
+                        <span class="badge bg-warning"><?=books[i]["status"]?></span>
+                      <? } else if (books[i]["status"]=="已完結") { ?>
+                        <span class="badge bg-success"><?=books[i]["status"]?></span>
+                      <? } else if (books[i]["status"]=="已放棄") { ?>
+                        <span class="badge bg-secondary"><?=books[i]["status"]?></span>
+                      <? } ?>
                     </p>
                     <p class="card-text <?if (streamerMode) { ?>placeholder<? } ?>"><?=books[i]["desc"]?></p>
                     <p class="card-text mt-auto">
