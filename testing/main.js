@@ -1014,3 +1014,9 @@ function fetchUrl(url) {
   }
   return null;
 }
+
+function analysisDoc() {
+  var stopMistakes = 0;
+  var usingMe = 0;
+  var sentenceTooLong = 0;
+}
