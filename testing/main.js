@@ -536,7 +536,8 @@ function addDbSettings(e) {
   sheet = db.getSheetByName("設定");
   whitespaceCount = (e.parameter.whitespaceCount==="true");
   symbolCount = (e.parameter.symbolCount==="true");
-  sheet.appendRow([e.parameter.goal,e.parameter.goalAll,e.parameter.freqNum,e.parameter.indents,e.parameter.lines,whitespaceCount,symbolCount,e.parameter.speakLang,e.parameter.geminiAPIkey,e.parameter.openJourneyAPIkey,e.parameter.penanaEmail,e.parameter.penanaPassword]);
+  streamerMode = (e.parameter.streamerMode==="true");
+  sheet.appendRow([e.parameter.goal,e.parameter.goalAll,e.parameter.freqNum,e.parameter.indents,e.parameter.lines,whitespaceCount,symbolCount,e.parameter.speakLang,e.parameter.geminiAPIkey,e.parameter.openJourneyAPIkey,e.parameter.penanaEmail,e.parameter.penanaPassword,streamerMode]);
   sheet.deleteRow(1);
   sheet.insertRowAfter(sheet.getLastRow()); 
 }
@@ -597,7 +598,8 @@ function getDbSettings() {
       userProperties.setProperty('openJourneyAPIkey', values[0][9]);
       userProperties.setProperty('penanaEmail', values[0][10]);
       userProperties.setProperty('penanaPassword', values[0][11]);
-      newSettings.push({"goal":values[0][0]+"","goalAll":values[0][1]+"", "freqNum":values[0][2]+"","indents":values[0][3]+"","lines":values[0][4]+"","whitespaceCount":values[0][5],"symbolCount":values[0][6],"speakLang":values[0][7],"geminiAPIkey":values[0][8],"openJourneyAPIkey":values[0][9],"penanaEmail":values[0][10],"penanaPassword":values[0][11]});
+      userProperties.setProperty('streamerMode', values[0][12]);
+      newSettings.push({"goal":values[0][0]+"","goalAll":values[0][1]+"", "freqNum":values[0][2]+"","indents":values[0][3]+"","lines":values[0][4]+"","whitespaceCount":values[0][5],"symbolCount":values[0][6],"speakLang":values[0][7],"geminiAPIkey":values[0][8],"openJourneyAPIkey":values[0][9],"penanaEmail":values[0][10],"penanaPassword":values[0][11],"streamerMode":values[0][12]});
       return newSettings;
     }
   }
@@ -877,6 +879,11 @@ function setSettings(e) {
   userProperties.setProperty('openJourneyAPIkey', e.parameter.openJourneyAPIkey);
   userProperties.setProperty('penanaEmail', e.parameter.penanaEmail);
   userProperties.setProperty('penanaPassword', e.parameter.penanaPassword);
+  if (e.parameter.streamerMode === "true") {
+    userProperties.setProperty('streamerMode', "true");
+  } else {
+    userProperties.setProperty('streamerMode', "false");
+  }
   addDbSettings(e);
 }
 

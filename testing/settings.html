@@ -57,6 +57,13 @@
             </div>
             <div id="symbolCountHelp" class="form-text">字數統計會把標點符號計算在內</div>
         </div>
+        <div class="col mb-3">
+            <div class="form-check form-switch">
+              <label for="streamerMode" class="form-check-label">🙈截圖模式</label>
+              <input type="checkbox" class="form-check-input" value="true" role="switch" id="streamerMode" name="streamerMode" <?if (getProperty("streamerMode")=="true"){?>checked="checked"<?}?>></option>
+            </div>
+            <div id="streamerModeHelp" class="form-text">隱藏一些重要的書本資訊</div>
+        </div>
       </div>
       <div class="mb-3">
         <label for="speakLang" class="form-label">🗣️朗讀語言</label>
