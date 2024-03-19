@@ -2,18 +2,13 @@
 <html>
   <head>
     <?!= include('style');?>
-    <style>
-      .card:hover .card-img-top {
-        opacity: 0!important;
-      }
-    </style>
     <?!= include('script'); ?>
   </head>
   <body>
     <?!= includeWithCode("header");?>
     <?const books = getProperty("books");
     const bookshelfDisplay = getProperty("bookshelfDisplay");
-    var streamerMode = (getProperty("streamerMode")==="true");?>
+    const streamerMode = (getProperty("streamerMode")==="true");?>
     <div class="container-xxl">
       <header class="lh-1 py-3 d-flex justify-content-center gap-1">
         <h1 class="mb-4">📚我的書櫃</h1>
