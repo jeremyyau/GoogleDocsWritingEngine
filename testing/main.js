@@ -70,7 +70,7 @@ function doGet(e) {
   if (path==null||e.parameter.page=="") {
     path = "index";
   }
-  var response = UrlFetchApp.fetch("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/"+operateMode+"/"+path+".html");
+  var response = fetchUrl("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/"+operateMode+"/"+path+".html");
   var html = HtmlService.createTemplate(response);
   switch(path) {
     case "index":
@@ -113,7 +113,7 @@ function doPost(e) {
   if (path==null||e.parameter.page=="") {
     path = "index";
   }
-  var response = UrlFetchApp.fetch("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/"+operateMode+"/"+path+".html");
+  var response = fetchUrl("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/"+operateMode+"/"+path+".html");
   var html = HtmlService.createTemplate(response);
   switch(e.parameter.actionType) {
     case "setBookshelfDisplay" :
@@ -171,12 +171,12 @@ function getUrl() {
 }
 
 function include(filename) {
-  var response = UrlFetchApp.fetch("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/"+operateMode+"/"+filename+".html");
+  var response = fetchUrl("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/"+operateMode+"/"+filename+".html");
   return HtmlService.createHtmlOutput(response).getContent();
 }
 
 function includeWithCode(filename) {
-  var response = UrlFetchApp.fetch("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/"+operateMode+"/"+filename+".html");
+  var response = fetchUrl("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/"+operateMode+"/"+filename+".html");
   return HtmlService.createTemplate(response).evaluate().getContent();
 }
 
@@ -680,7 +680,7 @@ function exportResult(bookId, selectedPara) {
 
 function frequency_chi(bookId, selectedPara) {
   const segmentUrl = 'https://cdn.jsdelivr.net/npm/segmentit@2.0.3/dist/umd/segmentit.min.js';
-  const response = UrlFetchApp.fetch(segmentUrl);
+  const response = fetchUrl(segmentUrl);
   const jsCode = response.getContentText();
   eval(jsCode);
   const segmentit = Segmentit.useDefault(new Segmentit.Segment());
@@ -963,7 +963,7 @@ function fetchHTML(title, content) {
     password: getProperty("penanaPassword")
   };
 
-  var loginResponse = UrlFetchApp.fetch('https://www.penana.com/login.php', {
+  var loginResponse = fetchUrl('https://www.penana.com/login.php', {
     method: 'post',
     payload: formData,
     followRedirects: false
@@ -986,8 +986,24 @@ function fetchHTML(title, content) {
   }
   storyUrl = books[getProperty("currentBook")]["penanaUrl"];
   storyId = storyUrl.split('story/')[1].split('/')[0];
-  var otherResponse = UrlFetchApp.fetch('https://www.penana.com/write.php?id=' + storyId, params);
+  var otherResponse = fetchUrl('https://www.penana.com/write.php?id=' + storyId, params);
   response = otherResponse.getContentText();
   Logger.log(response);
   return response;
+}
+
+function fetchUrl(url) {
+  var response;
+  var maxRetries = 10;
+  var retries = 0; 
+
+  while (retries < maxRetries) {
+    try {
+      response = UrlFetchApp.fetch(url);
+      return response;
+    } catch (e) {
+      retries++;
+    }
+  }
+  return null;
 }
