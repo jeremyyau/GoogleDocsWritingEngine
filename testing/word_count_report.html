@@ -15,8 +15,12 @@
     for (let i in reportResult) {
       chartData.push([reportResult[i]["heading1"], reportResult[i]["heading1Counts"]]);
       wordCounts += reportResult[i]["heading1Counts"];
-      for (let y in reportResult[i]["heading2PredictTime"]) {
-        totalPredictTime += reportResult[i]["heading2PredictTime"][y];
+      if (reportResult[i]["heading2PredictTime"] == null) {
+        totalPredictTime += reportResult[i]["heading1PredictTime"];
+      } else {
+        for (let y in reportResult[i]["heading2PredictTime"]) {
+          totalPredictTime += reportResult[i]["heading2PredictTime"][y];
+        }
       }
     }
     ?>
