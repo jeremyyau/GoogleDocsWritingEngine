@@ -88,7 +88,7 @@
                     <p class="card-text <?if (streamerMode) { ?>placeholder<? } ?>"><?=books[i]["desc"]?></p>
                     <p class="card-text mt-auto">
                       <? 
-                        if (books[i]["tags"] !== 'undefined') {
+                        if (books[i]["tags"] != null) {
                           if (books[i]["tags"].length != 0) {
                             const tags = books[i]["tags"].split(",");
                             for (let tag of tags) { 
