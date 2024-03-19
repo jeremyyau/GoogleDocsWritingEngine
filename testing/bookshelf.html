@@ -66,7 +66,7 @@
                 <div class="storyCard-body border rounded-4 card-img-overlay">
                   <? if (books[i]["image"]!="") { ?>
                   <div class="storyCard-front h-100">
-                    <img src="<?=books[i]["image"]?>" class="rounded-4 <?if (streamerMode) { ?>placeholder<? } ?>">
+                    <img src="<?=books[i]["image"]?>" class="rounded-4 <?if (invisible) { ?><? } ?>">
                   </div>
                   <? } else { ?>
                   <div class="storyCard-front d-flex justify-content-center align-items-center" style="height:100%;">
