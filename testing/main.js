@@ -96,7 +96,11 @@ function doGet(e) {
     default:
       break;
   }
-  if (e.parameter.actionType=="createDB") {createDB();}
+  if (e.parameter.actionType=="createDB") {
+    if (createDB()) {
+      initialDbData();
+    }
+  }
   if (e.parameter.actionType=="deleteDB") {deleteDB();}
   if (e.parameter.actionType=="setCurBook") {setCurBook(e);}
   var check = html.evaluate().setTitle('Google Docs Writing Engine v0.10.0').setFaviconUrl("https://i.imgur.com/rHgvyHs.png");
