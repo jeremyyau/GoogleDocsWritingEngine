@@ -66,11 +66,11 @@
                 <div class="storyCard-body border rounded-4 card-img-overlay">
                   <? if (books[i]["image"]!="") { ?>
                   <div class="storyCard-front h-100">
-                    <img src="<?=books[i]["image"]?>" class="rounded-4 <?if (invisible) { ?><? } ?>">
+                    <img src="<?=books[i]["image"]?>" class="rounded-4 <?if (streamerMode) { ?>invisible<? } ?>">
                   </div>
                   <? } else { ?>
                   <div class="storyCard-front d-flex justify-content-center align-items-center" style="height:100%;">
-                    <h5><strong><?=books[i]["name"]?></strong></h5>
+                    <h5 class="<?if (streamerMode) { ?>placeholder<? } ?>"><strong><?=books[i]["name"]?></strong></h5>
                   </div>
                   <? } ?> 
                   <div class="storyCard-back p-4 d-flex flex-column">
