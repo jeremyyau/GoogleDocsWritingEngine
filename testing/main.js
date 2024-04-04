@@ -1018,5 +1018,6 @@ function fetchUrl(url) {
 function analysisDoc() {
   var stopMistakes = 0;
   var usingMe = 0;
+  var usingLiu = 0;
   var sentenceTooLong = 0;
 }
