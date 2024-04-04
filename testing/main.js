@@ -970,7 +970,7 @@ function fetchHTML(title, content) {
     password: getProperty("penanaPassword")
   };
 
-  var loginResponse = fetchUrl('https://www.penana.com/login.php', {
+  var loginResponse = UrlFetchApp.fetch('https://www.penana.com/login.php', {
     method: 'post',
     payload: formData,
     followRedirects: false
@@ -993,7 +993,8 @@ function fetchHTML(title, content) {
   }
   storyUrl = books[getProperty("currentBook")]["penanaUrl"];
   storyId = storyUrl.split('story/')[1].split('/')[0];
-  var otherResponse = fetchUrl('https://www.penana.com/write.php?id=' + storyId, params);
+  console.log(storyId);
+  var otherResponse = UrlFetchApp.fetch('https://www.penana.com/write.php?id=' + storyId, params);
   response = otherResponse.getContentText();
   Logger.log(response);
   return response;
