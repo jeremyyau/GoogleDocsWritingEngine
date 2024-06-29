@@ -105,6 +105,7 @@ function doGet(e) {
   if (e.parameter.actionType=="setCurBook") {setCurBook(e);}
   var check = html.evaluate().setTitle('Google Docs Writing Engine v0.10.0').setFaviconUrl("https://i.imgur.com/rHgvyHs.png");
   var show = check.setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+  show.addMetaTag('viewport', 'width=device-width, initial-scale=1');
   return show;
 }
 
@@ -163,6 +164,7 @@ function doPost(e) {
   }
   var check = html.evaluate().setTitle('Google Docs Writing Engine v0.10.0').setFaviconUrl("https://i.imgur.com/rHgvyHs.png");
   var show = check.setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+  show.addMetaTag('viewport', 'width=device-width, initial-scale=1');
   return show;
 }
 
