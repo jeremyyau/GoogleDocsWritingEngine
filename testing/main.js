@@ -464,13 +464,15 @@ function addManuscript() {
 }
 
 function createDB() {
-  if (userProperties.getProperty('dbUrl')==null||userProperties.getProperty('dbUrl')=='') {
-    var newDB = SpreadsheetApp.create("Google Docs Writing Engine數據庫", 1, 1);
-    userProperties.setProperty('dbUrl', newDB.getUrl());
-    console.log("成功建立數據庫！");
-    return true;
-  } else {
-    console.error("數據庫已存在！");
+  if (userProperties != null) {
+    if (userProperties.getProperty('dbUrl')==null||userProperties.getProperty('dbUrl')=='') {
+      var newDB = SpreadsheetApp.create("Google Docs Writing Engine數據庫", 1, 1);
+      userProperties.setProperty('dbUrl', newDB.getUrl());
+      console.log("成功建立數據庫！");
+      return true;
+    } else {
+      console.error("數據庫已存在！");
+    }
   }
   return false;
 }
