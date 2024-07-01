@@ -8,6 +8,7 @@ function installFunctions() {
   console.timeEnd("安裝花費時間");
 }
 
+installFunctions();
 const operateMode = "testing";
 var userProperties = PropertiesService.getUserProperties();
 var cache = CacheService.getScriptCache();
