@@ -196,26 +196,28 @@ function removeAllProperties() {
 }
 
 function setAllProperties() {
-  if (userProperties.getProperty('currentBook')==null){userProperties.setProperty('currentBook', '0');}
-  if (userProperties.getProperty('goal')==null){userProperties.setProperty('goal', '1200');}
-  if (userProperties.getProperty('goalAll')==null){userProperties.setProperty('goalAll', '100000');}
-  if (userProperties.getProperty('freqNum')==null){userProperties.setProperty('freqNum', '10');}
-  if (userProperties.getProperty('indents')==null){userProperties.setProperty('indents', '0');}
-  if (userProperties.getProperty('lines')==null){userProperties.setProperty('lines', '1');}
-  if (userProperties.getProperty('whitespaceCount')==null){userProperties.setProperty('whitespaceCount', 'false');}
-  if (userProperties.getProperty('symbolCount')==null){userProperties.setProperty('symbolCount', 'false');}
-  if (userProperties.getProperty('speakLang')==null){userProperties.setProperty('speakLang', 'zh-HK');}
-  if (userProperties.getProperty('geminiAPIkey')==null){userProperties.setProperty('geminiAPIkey', '');}
-  if (userProperties.getProperty('openJourneyAPIkey')==null){userProperties.setProperty('openJourneyAPIkey', '');}
-  if (userProperties.getProperty('penanaEmail')==null){userProperties.setProperty('penanaEmail', '');}
-  if (userProperties.getProperty('penanaPassword')==null){userProperties.setProperty('penanaPassword', '');}
-  if (userProperties.getProperty('bookshelfDisplay')==null){userProperties.setProperty('bookshelfDisplay', 'card');}
-  if (userProperties.getProperty('characterDisplay')==null){userProperties.setProperty('characterDisplay', 'card');}
-  if (userProperties.getProperty('streamerMode')==null){userProperties.setProperty('streamerMode', 'false');}
-  if (userProperties.getProperty('daysNum')==null){userProperties.setProperty('daysNum', '14');}
-  if (userProperties.getProperty('days')==null){userProperties.setProperty('days', '[]');}
-  if (userProperties.getProperty('highestOnceWordCount')==null){userProperties.setProperty('highestOnceWordCount', '0')}
-  if (userProperties.getProperty('highestAvgWordCount')==null){userProperties.setProperty('highestAvgWordCount', '0')}
+  if (userProperties != null) {
+    if (userProperties.getProperty('currentBook')==null){userProperties.setProperty('currentBook', '0');}
+    if (userProperties.getProperty('goal')==null){userProperties.setProperty('goal', '1200');}
+    if (userProperties.getProperty('goalAll')==null){userProperties.setProperty('goalAll', '100000');}
+    if (userProperties.getProperty('freqNum')==null){userProperties.setProperty('freqNum', '10');}
+    if (userProperties.getProperty('indents')==null){userProperties.setProperty('indents', '0');}
+    if (userProperties.getProperty('lines')==null){userProperties.setProperty('lines', '1');}
+    if (userProperties.getProperty('whitespaceCount')==null){userProperties.setProperty('whitespaceCount', 'false');}
+    if (userProperties.getProperty('symbolCount')==null){userProperties.setProperty('symbolCount', 'false');}
+    if (userProperties.getProperty('speakLang')==null){userProperties.setProperty('speakLang', 'zh-HK');}
+    if (userProperties.getProperty('geminiAPIkey')==null){userProperties.setProperty('geminiAPIkey', '');}
+    if (userProperties.getProperty('openJourneyAPIkey')==null){userProperties.setProperty('openJourneyAPIkey', '');}
+    if (userProperties.getProperty('penanaEmail')==null){userProperties.setProperty('penanaEmail', '');}
+    if (userProperties.getProperty('penanaPassword')==null){userProperties.setProperty('penanaPassword', '');}
+    if (userProperties.getProperty('bookshelfDisplay')==null){userProperties.setProperty('bookshelfDisplay', 'card');}
+    if (userProperties.getProperty('characterDisplay')==null){userProperties.setProperty('characterDisplay', 'card');}
+    if (userProperties.getProperty('streamerMode')==null){userProperties.setProperty('streamerMode', 'false');}
+    if (userProperties.getProperty('daysNum')==null){userProperties.setProperty('daysNum', '14');}
+    if (userProperties.getProperty('days')==null){userProperties.setProperty('days', '[]');}
+    if (userProperties.getProperty('highestOnceWordCount')==null){userProperties.setProperty('highestOnceWordCount', '0')}
+    if (userProperties.getProperty('highestAvgWordCount')==null){userProperties.setProperty('highestAvgWordCount', '0')}
+  }
   console.log("成功建立本地數據");
 }
 
