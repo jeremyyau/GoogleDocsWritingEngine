@@ -30,16 +30,16 @@ function getPara(body) {
 }
 
 function getLevels(para) {
-  let levels = para.map(function(p) {
-    return [DocumentApp.ParagraphHeading.TITLE, 
-            DocumentApp.ParagraphHeading.SUBTITLE, 
-            DocumentApp.ParagraphHeading.HEADING1,
-            DocumentApp.ParagraphHeading.HEADING2,
-            DocumentApp.ParagraphHeading.HEADING3,
-            DocumentApp.ParagraphHeading.HEADING4,
-            DocumentApp.ParagraphHeading.HEADING5,
-            DocumentApp.ParagraphHeading.HEADING6,
-            DocumentApp.ParagraphHeading.NORMAL].indexOf(p.getHeading());
+  let levels = para.map(function (p) {
+    return [DocumentApp.ParagraphHeading.TITLE,
+    DocumentApp.ParagraphHeading.SUBTITLE,
+    DocumentApp.ParagraphHeading.HEADING1,
+    DocumentApp.ParagraphHeading.HEADING2,
+    DocumentApp.ParagraphHeading.HEADING3,
+    DocumentApp.ParagraphHeading.HEADING4,
+    DocumentApp.ParagraphHeading.HEADING5,
+    DocumentApp.ParagraphHeading.HEADING6,
+    DocumentApp.ParagraphHeading.NORMAL].indexOf(p.getHeading());
   });
   console.timeEnd("文件讀取時間");
   return levels;
@@ -60,7 +60,7 @@ function getParagraph(bookId) {
   var paraText = [];
   for (var i = 0; i < para.length; i++) {
     if (levels[i] == 2 && para[i].getText() != "" && para[i].getText() != null) {
-      paraText.push({"index":i,"text":para[i].getText()});
+      paraText.push({ "index": i, "text": para[i].getText() });
     }
   }
   return paraText;
@@ -68,16 +68,16 @@ function getParagraph(bookId) {
 
 function doGet(e) {
   path = e.pathInfo;
-  if (path==null||e.parameter.page=="") {
+  if (path == null || e.parameter.page == "") {
     path = "index";
   }
-  var response = fetchUrl("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/"+operateMode+"/"+path+".html");
+  var response = fetchUrl("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/" + operateMode + "/" + path + ".html");
   var html = HtmlService.createTemplate(response);
-  switch(path) {
+  switch (path) {
     case "index":
-      // toast = [{"img":"https://i.imgur.com/oKLUHRw.png", "title": "交稿提醒", "content": "你未交稿呀，木嘴！"}];
-      // cache.put('toast', JSON.stringify(toast));
-      // break;
+    // toast = [{"img":"https://i.imgur.com/oKLUHRw.png", "title": "交稿提醒", "content": "你未交稿呀，木嘴！"}];
+    // cache.put('toast', JSON.stringify(toast));
+    // break;
     case "bookshelf_edit":
       cache.put('bookId', e.parameter.bookId, 1800);
       break;
@@ -91,19 +91,19 @@ function doGet(e) {
       html.e = e;
       break;
     case "about_me":
-      toast = [{"img":"https://i.imgur.com/oKLUHRw.png", "title": "突發消息", "content": "郭凝輝失去了一切"}, {"img":"https://i.imgur.com/oKLUHRw.png", "title": "突發消息", "content": "郭凝輝的家人證實了這一消息"}];
+      toast = [{ "img": "https://i.imgur.com/oKLUHRw.png", "title": "突發消息", "content": "郭凝輝失去了一切" }, { "img": "https://i.imgur.com/oKLUHRw.png", "title": "突發消息", "content": "郭凝輝的家人證實了這一消息" }];
       cache.put('toast', JSON.stringify(toast));
       break;
     default:
       break;
   }
-  if (e.parameter.actionType=="createDB") {
+  if (e.parameter.actionType == "createDB") {
     if (createDB()) {
       initialDbData();
     }
   }
-  if (e.parameter.actionType=="deleteDB") {deleteDB();}
-  if (e.parameter.actionType=="setCurBook") {setCurBook(e);}
+  if (e.parameter.actionType == "deleteDB") { deleteDB(); }
+  if (e.parameter.actionType == "setCurBook") { setCurBook(e); }
   var check = html.evaluate().setTitle('Google Docs Writing Engine v0.10.0').setFaviconUrl("https://i.imgur.com/rHgvyHs.png");
   var show = check.setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
   show.addMetaTag('viewport', 'width=device-width, initial-scale=1');
@@ -112,13 +112,13 @@ function doGet(e) {
 
 function doPost(e) {
   path = e.pathInfo;
-  if (path==null||e.parameter.page=="") {
+  if (path == null || e.parameter.page == "") {
     path = "index";
   }
-  var response = fetchUrl("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/"+operateMode+"/"+path+".html");
+  var response = fetchUrl("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/" + operateMode + "/" + path + ".html");
   var html = HtmlService.createTemplate(response);
-  switch(e.parameter.actionType) {
-    case "setBookshelfDisplay" :
+  switch (e.parameter.actionType) {
+    case "setBookshelfDisplay":
       setBookshelfDisplay(e);
       break;
     case "addBook":
@@ -133,7 +133,7 @@ function doPost(e) {
     case "deleteAllBooks":
       deleteAllBooks();
       break;
-    case "setCharacterDisplay" :
+    case "setCharacterDisplay":
       setCharacterDisplay(e);
       break;
     case "addCard":
@@ -174,12 +174,12 @@ function getUrl() {
 }
 
 function include(filename) {
-  var response = fetchUrl("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/"+operateMode+"/"+filename+".html");
+  var response = fetchUrl("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/" + operateMode + "/" + filename + ".html");
   return HtmlService.createHtmlOutput(response).getContent();
 }
 
 function includeWithCode(filename) {
-  var response = fetchUrl("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/"+operateMode+"/"+filename+".html");
+  var response = fetchUrl("https://raw.githubusercontent.com/jeremyyau/GoogleDocsWritingEngine/main/" + operateMode + "/" + filename + ".html");
   return HtmlService.createTemplate(response).evaluate().getContent();
 }
 
@@ -197,26 +197,26 @@ function removeAllProperties() {
 
 function setAllProperties() {
   if (userProperties != null) {
-    if (userProperties.getProperty('currentBook')==null){userProperties.setProperty('currentBook', '0');}
-    if (userProperties.getProperty('goal')==null){userProperties.setProperty('goal', '1200');}
-    if (userProperties.getProperty('goalAll')==null){userProperties.setProperty('goalAll', '100000');}
-    if (userProperties.getProperty('freqNum')==null){userProperties.setProperty('freqNum', '10');}
-    if (userProperties.getProperty('indents')==null){userProperties.setProperty('indents', '0');}
-    if (userProperties.getProperty('lines')==null){userProperties.setProperty('lines', '1');}
-    if (userProperties.getProperty('whitespaceCount')==null){userProperties.setProperty('whitespaceCount', 'false');}
-    if (userProperties.getProperty('symbolCount')==null){userProperties.setProperty('symbolCount', 'false');}
-    if (userProperties.getProperty('speakLang')==null){userProperties.setProperty('speakLang', 'zh-HK');}
-    if (userProperties.getProperty('geminiAPIkey')==null){userProperties.setProperty('geminiAPIkey', '');}
-    if (userProperties.getProperty('openJourneyAPIkey')==null){userProperties.setProperty('openJourneyAPIkey', '');}
-    if (userProperties.getProperty('penanaEmail')==null){userProperties.setProperty('penanaEmail', '');}
-    if (userProperties.getProperty('penanaPassword')==null){userProperties.setProperty('penanaPassword', '');}
-    if (userProperties.getProperty('bookshelfDisplay')==null){userProperties.setProperty('bookshelfDisplay', 'card');}
-    if (userProperties.getProperty('characterDisplay')==null){userProperties.setProperty('characterDisplay', 'card');}
-    if (userProperties.getProperty('streamerMode')==null){userProperties.setProperty('streamerMode', 'false');}
-    if (userProperties.getProperty('daysNum')==null){userProperties.setProperty('daysNum', '14');}
-    if (userProperties.getProperty('days')==null){userProperties.setProperty('days', '[]');}
-    if (userProperties.getProperty('highestOnceWordCount')==null){userProperties.setProperty('highestOnceWordCount', '0')}
-    if (userProperties.getProperty('highestAvgWordCount')==null){userProperties.setProperty('highestAvgWordCount', '0')}
+    if (userProperties.getProperty('currentBook') == null) { userProperties.setProperty('currentBook', '0'); }
+    if (userProperties.getProperty('goal') == null) { userProperties.setProperty('goal', '1200'); }
+    if (userProperties.getProperty('goalAll') == null) { userProperties.setProperty('goalAll', '100000'); }
+    if (userProperties.getProperty('freqNum') == null) { userProperties.setProperty('freqNum', '10'); }
+    if (userProperties.getProperty('indents') == null) { userProperties.setProperty('indents', '0'); }
+    if (userProperties.getProperty('lines') == null) { userProperties.setProperty('lines', '1'); }
+    if (userProperties.getProperty('whitespaceCount') == null) { userProperties.setProperty('whitespaceCount', 'false'); }
+    if (userProperties.getProperty('symbolCount') == null) { userProperties.setProperty('symbolCount', 'false'); }
+    if (userProperties.getProperty('speakLang') == null) { userProperties.setProperty('speakLang', 'zh-HK'); }
+    if (userProperties.getProperty('geminiAPIkey') == null) { userProperties.setProperty('geminiAPIkey', ''); }
+    if (userProperties.getProperty('openJourneyAPIkey') == null) { userProperties.setProperty('openJourneyAPIkey', ''); }
+    if (userProperties.getProperty('penanaEmail') == null) { userProperties.setProperty('penanaEmail', ''); }
+    if (userProperties.getProperty('penanaPassword') == null) { userProperties.setProperty('penanaPassword', ''); }
+    if (userProperties.getProperty('bookshelfDisplay') == null) { userProperties.setProperty('bookshelfDisplay', 'card'); }
+    if (userProperties.getProperty('characterDisplay') == null) { userProperties.setProperty('characterDisplay', 'card'); }
+    if (userProperties.getProperty('streamerMode') == null) { userProperties.setProperty('streamerMode', 'false'); }
+    if (userProperties.getProperty('daysNum') == null) { userProperties.setProperty('daysNum', '14'); }
+    if (userProperties.getProperty('days') == null) { userProperties.setProperty('days', '[]'); }
+    if (userProperties.getProperty('highestOnceWordCount') == null) { userProperties.setProperty('highestOnceWordCount', '0') }
+    if (userProperties.getProperty('highestAvgWordCount') == null) { userProperties.setProperty('highestAvgWordCount', '0') }
   }
   console.log("成功建立本地數據");
 }
@@ -227,12 +227,12 @@ function setProperty(propertyName) {
 
 function getProperty(propertyName) {
   var property;
-  if (!(['books','cards','days'].includes(propertyName))) {
+  if (!(['books', 'cards', 'days'].includes(propertyName))) {
     property = userProperties.getProperty(propertyName);
   } else {
-    if (propertyName=="books") {property = getDbBooks();}
-    if (propertyName=="cards") {property = getDbCards();}
-    if (propertyName=="days") {property = JSON.parse(userProperties.getProperty(propertyName));}
+    if (propertyName == "books") { property = getDbBooks(); }
+    if (propertyName == "cards") { property = getDbCards(); }
+    if (propertyName == "days") { property = JSON.parse(userProperties.getProperty(propertyName)); }
   }
   return property;
 }
@@ -269,7 +269,7 @@ function addBook(e) {
   } else {
     newGoalAll = getProperty("goalAll");
   }
-  sheet.appendRow([e.parameter.image,newBookName,e.parameter.desc,e.parameter.bookUrl,newGoal,newGoalAll,e.parameter.tags,e.parameter.status,e.parameter.penanaUrl]);
+  sheet.appendRow([e.parameter.image, newBookName, e.parameter.desc, e.parameter.bookUrl, newGoal, newGoalAll, e.parameter.tags, e.parameter.status, e.parameter.penanaUrl]);
   sheet.insertRowAfter(sheet.getLastRow());
   console.log("成功新增書本！");
 }
@@ -277,34 +277,34 @@ function addBook(e) {
 function editBook(e) {
   db = getDB();
   sheet = db.getSheetByName("書本");
-  sheet.getRange(parseInt(e.parameter.bookId)+1,1).setValue(e.parameter.image);
+  sheet.getRange(parseInt(e.parameter.bookId) + 1, 1).setValue(e.parameter.image);
   if (e.parameter.bookName != "") {
-    sheet.getRange(parseInt(e.parameter.bookId)+1,2).setValue(e.parameter.bookName);
+    sheet.getRange(parseInt(e.parameter.bookId) + 1, 2).setValue(e.parameter.bookName);
   } else {
-    sheet.getRange(parseInt(e.parameter.bookId)+1,2).setValue(DocumentApp.openByUrl(e.parameter.bookUrl).getName());
+    sheet.getRange(parseInt(e.parameter.bookId) + 1, 2).setValue(DocumentApp.openByUrl(e.parameter.bookUrl).getName());
   }
-  sheet.getRange(parseInt(e.parameter.bookId)+1,3).setValue(e.parameter.desc);
-  sheet.getRange(parseInt(e.parameter.bookId)+1,4).setValue(e.parameter.bookUrl);
+  sheet.getRange(parseInt(e.parameter.bookId) + 1, 3).setValue(e.parameter.desc);
+  sheet.getRange(parseInt(e.parameter.bookId) + 1, 4).setValue(e.parameter.bookUrl);
   if (e.parameter.goal != "") {
-    sheet.getRange(parseInt(e.parameter.bookId)+1,5).setValue(e.parameter.goal);
+    sheet.getRange(parseInt(e.parameter.bookId) + 1, 5).setValue(e.parameter.goal);
   } else {
-    sheet.getRange(parseInt(e.parameter.bookId)+1,5).setValue(goal);
+    sheet.getRange(parseInt(e.parameter.bookId) + 1, 5).setValue(goal);
   }
   if (e.parameter.goalAll != "") {
-    sheet.getRange(parseInt(e.parameter.bookId)+1,6).setValue(e.parameter.goalAll);
+    sheet.getRange(parseInt(e.parameter.bookId) + 1, 6).setValue(e.parameter.goalAll);
   } else {
-    sheet.getRange(parseInt(e.parameter.bookId)+1,6).setValue(goalAll);
+    sheet.getRange(parseInt(e.parameter.bookId) + 1, 6).setValue(goalAll);
   }
-  sheet.getRange(parseInt(e.parameter.bookId)+1,7).setValue(e.parameter.tags);
-  sheet.getRange(parseInt(e.parameter.bookId)+1,8).setValue(e.parameter.status);
-  sheet.getRange(parseInt(e.parameter.bookId)+1,9).setValue(e.parameter.penanaUrl);
+  sheet.getRange(parseInt(e.parameter.bookId) + 1, 7).setValue(e.parameter.tags);
+  sheet.getRange(parseInt(e.parameter.bookId) + 1, 8).setValue(e.parameter.status);
+  sheet.getRange(parseInt(e.parameter.bookId) + 1, 9).setValue(e.parameter.penanaUrl);
   console.log("成功編輯書本！");
 }
 
 function deleteBook(e) {
   db = getDB();
   sheet = db.getSheetByName("書本");
-  sheet.deleteRow(parseInt(e.parameter.bookId)+1);
+  sheet.deleteRow(parseInt(e.parameter.bookId) + 1);
   sheet.insertRowAfter(sheet.getLastRow());
   console.log("成功刪除書本！");
 }
@@ -334,8 +334,8 @@ function getHeading(para, levels) {
   let heading2Counts = 0;
   let heading1PredictTime = 0;
   let heading2PredictTime = 0;
-  let whitespaceCount = (getProperty('whitespaceCount')==="true");
-  let symbolCount = (getProperty('symbolCount')==="true");
+  let whitespaceCount = (getProperty('whitespaceCount') === "true");
+  let symbolCount = (getProperty('symbolCount') === "true");
   let text;
   console.time("字數統計時間");
   for (let i in para) {
@@ -353,7 +353,7 @@ function getHeading(para, levels) {
         heading1PredictTime = 0;
         heading2PredictTime = 0;
       }
-      headingList.push({"heading1": para[i].getText()});
+      headingList.push({ "heading1": para[i].getText() });
       currentHeading++;
     }
     if (levels[i] == 3 && para[i].getText() != "" && para[i].getText() != null) {
@@ -380,8 +380,8 @@ function getHeading(para, levels) {
     }
     if (levels[i] == 8 && para[i].getText() != "" && para[i].getText() != null && currentHeading != -1) {
       text = para[i].getText();
-      if (!whitespaceCount) {text = text.trim();}
-      if (!symbolCount) {text = text.replace(/[\（\）。，「」『』《》？：；…、！—～＄,$-.，！。？、【】]/g, " ");}
+      if (!whitespaceCount) { text = text.trim(); }
+      if (!symbolCount) { text = text.replace(/[\（\）。，「」『』《》？：；…、！—～＄,$-.，！。？、【】]/g, " "); }
       eng = text.match(/[A-Za-z0-9]+/gi);
       chi = text.replace(/[\sA-Za-z0-9]/gi, "");
       chi = chi ? chi.length : 0;
@@ -405,11 +405,11 @@ function getHeading(para, levels) {
 }
 
 function wordCount(text) {
-  let whitespaceCount = (getProperty('whitespaceCount')==="true");
-  let symbolCount = (getProperty('symbolCount')==="true");
+  let whitespaceCount = (getProperty('whitespaceCount') === "true");
+  let symbolCount = (getProperty('symbolCount') === "true");
   let temtext = text;
-  if (!whitespaceCount) {temtext = temtext.trim();}
-  if (!symbolCount) {temtext = temtext.replace(/[\（\）。，「」『』？：；…、！—～＄,$-.]/gi, " ");}
+  if (!whitespaceCount) { temtext = temtext.trim(); }
+  if (!symbolCount) { temtext = temtext.replace(/[\（\）。，「」『』？：；…、！—～＄,$-.]/gi, " "); }
   let eng = temtext.match(/[A-Za-z0-9]+/gi);
   let chi = temtext.replace(/[\sA-Za-z0-9]/gi, "");
   chi = chi ? chi.length : 0;
@@ -423,8 +423,8 @@ function predictTime(wordCount) {
   if (count > 0) {
     time++;
   }
-  count-=450;
-  for (i=count;i>=0;i-=300) {
+  count -= 450;
+  for (i = count; i >= 0; i -= 300) {
     time++;
   }
   return time;
@@ -439,10 +439,10 @@ function addDay() {
       wordCounts += reportResult[x]["heading1Counts"];
     }
   }
-  if (days.length==getProperty("daysNum")) {
+  if (days.length == getProperty("daysNum")) {
     days.splice(0, 1);
   }
-  days.push({"year": newDate.getFullYear(), "month": month = newDate.getMonth()+1, "date":newDate.getDate(),"wordCount":wordCounts});
+  days.push({ "year": newDate.getFullYear(), "month": month = newDate.getMonth() + 1, "date": newDate.getDate(), "wordCount": wordCounts });
   userProperties.setProperty('days', JSON.stringify(days));
 }
 
@@ -458,14 +458,14 @@ function deleteAllDays() {
 
 function addManuscript() {
   for (let i in books) {
-    
+
   }
   userProperties.setProperty('manuscript', JSON.stringify(manuscript));
 }
 
 function createDB() {
   if (userProperties != null) {
-    if (userProperties.getProperty('dbUrl')==null||userProperties.getProperty('dbUrl')=='') {
+    if (userProperties.getProperty('dbUrl') == null || userProperties.getProperty('dbUrl') == '') {
       var newDB = SpreadsheetApp.create("Google Docs Writing Engine數據庫", 1, 1);
       userProperties.setProperty('dbUrl', newDB.getUrl());
       console.log("成功建立數據庫！");
@@ -490,7 +490,7 @@ function deleteDB() {
 
 function getDB() {
   url = userProperties.getProperty('dbUrl');
-  if (url!=""&&url!=null) {
+  if (url != "" && url != null) {
     return SpreadsheetApp.openByUrl(url);
   }
   return;
@@ -498,22 +498,22 @@ function getDB() {
 
 function initialDbData() {
   db = getDB();
-  if (db!=null) {
+  if (db != null) {
     sheet1 = db.getSheets()[0];
-    if (db.getSheetByName("書本")==null) {
+    if (db.getSheetByName("書本") == null) {
       db.insertSheet('書本');
     }
-    if (db.getSheetByName("角色卡")==null) {
+    if (db.getSheetByName("角色卡") == null) {
       db.insertSheet('角色卡');
     }
-    if (db.getSheetByName("設定")==null) {
+    if (db.getSheetByName("設定") == null) {
       db.insertSheet('設定');
     }
-    if (sheet1!=null) {
+    if (sheet1 != null) {
       db.deleteSheet(sheet1);
     }
     sheet = db.getSheetByName("設定");
-    sheet.appendRow([userProperties.getProperty('goal'),userProperties.getProperty('goalAll'),userProperties.getProperty('freqNum'),userProperties.getProperty('indents'),userProperties.getProperty('lines'),userProperties.getProperty('whitespaceCount'),userProperties.getProperty('symbolCount'),userProperties.getProperty('speakLang'),userProperties.getProperty('geminiAPIkey'),userProperties.getProperty('openJourneyAPIkey'),userProperties.getProperty('penanaEmail'),userProperties.getProperty('penanaPassword')]);
+    sheet.appendRow([userProperties.getProperty('goal'), userProperties.getProperty('goalAll'), userProperties.getProperty('freqNum'), userProperties.getProperty('indents'), userProperties.getProperty('lines'), userProperties.getProperty('whitespaceCount'), userProperties.getProperty('symbolCount'), userProperties.getProperty('speakLang'), userProperties.getProperty('geminiAPIkey'), userProperties.getProperty('openJourneyAPIkey'), userProperties.getProperty('penanaEmail'), userProperties.getProperty('penanaPassword')]);
     console.log("數據初始化完成！");
   } else {
     console.error("數據庫不存在！");
@@ -523,8 +523,8 @@ function initialDbData() {
 function addDbBooks() {
   db = getDB();
   sheet = db.getSheetByName("書本");
-  for (i=0;i<books.length;i++) {
-    sheet.appendRow([books[i]["image"],books[i]["name"],books[i]["desc"],books[i]["link"],books[i]["goal"],books[i]["goalAll"]]);
+  for (i = 0; i < books.length; i++) {
+    sheet.appendRow([books[i]["image"], books[i]["name"], books[i]["desc"], books[i]["link"], books[i]["goal"], books[i]["goalAll"]]);
     sheet.insertRowAfter(sheet.getLastRow());
   }
 }
@@ -532,8 +532,8 @@ function addDbBooks() {
 function addDbCards() {
   db = getDB();
   sheet = db.getSheetByName("角色卡");
-  for (i=0;i<cards.length;i++) {
-    sheet.appendRow([cards[i]["image"],cards[i]["type"],cards[i]["name"],cards[i]["gender"],cards[i]["desc"]]);
+  for (i = 0; i < cards.length; i++) {
+    sheet.appendRow([cards[i]["image"], cards[i]["type"], cards[i]["name"], cards[i]["gender"], cards[i]["desc"]]);
     sheet.insertRowAfter(sheet.getLastRow());
   }
 }
@@ -541,24 +541,24 @@ function addDbCards() {
 function addDbSettings(e) {
   db = getDB();
   sheet = db.getSheetByName("設定");
-  whitespaceCount = (e.parameter.whitespaceCount==="true");
-  symbolCount = (e.parameter.symbolCount==="true");
-  streamerMode = (e.parameter.streamerMode==="true");
-  sheet.appendRow([e.parameter.goal,e.parameter.goalAll,e.parameter.freqNum,e.parameter.indents,e.parameter.lines,whitespaceCount,symbolCount,e.parameter.speakLang,e.parameter.geminiAPIkey,e.parameter.openJourneyAPIkey,e.parameter.penanaEmail,e.parameter.penanaPassword,streamerMode]);
+  whitespaceCount = (e.parameter.whitespaceCount === "true");
+  symbolCount = (e.parameter.symbolCount === "true");
+  streamerMode = (e.parameter.streamerMode === "true");
+  sheet.appendRow([e.parameter.goal, e.parameter.goalAll, e.parameter.freqNum, e.parameter.indents, e.parameter.lines, whitespaceCount, symbolCount, e.parameter.speakLang, e.parameter.geminiAPIkey, e.parameter.openJourneyAPIkey, e.parameter.penanaEmail, e.parameter.penanaPassword, streamerMode]);
   sheet.deleteRow(1);
-  sheet.insertRowAfter(sheet.getLastRow()); 
+  sheet.insertRowAfter(sheet.getLastRow());
 }
 
 function getDbBooks() {
   db = getDB();
-  if (db!=null) {
+  if (db != null) {
     sheet = db.getSheetByName("書本");
-    if (sheet!=null) {
+    if (sheet != null) {
       let newBooks = [];
       var range = sheet.getDataRange();
       var values = range.getValues();
       for (var i = 0; i < values.length; i++) {
-        newBooks.push({"image":values[i][0],"name":values[i][1], "desc":values[i][2],"link":values[i][3],"goal":values[i][4],"goalAll":values[i][5],"tags":values[i][6],"status":values[i][7],"penanaUrl":values[i][8]});
+        newBooks.push({ "image": values[i][0], "name": values[i][1], "desc": values[i][2], "link": values[i][3], "goal": values[i][4], "goalAll": values[i][5], "tags": values[i][6], "status": values[i][7], "penanaUrl": values[i][8] });
       }
       books = newBooks;
       return books;
@@ -569,14 +569,14 @@ function getDbBooks() {
 
 function getDbCards() {
   db = getDB();
-  if (db!=null) {
+  if (db != null) {
     sheet = db.getSheetByName("角色卡");
-    if (sheet!=null) {
+    if (sheet != null) {
       let newCards = [];
       var range = sheet.getDataRange();
       var values = range.getValues();
       for (var i = 0; i < values.length; i++) {
-        newCards.push({"image":values[i][0],"type":values[i][1], "name":values[i][2],"gender":values[i][3],"desc":values[i][4]});
+        newCards.push({ "image": values[i][0], "type": values[i][1], "name": values[i][2], "gender": values[i][3], "desc": values[i][4] });
       }
       cards = newCards;
       return cards;
@@ -587,17 +587,17 @@ function getDbCards() {
 
 function getDbSettings() {
   db = getDB();
-  if (db!=null) {
+  if (db != null) {
     sheet = db.getSheetByName("設定");
-    if (sheet!=null) {
+    if (sheet != null) {
       let newSettings = [];
       var range = sheet.getDataRange();
       var values = range.getValues();
-      userProperties.setProperty('goal', values[0][0]+"");
-      userProperties.setProperty('goalAll', values[0][1]+"");
-      userProperties.setProperty('freqNum', values[0][2]+"");
-      userProperties.setProperty('indents', values[0][3]+"");
-      userProperties.setProperty('lines', values[0][4]+"");
+      userProperties.setProperty('goal', values[0][0] + "");
+      userProperties.setProperty('goalAll', values[0][1] + "");
+      userProperties.setProperty('freqNum', values[0][2] + "");
+      userProperties.setProperty('indents', values[0][3] + "");
+      userProperties.setProperty('lines', values[0][4] + "");
       userProperties.setProperty('whitespaceCount', values[0][5]);
       userProperties.setProperty('symbolCount', values[0][6]);
       userProperties.setProperty('speakLang', values[0][7]);
@@ -606,7 +606,7 @@ function getDbSettings() {
       userProperties.setProperty('penanaEmail', values[0][10]);
       userProperties.setProperty('penanaPassword', values[0][11]);
       userProperties.setProperty('streamerMode', values[0][12]);
-      newSettings.push({"goal":values[0][0]+"","goalAll":values[0][1]+"", "freqNum":values[0][2]+"","indents":values[0][3]+"","lines":values[0][4]+"","whitespaceCount":values[0][5],"symbolCount":values[0][6],"speakLang":values[0][7],"geminiAPIkey":values[0][8],"openJourneyAPIkey":values[0][9],"penanaEmail":values[0][10],"penanaPassword":values[0][11],"streamerMode":values[0][12]});
+      newSettings.push({ "goal": values[0][0] + "", "goalAll": values[0][1] + "", "freqNum": values[0][2] + "", "indents": values[0][3] + "", "lines": values[0][4] + "", "whitespaceCount": values[0][5], "symbolCount": values[0][6], "speakLang": values[0][7], "geminiAPIkey": values[0][8], "openJourneyAPIkey": values[0][9], "penanaEmail": values[0][10], "penanaPassword": values[0][11], "streamerMode": values[0][12] });
       return newSettings;
     }
   }
@@ -622,7 +622,7 @@ function exportResult(bookId, selectedPara) {
   selectedPara = selectedPara.map(Number);
   bookName = DocumentApp.openByUrl(books[bookId]["link"]).getName();
   let body = getDocument(bookId);
-  if (db.getSheetByName(bookName)==null) {
+  if (db.getSheetByName(bookName) == null) {
     db.insertSheet(bookName);
   }
   sheet = db.getSheetByName(bookName);
@@ -636,13 +636,13 @@ function exportResult(bookId, selectedPara) {
     if (levels[i] == 2 && para[i].getText() != "" && para[i].getText() != null) {
       isGreaterThanAll = true;
       if (selectedPara.includes(i)) {
-        paragraphs.push({"heading1": para[i].getText()});
+        paragraphs.push({ "heading1": para[i].getText() });
         currentHeading++;
         currentHeading2 = 0;
       } else {
         for (let k in selectedPara) {
           if (selectedPara[k] > i) {
-            i = selectedPara[k]-1;
+            i = selectedPara[k] - 1;
             isGreaterThanAll = false;
             break;
           }
@@ -656,25 +656,25 @@ function exportResult(bookId, selectedPara) {
     if (levels[i] == 3 && para[i].getText() != "" && para[i].getText() != null) {
       if (currentHeading != -1) {
         if (paragraphs[currentHeading]["heading2"] == null) {
-          paragraphs[currentHeading]["heading2"] = [{"title": [para[i].getText()], "content": []}];
+          paragraphs[currentHeading]["heading2"] = [{ "title": [para[i].getText()], "content": [] }];
         } else {
-          paragraphs[currentHeading]["heading2"].push({"title": [para[i].getText()], "content": []});
+          paragraphs[currentHeading]["heading2"].push({ "title": [para[i].getText()], "content": [] });
           currentHeading2++;
         }
       }
     }
     if (levels[i] == 8 && para[i].getText() != null) {
       if (currentHeading != -1) {
-        if (paragraphs[currentHeading]["heading2"]===undefined) {
-          if (paragraphs[currentHeading]["content"]==null) {
-            if (para[i].getText()!="") {
+        if (paragraphs[currentHeading]["heading2"] === undefined) {
+          if (paragraphs[currentHeading]["content"] == null) {
+            if (para[i].getText() != "") {
               paragraphs[currentHeading]["content"] = [para[i].getText()];
             }
           } else {
             paragraphs[currentHeading]["content"].push(para[i].getText());
           }
         } else {
-          if (!(paragraphs[currentHeading]["heading2"][currentHeading2]["content"].length == 0 && para[i].getText()=="")) {
+          if (!(paragraphs[currentHeading]["heading2"][currentHeading2]["content"].length == 0 && para[i].getText() == "")) {
             paragraphs[currentHeading]["heading2"][currentHeading2]["content"].push(para[i].getText());
           }
         }
@@ -712,13 +712,13 @@ function frequency_chi(bookId, selectedPara) {
     if (levels[i] == 2 && para[i].getText() != "" && para[i].getText() != null) {
       isGreaterThanAll = true;
       if (selectedPara.includes(i)) {
-        paragraphs.push({"heading1": para[i].getText()});
+        paragraphs.push({ "heading1": para[i].getText() });
         currentHeading++;
         currentHeading2 = 0;
       } else {
         for (let k in selectedPara) {
           if (selectedPara[k] > i) {
-            i = selectedPara[k]-1;
+            i = selectedPara[k] - 1;
             isGreaterThanAll = false;
             break;
           }
@@ -733,18 +733,18 @@ function frequency_chi(bookId, selectedPara) {
     if (levels[i] == 3 && para[i].getText() != "" && para[i].getText() != null) {
       if (currentHeading != -1) {
         if (paragraphs[currentHeading]["heading2"] == null) {
-          paragraphs[currentHeading]["heading2"] = [{"title": [para[i].getText()], "content": []}];
+          paragraphs[currentHeading]["heading2"] = [{ "title": [para[i].getText()], "content": [] }];
         } else {
-          paragraphs[currentHeading]["heading2"].push({"title": [para[i].getText()], "content": []});
+          paragraphs[currentHeading]["heading2"].push({ "title": [para[i].getText()], "content": [] });
           currentHeading2++;
         }
       }
     }
     if (levels[i] == 8 && para[i].getText() != null) {
       if (currentHeading != -1) {
-        if (paragraphs[currentHeading]["heading2"]===undefined) {
-          if (paragraphs[currentHeading]["content"]==null) {
-            if (para[i].getText()!="") {
+        if (paragraphs[currentHeading]["heading2"] === undefined) {
+          if (paragraphs[currentHeading]["content"] == null) {
+            if (para[i].getText() != "") {
               paragraphs[currentHeading]["content"] = [para[i].getText()];
               freqList = freqList.concat(segmentit.doSegment(para[i].getText()));
             }
@@ -753,7 +753,7 @@ function frequency_chi(bookId, selectedPara) {
             freqList = freqList.concat(segmentit.doSegment(para[i].getText()));
           }
         } else {
-          if (!(paragraphs[currentHeading]["heading2"][currentHeading2]["content"].length == 0 && para[i].getText()=="")) {
+          if (!(paragraphs[currentHeading]["heading2"][currentHeading2]["content"].length == 0 && para[i].getText() == "")) {
             paragraphs[currentHeading]["heading2"][currentHeading2]["content"].push(para[i].getText());
             freqList = freqList.concat(segmentit.doSegment(para[i].getText()));
           }
@@ -768,8 +768,8 @@ function frequency_chi(bookId, selectedPara) {
     countRank[key] = (countRank[key] || 0) + 1;
   });
   countRank = Object.entries(countRank)
-  .sort((a, b) => b[1] - a[1])
-  .map(entry => ({ word: entry[0], count: entry[1] }));
+    .sort((a, b) => b[1] - a[1])
+    .map(entry => ({ word: entry[0], count: entry[1] }));
   console.timeEnd("頻率分析時間");
   return countRank;
 }
@@ -781,13 +781,13 @@ function frequency_eng(bookId) {
   let para = getPara(body);
   let levels = getLevels(para);
   var paraText = para.map(function (p) {
-    if (p.getText()==p.getLinkUrl()) {
+    if (p.getText() == p.getLinkUrl()) {
       return;
     }
     let temtext = p.getText();
     eng = temtext.match(/[A-Za-z]+/gi);
-    if (eng!=null) {
-      if (blacklist.some(r=> eng.indexOf(r) >= 0)) {
+    if (eng != null) {
+      if (blacklist.some(r => eng.indexOf(r) >= 0)) {
         return;
       }
     }
@@ -811,13 +811,13 @@ function addCard(e) {
   if (e.parameter.image != "") {
     newImage = e.parameter.image;
   } else {
-    if (e.parameter.gender!="女性") {
+    if (e.parameter.gender != "女性") {
       newImage = "https://www.w3schools.com/howto/img_avatar.png";
     } else {
       newImage = "https://www.w3schools.com/howto/img_avatar2.png";
     }
   }
-  sheet.appendRow([newImage,e.parameter.type,e.parameter.name,e.parameter.gender,e.parameter.desc]);
+  sheet.appendRow([newImage, e.parameter.type, e.parameter.name, e.parameter.gender, e.parameter.desc]);
   sheet.insertRowAfter(sheet.getLastRow());
   console.log("成功新增角色卡！");
 }
@@ -826,25 +826,25 @@ function editCard(e) {
   db = getDB();
   sheet = db.getSheetByName("角色卡");
   if (e.parameter.image != "") {
-    sheet.getRange(parseInt(e.parameter.cardId)+1,1).setValue(e.parameter.image);
+    sheet.getRange(parseInt(e.parameter.cardId) + 1, 1).setValue(e.parameter.image);
   } else {
-    if (e.parameter.gender!="女性") {
-      sheet.getRange(parseInt(e.parameter.cardId)+1,1).setValue("https://www.w3schools.com/howto/img_avatar.png");
+    if (e.parameter.gender != "女性") {
+      sheet.getRange(parseInt(e.parameter.cardId) + 1, 1).setValue("https://www.w3schools.com/howto/img_avatar.png");
     } else {
-      sheet.getRange(parseInt(e.parameter.cardId)+1,1).setValue("https://www.w3schools.com/howto/img_avatar2.png");
+      sheet.getRange(parseInt(e.parameter.cardId) + 1, 1).setValue("https://www.w3schools.com/howto/img_avatar2.png");
     }
   }
-  sheet.getRange(parseInt(e.parameter.cardId)+1,2).setValue(e.parameter.type);
-  sheet.getRange(parseInt(e.parameter.cardId)+1,3).setValue(e.parameter.name);
-  sheet.getRange(parseInt(e.parameter.cardId)+1,4).setValue(e.parameter.gender);
-  sheet.getRange(parseInt(e.parameter.cardId)+1,5).setValue(e.parameter.desc);
+  sheet.getRange(parseInt(e.parameter.cardId) + 1, 2).setValue(e.parameter.type);
+  sheet.getRange(parseInt(e.parameter.cardId) + 1, 3).setValue(e.parameter.name);
+  sheet.getRange(parseInt(e.parameter.cardId) + 1, 4).setValue(e.parameter.gender);
+  sheet.getRange(parseInt(e.parameter.cardId) + 1, 5).setValue(e.parameter.desc);
   console.log("成功編輯角色卡！");
 }
 
 function deleteCard(e) {
   db = getDB();
   sheet = db.getSheetByName("角色卡");
-  sheet.deleteRow(parseInt(e.parameter.cardId)+1);
+  sheet.deleteRow(parseInt(e.parameter.cardId) + 1);
   sheet.insertRowAfter(sheet.getLastRow());
   console.log("成功刪除角色卡！");
 }
@@ -903,7 +903,7 @@ function deleteAllSettings() {
 
 function deleteAllData() {
   var triggers = ScriptApp.getProjectTriggers();
-  if (triggers.length!=0) {
+  if (triggers.length != 0) {
     ScriptApp.deleteTrigger(triggers[0]);
     console.log("已刪除Trigger");
   }
@@ -924,15 +924,15 @@ function resetAllData() {
 
 function createTimeDrivenTriggers() {
   var triggers = ScriptApp.getProjectTriggers();
-  if (triggers.length!=1) {
-    const createTrigger = ([hour, minute])=>
-    ScriptApp.newTrigger("addDay")
-    .timeBased()
-    .atHour(hour)
-    .nearMinute(minute)
-    .everyDays(1) 
-    .create();
-    [[0,0]].forEach(createTrigger);
+  if (triggers.length != 1) {
+    const createTrigger = ([hour, minute]) =>
+      ScriptApp.newTrigger("addDay")
+        .timeBased()
+        .atHour(hour)
+        .nearMinute(minute)
+        .everyDays(1)
+        .create();
+    [[0, 0]].forEach(createTrigger);
     console.log("成功建立TimeDrivenTrigger！");
   } else {
     console.error("TimeDrivenTrigger已存在！");
@@ -941,7 +941,7 @@ function createTimeDrivenTriggers() {
 
 function createCalendar() {
   var calendar = CalendarApp.createCalendar("GoogleDocsWritingEngine");
-Logger.log('Created the calendar "%s", with the ID "%s".',
+  Logger.log('Created the calendar "%s", with the ID "%s".',
     calendar.getName(), calendar.getId());
 }
 
@@ -949,7 +949,7 @@ function createOneOff(bookName, id, datetime) {
   var event = CalendarApp.getCalendarById(id).createEvent(bookName,
     new Date(datetime),
     new Date(datetime));
-Logger.log('Event ID: ' + event.getId());
+  Logger.log('Event ID: ' + event.getId());
 }
 
 function createLongTerm(bookName, id, datetime, endDate) {
@@ -957,15 +957,15 @@ function createLongTerm(bookName, id, datetime, endDate) {
     new Date(datetime),
     new Date(datetime),
     CalendarApp.newRecurrence().addWeeklyRule()
-        .onlyOnWeekdays([CalendarApp.Weekday.TUESDAY, CalendarApp.Weekday.THURSDAY])
-        .until(new Date(endDate)));
+      .onlyOnWeekdays([CalendarApp.Weekday.TUESDAY, CalendarApp.Weekday.THURSDAY])
+      .until(new Date(endDate)));
   Logger.log('Event Series ID: ' + eventSeries.getId());
 }
 
 function fetchHTML(title, content) {
   splitAccording = "\n";
 
-  for (i=0;i<getProperty("indents").length;i++) {
+  for (i = 0; i < getProperty("indents").length; i++) {
     splitAccording += "\n";
   }
 
@@ -1010,7 +1010,7 @@ function fetchHTML(title, content) {
 function fetchUrl(url) {
   var response;
   var maxRetries = 10;
-  var retries = 0; 
+  var retries = 0;
 
   while (retries < maxRetries) {
     try {
