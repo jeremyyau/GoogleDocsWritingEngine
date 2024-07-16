@@ -19,20 +19,5 @@
   </head>
   <body>
     <iframe id="mainFrame" src="https://script.google.com/macros/s/AKfycbx-OVJeJ9-iCWjZAMSgqZlQd8ncPLGzxv_S0ttzAJ-szAU_xSQMVWlsab13A9nT-vor/exec" frameborder="0" width="100%" height="100%"></iframe>
-    <script>
-      var iframe = document.getElementById('mainFrame');
-    
-      iframe.addEventListener('load', function() {
-        var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
-        var links = iframeDocument.getElementsByTagName('a');
-  
-        for (var i = 0; i < links.length; i++) {
-          links[i].addEventListener('click', function(event) {
-            event.preventDefault();
-            iframe.src = this.href;
-          });
-        }
-      });
-    </script>
   </body>
 </html>
